@@ -16,12 +16,18 @@ class MessageAssistantService:
     
     @classmethod
     def analyze_message(
-        cls, message: str, api_key: str = "", provider: str = "gemini"
+        cls, message: str, api_key: str = "", provider: str = ""
     ) -> Tuple[bool, str, Dict[str, Any]]:
         """Analyzes tone, clarity, pressure, and naturalness of a message."""
         prompt = build_message_analysis_prompt(message)
-        key_to_use = (api_key or os.getenv("LLM_API_KEY", "")).strip()
-        
+
+        # Auto-detect provider & key from env if not supplied
+        provider = provider or os.getenv("LLM_PROVIDER", "groq")
+        if provider == "groq":
+            key_to_use = (api_key or os.getenv("GROQ_API_KEY", "") or os.getenv("LLM_API_KEY", "")).strip()
+        else:
+            key_to_use = (api_key or os.getenv("LLM_API_KEY", "")).strip()
+
         raw_text = ""
         source = "offline_engine"
         
@@ -49,12 +55,18 @@ class MessageAssistantService:
 
     @classmethod
     def improve_message(
-        cls, message: str, tone: str, api_key: str = "", provider: str = "gemini"
+        cls, message: str, tone: str, api_key: str = "", provider: str = ""
     ) -> Tuple[bool, str, Dict[str, Any]]:
         """Generates alternative versions of the message matching the selected tone."""
         prompt = build_message_improvement_prompt(message, tone)
-        key_to_use = (api_key or os.getenv("LLM_API_KEY", "")).strip()
-        
+
+        # Auto-detect provider & key from env if not supplied
+        provider = provider or os.getenv("LLM_PROVIDER", "groq")
+        if provider == "groq":
+            key_to_use = (api_key or os.getenv("GROQ_API_KEY", "") or os.getenv("LLM_API_KEY", "")).strip()
+        else:
+            key_to_use = (api_key or os.getenv("LLM_API_KEY", "")).strip()
+
         raw_text = ""
         source = "offline_engine"
         
@@ -85,9 +97,29 @@ class MessageAssistantService:
 
     @classmethod
     def _call_llm(cls, prompt: str, api_key: str, provider: str) -> str:
-        """Helper to invoke external LLM with support for Gemini, Ollama, and OpenAI."""
+        """Helper to invoke external LLM with support for Groq, Gemini, Ollama, and OpenAI."""
         prov = provider.lower().strip()
-        if prov == "gemini" or prov == "":
+
+        if prov == "groq":
+            url = "https://api.groq.com/openai/v1/chat/completions"
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
+            payload = {
+                "model": "llama-3.1-8b-instant",
+                "messages": [
+                    {"role": "system", "content": "You are ഇഷ്ടAI, an expert romantic communication coach. Analyse messages and give structured feedback."},
+                    {"role": "user", "content": prompt}
+                ],
+                "temperature": 0.7,
+                "max_tokens": 800
+            }
+            resp = requests.post(url, headers=headers, json=payload, timeout=12)
+            resp.raise_for_status()
+            return resp.json()["choices"][0]["message"]["content"]
+
+        elif prov == "gemini":
             url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
             payload = {
                 "contents": [{"parts": [{"text": prompt}]}],
@@ -97,6 +129,7 @@ class MessageAssistantService:
             resp.raise_for_status()
             data = resp.json()
             return data["candidates"][0]["content"]["parts"][0]["text"]
+
         elif prov == "ollama":
             url = "http://localhost:11434/api/generate"
             payload = {
@@ -107,13 +140,15 @@ class MessageAssistantService:
             resp = requests.post(url, json=payload, timeout=15)
             resp.raise_for_status()
             return resp.json().get("response", "")
+
         else:
+            # OpenAI-compatible fallback
             url = "https://api.openai.com/v1/chat/completions"
             headers = {"Authorization": f"Bearer {api_key}"}
             payload = {
                 "model": "gpt-4o-mini" if "gpt-4" in prov else "gpt-3.5-turbo",
                 "messages": [
-                    {"role": "system", "content": "You are LoveAI, an expert communication coach."},
+                    {"role": "system", "content": "You are ഇഷ്ടAI, an expert romantic communication coach."},
                     {"role": "user", "content": prompt}
                 ],
                 "temperature": 0.7,
@@ -121,8 +156,7 @@ class MessageAssistantService:
             }
             resp = requests.post(url, headers=headers, json=payload, timeout=12)
             resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
+            return resp.json()["choices"][0]["message"]["content"]
 
     @classmethod
     def _offline_analyze(cls, message: str) -> str:
