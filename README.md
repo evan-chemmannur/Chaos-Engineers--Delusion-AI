@@ -10,9 +10,8 @@
 
 
 ### Team Members
-- Team Lead: Evan Chemmannur - College of Engineering, Chengannur
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Evan Chemmannur
+- Member 2: Christy Varghese
 
 ### Project Description
 ഇഷ്ടAI is a Malayalam-first AI-powered romantic communication assistant. It helps you figure out your "compatibility score" with your crush (spoiler: it's random), analyse the stress level of your messages, and track your relationship journey — all while looking gorgeous with a scroll-driven cinematic intro animation.
@@ -94,8 +93,7 @@ For Software:
 
 ## Team Contributions
 - Evan Chemmannur: Full-stack development — Flask backend, REST API, HTML/CSS/JS frontend, Gemini LLM integration, scroll animation, Malayalam UI, 22 unit tests
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Christy Varghese: [Specific contributions]
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
