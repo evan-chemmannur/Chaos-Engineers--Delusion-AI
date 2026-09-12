@@ -22,10 +22,9 @@ class TestServerRoutes(unittest.TestCase):
             self.assertIn(b"hero-landing", response.data)
 
     def test_feature_routes(self):
-        """Feature paths like '/compatibility', '/advisor' should return 200 OK."""
+        """Feature paths like '/compatibility', '/message' should return 200 OK."""
         routes = [
             "/compatibility",
-            "/advisor",
             "/message",
             "/journey",
             "/milestones"
@@ -35,11 +34,12 @@ class TestServerRoutes(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertIn(b"LOVEAI", response.data)
 
-    def test_image_route_redirect(self):
-        """The '/image' path should redirect to '/' with 302."""
-        response = self.client.get("/image")
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.headers["Location"], "/")
+    def test_removed_routes_redirect(self):
+        """Removed paths ('/image', '/advisor') should redirect to '/' with 302."""
+        for path in ["/image", "/advisor"]:
+            response = self.client.get(path)
+            self.assertEqual(response.status_code, 302)
+            self.assertEqual(response.headers["Location"], "/")
 
     def test_settings_route_removed(self):
         """The '/settings' path should no longer exist and return 404."""

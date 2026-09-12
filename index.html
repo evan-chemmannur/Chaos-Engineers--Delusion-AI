@@ -1049,7 +1049,6 @@
       <ul class="nav-tabs">
         <li><button class="white-pink-btn active" onclick="switchView('home')">ഡാഷ്ബോർഡ്</button></li>
         <li><button class="white-pink-btn" onclick="switchView('compatibility')">പൊരുത്തം</button></li>
-        <li><button class="white-pink-btn" onclick="switchView('advisor')">AI ഉപദേശം</button></li>
         <li><button class="white-pink-btn" onclick="switchView('message')">സന്ദേശ സഹായി</button></li>
         <li><button class="white-pink-btn" onclick="switchView('journey')">യാത്ര</button></li>
       </ul>
@@ -1079,7 +1078,7 @@
                 <span class="reveal-line"><span class="reveal-word delay-3">ബന്ധപ്പെടുക. 💕</span></span>
               </h1>
               <p class="hero-subtext">
-                സ്നേഹവും പരസ്പര ബഹുമാനവുമുള്ള ഒരു യഥാർത്ഥ റൊമാന്റിക് കണക്ഷൻ വളർത്തുക. ഗണിത-അധിഷ്ഠിത പൊരുത്ത പരിശോധനയും, കൃത്യമായ AI റോഡ്‌മാപ്പുകളും ഒരുമിച്ച് നൽകുന്നു.
+                സ്നേഹവും പരസ്പര ബഹുമാനവുമുള്ള ഒരു യഥാർത്ഥ റൊമാന്റിക് കണക്ഷൻ വളർത്തുക. ഗണിത-അധിഷ്ഠിത പൊരുത്ത പരിശോധനയും, സന്ദേശ സഹായിയും ഒരുമിച്ച് നൽകുന്നു.
               </p>
             </div>
           </div>
@@ -1087,7 +1086,7 @@
 
         <div class="romantic-grid-12">
           
-          <div class="romantic-card col-span-4">
+          <div class="romantic-card col-span-6">
             <div class="card-tag">SYSTEM 01</div>
             <div class="section-title">💘 പൊരുത്തം ANALYZER</div>
             <div class="metric-display" id="dash-comp-metric">--%</div>
@@ -1095,22 +1094,15 @@
             <button class="action-btn-outline" onclick="switchView('compatibility')">പൊരുത്തം കണക്കാക്കുക →</button>
           </div>
 
-          <div class="romantic-card col-span-4">
+          <div class="romantic-card col-span-6">
             <div class="card-tag">SYSTEM 02</div>
-            <div class="section-title">🤖 AI ബന്ധ ഉപദേശം</div>
-            <p class="section-desc" style="margin-top: 14px;">പരസ്പര ബഹുമാനവും അതിരുകളും കാത്തുസൂക്ഷിച്ചുള്ള 6-ഘട്ട communication roadmap.</p>
-            <button class="action-btn-pink" onclick="switchView('advisor')">Roadmap ഉണ്ടാക്കുക →</button>
-          </div>
-
-          <div class="romantic-card col-span-4">
-            <div class="card-tag">SYSTEM 03</div>
             <div class="section-title">💬 സന്ദേശ സഹായി</div>
             <p class="section-desc" style="margin-top: 14px;">നിങ്ങളുടെ Message-ലെ സമ്മർദ്ദവും ടോണും വിശകലനം ചെയ്യുക, അല്ലെങ്കിൽ മികച്ച രീതിയിൽ rewrite ചെയ്യുക.</p>
             <button class="action-btn-outline" onclick="switchView('message')">Message Assistant തുറക്കുക →</button>
           </div>
 
           <div class="romantic-card col-span-12">
-            <div class="card-tag">SYSTEM 04</div>
+            <div class="card-tag">SYSTEM 03</div>
             <div class="section-title">❤️ ബന്ധത്തിന്റെ യാത്ര</div>
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0;">
               <span class="metric-label" id="dash-journey-caption">പൂർത്തിയായ MILESTONES</span>
@@ -1206,66 +1198,7 @@
         </div>
       </section>
 
-      <!-- ==================== VIEW 3: AI ADVISOR ==================== -->
-      <section id="view-advisor" class="feature-view">
-        <div class="romantic-grid-12">
-          <div class="romantic-card col-span-5">
-            <div class="card-tag">സാഹചര്യം</div>
-            <div class="section-title">ബന്ധത്തിന്റെ അവസ്ഥ</div>
-
-            <label class="field-label">ഇപ്പോഴത്തെ ബന്ധം:</label>
-            <select class="input-field" id="adv-status">
-              <option value="Stranger">Stranger (അറിയില്ല)</option>
-              <option value="Classmate" selected>Classmate (പഠിക്കുന്നവർ)</option>
-              <option value="Acquaintance">Acquaintance (പരിചയക്കാർ)</option>
-              <option value="Friend">Friend (സുഹൃത്ത്)</option>
-              <option value="Close Friend">Close Friend (അടുത്ത സുഹൃത്ത്)</option>
-              <option value="Already talking">Already talking (സംസാരിക്കാറുണ്ട്)</option>
-            </select>
-
-            <label class="field-label">Communication എത്ര തവണ നടക്കുന്നു:</label>
-            <select class="input-field" id="adv-freq">
-              <option value="Rarely">അപ്പോഴൊക്കെ (Rarely)</option>
-              <option value="Sometimes" selected>ഇടയ്ക്കിടെ (Sometimes)</option>
-              <option value="Often">കൂടുതൽ തവണ (Often)</option>
-              <option value="Daily">ദിവസവും (Daily)</option>
-            </select>
-
-            <label class="field-label">നിങ്ങളുടെ ലക്ഷ്യം:</label>
-            <select class="input-field" id="adv-goal">
-              <option value="Start talking">സംസാരം തുടങ്ങുക</option>
-              <option value="Become better friends">നല്ല friends ആവുക</option>
-              <option value="Spend more time together">ഒരുമിച്ച് കൂടുതൽ സമയം ചിലവഴിക്കുക</option>
-              <option value="Ask them to hang out" selected>Hangout ചെയ്യാൻ ക്ഷണിക്കുക</option>
-              <option value="Express feelings">ഇഷ്ടം തുറന്നു പറയുക</option>
-              <option value="Ask them on a date">Date-ന് ക്ഷണിക്കുക</option>
-              <option value="Improve an existing relationship">ബന്ധം കൂടുതൽ മികച്ചതാക്കുക</option>
-            </select>
-
-            <label class="field-label">നിങ്ങളുടെ Situation പറയുക:</label>
-            <textarea class="input-field" id="adv-situation" rows="4">ഞങ്ങൾ class-ൽ അടുത്തിരുന്ന് project കാര്യങ്ങൾ സംസാരിക്കാറുണ്ട്, പക്ഷെ കോളേജിന് പുറത്ത് ഇതുവരെ ഒരുമിച്ച് പോയിട്ടില്ല. ഒരു awkwardness-ഉം ഇല്ലാതെ coffee കുടിക്കാൻ വിളിക്കണം എന്നാണ് ആഗ്രഹം.</textarea>
-
-            <button class="action-btn-pink" style="width: 100%;" id="btn-adv-exec" onclick="runAdvisor()">AI ഉപദേശം നൽകുക 🤖</button>
-          </div>
-
-          <div class="romantic-card col-span-7">
-            <div class="card-tag">ROADMAP</div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <div class="section-title" style="margin-bottom: 0;">STEP-BY-STEP മാർഗ്ഗനിർദ്ദേശം</div>
-              <button class="action-btn-outline" style="padding: 4px 12px; font-size: 11px;" onclick="copyAdvRoadmap()">[ COPY ചെയ്യുക ]</button>
-            </div>
-            <div id="adv-steps-container">
-              <p class="section-desc">നിങ്ങളുടെ situation നൽകിയാൽ step-by-step roadmap ഇവിടെ ലഭിക്കും.</p>
-            </div>
-            <div id="adv-reminder-box" style="display: none; border-top: 1px solid var(--border-line); padding-top: 16px; margin-top: 16px;">
-              <span class="metric-label" style="color: var(--accent-pink);">ഓർമ്മയ്ക്കായി</span>
-              <p class="section-desc" id="adv-reminder-text" style="margin-top: 6px;"></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 5: MESSAGE ASSISTANT ==================== -->
+      <!-- ==================== VIEW 3: MESSAGE ASSISTANT ==================== -->
       <section id="view-message" class="feature-view">
         <div class="romantic-grid-12">
           <div class="romantic-card col-span-6">
@@ -1522,7 +1455,6 @@
        ========================================================== */
     let currentTone = 'Casual';
     let currentMessageMode = 'analyze';
-    let lastAdvisorText = '';
 
     const pathToView = {
       '/': 'dashboard',
@@ -1530,7 +1462,7 @@
       '/dashboard': 'dashboard',
       '/compatibility': 'compatibility',
       '/image': 'dashboard',
-      '/advisor': 'advisor',
+      '/advisor': 'dashboard',
       '/message': 'message',
       '/journey': 'journey',
       '/milestones': 'journey'
@@ -1540,7 +1472,6 @@
       'dashboard': '/',
       'home': '/',
       'compatibility': '/compatibility',
-      'advisor': '/advisor',
       'message': '/message',
       'journey': '/journey'
     };
@@ -2077,54 +2008,6 @@
         if (mount) mount.innerHTML = "";
         showScreen(0);
       });
-    }
-
-    async function runAdvisor() {
-      const status = document.getElementById('adv-status').value;
-      const freq = document.getElementById('adv-freq').value;
-      const goal = document.getElementById('adv-goal').value;
-      const situation = document.getElementById('adv-situation').value.trim();
-
-      const btn = document.getElementById('btn-adv-exec');
-      btn.innerText = 'ROADMAP തയ്യാറാക്കുകയാണ് 💕...';
-      btn.disabled = true;
-
-      try {
-        const res = await fetch('/api/advisor', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ relationship_status: status, communication_freq: freq, goal, situation })
-        });
-        const json = await res.json();
-        if (json.success) {
-          const r = json.result;
-          lastAdvisorText = r.raw_text;
-          const container = document.getElementById('adv-steps-container');
-          container.innerHTML = '';
-          r.steps.forEach(s => {
-            const el = document.createElement('div');
-            el.className = 'roadmap-step';
-            el.innerHTML = `
-              <div class="step-id">STEP // ${s.step_num}</div>
-              <div class="step-title">${s.title}</div>
-              <div class="step-body">${s.description}</div>
-            `;
-            container.appendChild(el);
-          });
-          document.getElementById('adv-reminder-text').innerText = r.reminder;
-          document.getElementById('adv-reminder-box').style.display = 'block';
-        }
-      } catch (e) {
-        alert('Advisor പ്രശ്നം: ' + e);
-      } finally {
-        btn.innerText = 'AI ഉപദേശം നൽകുക 🤖';
-        btn.disabled = false;
-      }
-    }
-
-    function copyAdvRoadmap() {
-      navigator.clipboard.writeText(lastAdvisorText);
-      alert('✓ Roadmap പൂർണ്ണമായി copy ചെയ്തു.');
     }
 
     async function runMessageAction() {

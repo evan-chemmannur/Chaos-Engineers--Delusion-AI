@@ -28,7 +28,6 @@ app = Flask(__name__, static_folder=str(BASE_DIR / "assets"))
 @app.route("/home")
 @app.route("/dashboard")
 @app.route("/compatibility")
-@app.route("/advisor")
 @app.route("/message")
 @app.route("/journey")
 @app.route("/milestones")
@@ -40,9 +39,10 @@ def index():
         return render_template_string(content)
     return "LoveAI Server is running. index.html not found.", 404
 
-# Redirect removed image feature route to home
+# Redirect removed feature routes to home
 @app.route("/image")
-def redirect_image():
+@app.route("/advisor")
+def redirect_removed_routes():
     return redirect("/", code=302)
 
 # Serve assets
