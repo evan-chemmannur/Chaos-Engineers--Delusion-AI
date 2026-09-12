@@ -10,8 +10,8 @@
 
 
 ### TEAM MEMBERS
-- Team Lead: Evan Chemmannur
-- Member 2: Christy Varghese
+- Team Lead: Evan Chemmannur - College of Engineering, Chengannur
+- Member 2: Christy Varghese - College of Engineering, Chengannur
 
 ### PROJECT DESCRIPTION
 ഇഷ്ടAI is a Malayalam-first AI-powered romantic communication assistant. It helps you figure out your "compatibility score" with your crush (spoiler: it's random), analyse the stress level of your messages, and track your relationship journey — all while looking gorgeous with a scroll-driven cinematic intro animation.
@@ -33,7 +33,7 @@ For Software:
 - **Languages:** Python 3.12, HTML5, CSS3, JavaScript (ES6+)
 - **Frameworks:** Flask (web server & REST API)
 - **Libraries:** `python-dotenv`, `requests`, `Pillow`, `numpy`, `flask`
-- **AI:** Google Gemini API (live LLM message analysis)
+- **AI:** Groq API (Llama 3.1 8B Instant) / Google Gemini API (live LLM message analysis)
 - **Tools:** Git, PyInstaller, VS Code, ezgif (frame extraction)
 - **Fonts:** Noto Sans Malayalam, Courier New (monospace UI)
 
@@ -53,7 +53,7 @@ python -m venv venv
 venv\Scripts\activate
 pip install flask python-dotenv requests pillow numpy
 cp .env.example .env
-# Add your GEMINI_API_KEY to .env
+# Add your GROQ_API_KEY (or GEMINI_API_KEY) to .env
 ```
 
 # Run
@@ -69,8 +69,7 @@ For Software:
 https://drive.google.com/drive/folders/1OgPm-mmbdaFQi4j7pH2DZHa2T0MI7PG3?usp=sharing
 
 # Diagrams
-
-*Flask REST API → Single Page HTML App → Groq LLM for live message telemetry*
+*Flask REST API → Single Page HTML App → Groq / Gemini LLM for live message telemetry*
 
 ### DEPLOYMENT
 
@@ -79,7 +78,7 @@ https://chaos-engineers-delusion-ai.onrender.com
 
 ## TEAM CONTRIBUTIONS
 - Evan Chemmannur: Frontend — HTML/CSS/JS, UI/UX, scroll animation, Malayalam localization
-- Christy Varghese: Backend — Flask server, REST API, Gemini LLM integration, database & tests
+- Christy Varghese: Backend — Flask server, REST API, Groq & Gemini LLM integration, database & tests
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
