@@ -92,8 +92,8 @@ For Software:
 
 
 ## Team Contributions
-- Evan Chemmannur: Full-stack development — Flask backend, REST API, HTML/CSS/JS frontend, Gemini LLM integration, scroll animation, Malayalam UI, 22 unit tests
-- Christy Varghese: [Specific contributions]
+- Evan Chemmannur: Frontend — HTML/CSS/JS, UI/UX, scroll animation, Malayalam localization
+- Christy Varghese: Backend — Flask server, REST API, Gemini LLM integration, database & tests
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
