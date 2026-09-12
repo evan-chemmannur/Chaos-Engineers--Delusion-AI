@@ -257,7 +257,8 @@ def delete_milestone_endpoint(milestone_id):
     success = db.delete_milestone(milestone_id)
     return jsonify({"success": success})
 
-def run_server(port=5000, host="127.0.0.1"):
+def run_server(port=None, host="0.0.0.0"):
+    port = port or int(os.environ.get("PORT", 5000))
     print("==================================================")
     try:
         print("ഇഷ്ടAI (IshtaAI) Web Server is running!")

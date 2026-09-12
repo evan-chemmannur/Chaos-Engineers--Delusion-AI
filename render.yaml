@@ -1,0 +1,15 @@
+﻿services:
+  - type: web
+    name: ishtaai
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --chdir app server:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: SAVE_AI_HISTORY
+        value: "true"
+      - key: THEME_MODE
+        value: dark

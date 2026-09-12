@@ -1167,23 +1167,23 @@
               <div class="photo-row">
                 <div class="photo-slot">
                   <div class="photo-circle" id="photo1Circle">
-                    <span>+ Photo ചേർക്കുക<br>(You)</span>
+                    <span>+ ഫോട്ടോ ചേർക്കുക<br>(നിങ്ങൾ)</span>
                   </div>
                   <span>നിങ്ങൾ (You)</span>
                   <input type="file" accept="image/*" id="photo1Input" style="display:none" />
                 </div>
                 <div class="photo-slot">
                   <div class="photo-circle" id="photo2Circle">
-                    <span>+ Photo ചേർക്കുക<br>(Them)</span>
+                    <span>+ ഫോട്ടോ ചേർക്കുക<br>(അവർ)</span>
                   </div>
                   <span>അവർ (Them)</span>
                   <input type="file" accept="image/*" id="photo2Input" style="display:none" />
                 </div>
               </div>
               <label class="meter-label" for="comp-name1">നിങ്ങളുടെ പേര് (Your name)</label>
-              <input type="text" class="meter-input" id="comp-name1" placeholder="e.g. Rahul" autocomplete="off" />
+              <input type="text" class="meter-input" id="comp-name1" placeholder="ഉദാ: രാഹുൽ" autocomplete="off" />
               <label class="meter-label" for="comp-name2">അവരുടെ പേര് (Their name)</label>
-              <input type="text" class="meter-input" id="comp-name2" placeholder="e.g. Ananya" autocomplete="off" />
+              <input type="text" class="meter-input" id="comp-name2" placeholder="ഉദാ: അനന്യ" autocomplete="off" />
               <button class="meter-btn" id="startBtn" disabled>പൊരുത്തം പരിശോധിക്കുക 💕</button>
             </div>
 
@@ -2117,9 +2117,9 @@
         photos.p1 = null;
         photos.p2 = null;
         const c1 = document.getElementById("photo1Circle");
-        if (c1) c1.innerHTML = "<span>+ Photo ചേർക്കുക<br>(You)</span>";
+        if (c1) c1.innerHTML = "<span>+ ഫോട്ടോ ചേർക്കുക<br>(നിങ്ങൾ)</span>";
         const c2 = document.getElementById("photo2Circle");
-        if (c2) c2.innerHTML = "<span>+ Photo ചേർക്കുക<br>(Them)</span>";
+        if (c2) c2.innerHTML = "<span>+ ഫോട്ടോ ചേർക്കുക<br>(അവർ)</span>";
         if (name1Input) name1Input.value = "";
         if (name2Input) name2Input.value = "";
         checkNames();
@@ -2197,9 +2197,9 @@
         document.getElementById('m-clarity').innerText = '--';
         document.getElementById('m-pressure').innerText = '--';
         document.getElementById('m-natural').innerText = '--';
-        if (feedbackBox) feedbackBox.innerText = 'Message നൽകി ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക...';
+        if (feedbackBox) feedbackBox.innerText = 'സന്ദേശം നൽകി ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക...';
         if (statusEl) {
-          statusEl.innerText = '● LIVE WAITING';
+          statusEl.innerText = '● തയ്യാറാണ് (Waiting)';
           statusEl.style.color = 'var(--label-3)';
         }
         return;
@@ -2218,7 +2218,7 @@
           if (json.success) {
             const d = json.result;
             const headingSpan = document.getElementById('msg-res-heading')?.querySelector('span');
-            if (headingSpan) headingSpan.innerText = 'MESSAGE TELEMETRY';
+            if (headingSpan) headingSpan.innerText = 'സന്ദേശ വിശകലനം (TELEMETRY)';
             
             document.getElementById('m-tone').innerText = d.tone;
             document.getElementById('m-clarity').innerText = d.clarity;
@@ -2260,7 +2260,7 @@
           if (json.success) {
             const d = json.result;
             const headingSpan = document.getElementById('msg-res-heading')?.querySelector('span');
-            if (headingSpan) headingSpan.innerText = `REWRITES // ${d.tone.toUpperCase()}`;
+            if (headingSpan) headingSpan.innerText = `മെച്ചപ്പെടുത്തിയ നിർദ്ദേശങ്ങൾ // ${d.tone.toUpperCase()}`;
             
             if (metricsGrid) metricsGrid.style.display = 'none';
             const fbParent = document.getElementById('msg-feedback-container');
@@ -2277,10 +2277,10 @@
                 card.style.alignItems = 'center';
                 card.innerHTML = `
                   <div>
-                    <div class="step-id">OPTION ${idx+1} // ${d.tone}</div>
+                    <div class="step-id">ഓപ്ഷൻ ${idx+1} // ${d.tone}</div>
                     <div style="font-size: 14px; color: var(--label-1); margin-top: 4px; font-weight: 600;">"${opt}"</div>
                   </div>
-                  <button class="action-btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="navigator.clipboard.writeText('${opt.replace(/'/g, "\\'")}'); alert('Copy ചെയ്തു!');">[ COPY ചെയ്യുക ]</button>
+                  <button class="action-btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="navigator.clipboard.writeText('${opt.replace(/'/g, "\\'")}'); alert('സന്ദേശം കോപ്പി ചെയ്തു! 💕');">[ കോപ്പി ചെയ്യുക ]</button>
                 `;
                 rewritesContainer.appendChild(card);
               });
@@ -2291,7 +2291,7 @@
         console.error('Live telemetry error:', e);
       } finally {
         if (statusEl) {
-          statusEl.innerText = '● LIVE ACTIVE';
+          statusEl.innerText = '● ലൈവ് സജീവം';
           statusEl.style.color = '#10b981';
         }
       }
@@ -2323,14 +2323,14 @@
                 <div style="font-family: var(--font-mono); font-size: 11px; color: var(--label-2);">${m.description || ''} ${m.event_date ? '— ' + m.event_date : ''}</div>
               </div>
             </div>
-            <button class="action-btn-outline" style="padding: 4px 8px; font-size: 11px; color: var(--accent-pink);" onclick="deleteMilestone(${m.id})">[ DELETE ]</button>
+            <button class="action-btn-outline" style="padding: 4px 8px; font-size: 11px; color: var(--accent-pink);" onclick="deleteMilestone(${m.id})">[ ഒഴിവാക്കുക ]</button>
           `;
           list.appendChild(row);
         });
 
         const total = data.milestones.length;
         const pct = total > 0 ? Math.round(completed / total * 100) : 0;
-        document.getElementById('j-status-text').innerText = `${completed} / ${total} MILESTONES പൂർത്തിയായി (${pct}%)`;
+        document.getElementById('j-status-text').innerText = `${completed} / ${total} നാഴികക്കല്ലുകൾ പൂർത്തിയായി (${pct}%)`;
         document.getElementById('j-progress-bar').style.width = pct + '%';
       }
     }
@@ -2341,14 +2341,14 @@
     }
 
     async function deleteMilestone(id) {
-      if (confirm('ഈ milestone delete ചെയ്യണോ?')) {
+      if (confirm('ഈ നാഴികക്കല്ല് (Milestone) ഒഴിവാക്കണോ?')) {
         await fetch(`/api/milestones/${id}`, { method: 'DELETE' });
         loadMilestones();
       }
     }
 
     async function promptAddMilestone() {
-      const title = prompt('Milestone പേര് നൽകുക:');
+      const title = prompt('നാഴികക്കല്ലിന്റെ (Milestone) പേര് നൽകുക:');
       if (title && title.trim()) {
         await fetch('/api/milestones', {
           method: 'POST',
