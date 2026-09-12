@@ -3,7 +3,10 @@
 import os
 from typing import Tuple, Dict, Any
 import numpy as np
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 
 from app.core.validation import validate_image_file
 from app.config import IMAGE_DISCLAIMER
@@ -16,6 +19,8 @@ class ImageComparator:
     @classmethod
     def load_image_safely(cls, image_path: str) -> np.ndarray:
         """Loads an image safely supporting Windows paths with Unicode characters."""
+        if cv2 is None:
+            raise RuntimeError("OpenCV (cv2) is not installed in this environment.")
         # np.fromfile + cv2.imdecode avoids Windows Unicode file path bugs in standard cv2.imread
         with open(image_path, "rb") as f:
             bytes_data = bytearray(f.read())
@@ -32,6 +37,9 @@ class ImageComparator:
         Returns:
             (success, error_message, result_dict)
         """
+        if cv2 is None:
+            return False, "OpenCV (cv2) is not installed on this server.", {}
+
         # Validate file 1
         v1, err1 = validate_image_file(path1)
         if not v1:
