@@ -65,30 +65,16 @@ python app/server.py
 ### Project Documentation
 For Software:
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*300-frame scroll-driven cinematic intro — scroll down to reveal the app*
-
-![Screenshot2](Add screenshot 2 here with proper name)
-*The Love-O-Meter: generates a compatibility score with animated gauge and reaction GIFs*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Live Message Assistant: real-time LLM analysis of tone, stress & rewrite suggestions*
-
-![Screenshot4](Add screenshot 4 here with proper name)
-*Relationship milestone tracker — from "first conversation" to "asked them out"*
+# Screenshots 
+https://drive.google.com/drive/folders/1OgPm-mmbdaFQi4j7pH2DZHa2T0MI7PG3?usp=sharing
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
+
 *Flask REST API → Single Page HTML App → Gemini LLM for live message telemetry*
 
-### Project Demo
-# Video
-[Add your demo video link here]
-*Demonstrates the scroll animation intro, Love-O-Meter, and live message analysis*
+### Deployment
 
-# Additional Demos
-[Add any extra demo materials/links]
+https://chaos-engineers-delusion-ai.onrender.com
 
 
 ## Team Contributions
