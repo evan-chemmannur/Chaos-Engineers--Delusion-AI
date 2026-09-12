@@ -168,10 +168,14 @@ def analyze_message_endpoint():
     """Analyzes tone, pressure, clarity, and naturalness of a message."""
     data = request.get_json() or {}
     message = data.get("message", "")
+    api_key = data.get("api_key", "").strip()
+    provider = data.get("provider", "gemini").strip()
     if not message.strip():
         return jsonify({"success": False, "error": "Message cannot be empty."}), 400
         
-    success, msg, result = MessageAssistantService.analyze_message(message)
+    success, msg, result = MessageAssistantService.analyze_message(
+        message, api_key=api_key, provider=provider
+    )
     return jsonify({"success": success, "result": result})
 
 @app.route("/api/message/improve", methods=["POST"])
@@ -180,11 +184,32 @@ def improve_message_endpoint():
     data = request.get_json() or {}
     message = data.get("message", "")
     tone = data.get("tone", "Casual")
+    api_key = data.get("api_key", "").strip()
+    provider = data.get("provider", "gemini").strip()
     if not message.strip():
         return jsonify({"success": False, "error": "Message cannot be empty."}), 400
         
-    success, msg, result = MessageAssistantService.improve_message(message, tone)
+    success, msg, result = MessageAssistantService.improve_message(
+        message, tone, api_key=api_key, provider=provider
+    )
     return jsonify({"success": success, "result": result})
+
+@app.route("/api/llm/key", methods=["GET", "POST"])
+def llm_key_endpoint():
+    """Retrieves current LLM key status or saves a new API key."""
+    if request.method == "POST":
+        data = request.get_json() or {}
+        key = data.get("api_key", "").strip()
+        provider = data.get("provider", "gemini").strip()
+        if key:
+            os.environ["LLM_API_KEY"] = key
+        if provider:
+            os.environ["LLM_PROVIDER"] = provider
+        return jsonify({"success": True, "has_key": bool(key or os.getenv("LLM_API_KEY", "")), "provider": provider})
+    else:
+        has_key = bool(os.getenv("LLM_API_KEY", "").strip())
+        provider = os.getenv("LLM_PROVIDER", "gemini")
+        return jsonify({"success": True, "has_key": has_key, "provider": provider})
 
 @app.route("/api/milestones", methods=["GET", "POST"])
 def milestones_endpoint():

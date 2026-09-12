@@ -1202,7 +1202,23 @@
       <section id="view-message" class="feature-view">
         <div class="romantic-grid-12">
           <div class="romantic-card col-span-6">
-            <div class="card-tag">MESSAGE</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <div class="card-tag">MESSAGE</div>
+              <button class="action-btn-outline" style="padding: 2px 10px; font-size: 11px;" onclick="toggleLlmDrawer()">⚙️ LLM മോഡ് / API Key</button>
+            </div>
+            
+            <!-- Collapsible LLM Config Drawer -->
+            <div id="llm-config-drawer" style="display: none; background: #fff5f8; border: 1px solid var(--border-line); border-radius: 10px; padding: 12px; margin-bottom: 14px;">
+              <div style="font-size: 12px; font-weight: 700; color: var(--accent-pink); margin-bottom: 6px;">Google Gemini API Key (Live Cloud LLM):</div>
+              <div style="display: flex; gap: 8px;">
+                <input type="password" id="gemini-api-key" class="input-field" style="margin-bottom: 0; padding: 6px 10px; font-size: 12px;" placeholder="AIzaSy... (Enter key for direct Gemini LLM)" />
+                <button class="action-btn-pink" style="padding: 6px 14px; font-size: 11px; white-space: nowrap;" onclick="saveLlmKey()">Save Key</button>
+              </div>
+              <div style="font-size: 11px; color: var(--label-2); margin-top: 6px; line-height: 1.4;">
+                <span id="llm-active-status" style="font-weight: 600; color: var(--label-1);">🟢 ലൈവ് സെമാന്റിക് NLP എഞ്ചിൻ സജീവം</span>. Gemini Key ചേർത്താൽ ക്ലൗഡ് LLM നേരിട്ട് പ്രവർത്തിക്കും.
+              </div>
+            </div>
+
             <div class="section-title">MESSAGE ഉണ്ടാക്കുക</div>
 
             <div style="display: flex; gap: 8px; margin-bottom: 14px;">
@@ -1210,8 +1226,11 @@
               <button class="white-pink-btn" id="mode-btn-improve" onclick="setMessageMode('improve')">02 // മെച്ചപ്പെടുത്തുക</button>
             </div>
 
-            <label class="field-label" id="msg-input-label">നിങ്ങളുടെ Message നൽകുക:</label>
-            <textarea class="input-field" id="msg-input" rows="4">Hey! ഈ വ്യാഴാഴ്ച നമുക്ക് ഒരുമിച്ച് coffee കുടിക്കാനോ പഠിക്കാനോ സമയം ഉണ്ടോ?</textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="field-label" id="msg-input-label" style="margin-bottom: 0;">നിങ്ങളുടെ Message നൽകുക:</label>
+              <span id="msg-char-count" style="font-size: 11px; font-family: var(--font-mono); color: var(--label-3);">67 chars</span>
+            </div>
+            <textarea class="input-field" id="msg-input" rows="4" placeholder="ടൈപ്പ് ചെയ്യുമ്പോൾ തത്സമയം (Live) പാരാമീറ്ററുകൾ വിശകലനം ചെയ്യപ്പെടും...">Hey! ഈ വ്യാഴാഴ്ച നമുക്ക് ഒരുമിച്ച് coffee കുടിക്കാനോ പഠിക്കാനോ സമയം ഉണ്ടോ?</textarea>
 
             <div id="msg-tone-section" style="display: none; margin-bottom: 14px;">
               <label class="field-label">ആവശ്യമായ Tone:</label>
@@ -1226,33 +1245,43 @@
               </div>
             </div>
 
-            <button class="action-btn-pink" style="width: 100%;" id="btn-msg-run" onclick="runMessageAction()">Message വിശകലനം ചെയ്യുക</button>
+            <button class="action-btn-pink" style="width: 100%;" id="btn-msg-run" onclick="runMessageAction()">⚡ തത്സമയം വിശകലനം ചെയ്യുക</button>
           </div>
 
           <div class="romantic-card col-span-6" id="msg-result-panel">
-            <div class="card-tag">TELEMETRY</div>
-            <div class="section-title" id="msg-res-heading">MESSAGE TELEMETRY</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <div class="card-tag" id="msg-telemetry-status-tag">🟢 LIVE TELEMETRY</div>
+              <span id="msg-engine-source-badge" style="font-size: 10px; font-family: var(--font-mono); color: var(--accent-pink); background: #ffeef2; padding: 2px 8px; border-radius: 12px; border: 1px solid var(--border-line);">🧠 LIVE NLP ENGINE</span>
+            </div>
+            <div class="section-title" id="msg-res-heading" style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span>MESSAGE TELEMETRY</span>
+              <span id="live-typing-status" style="font-size: 11px; font-family: var(--font-mono); color: #10b981; font-weight: 700;">● LIVE ACTIVE</span>
+            </div>
 
-            <div id="msg-metrics-grid" style="display: none; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
-              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
-                <span class="metric-label">TONE</span>
-                <div id="m-tone" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+            <div id="msg-metrics-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
+              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+                <span class="metric-label">TONE // ടോൺ</span>
+                <div id="m-tone" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
-              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
-                <span class="metric-label">വ്യക്തത</span>
-                <div id="m-clarity" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+                <span class="metric-label">വ്യക്തത // CLARITY</span>
+                <div id="m-clarity" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
-              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
-                <span class="metric-label">സമ്മർദ്ദം</span>
-                <div id="m-pressure" style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-pink); margin-top: 4px;">--</div>
+              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+                <span class="metric-label">സമ്മർദ്ദം // PRESSURE</span>
+                <div id="m-pressure" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: #10b981;">--</div>
               </div>
-              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
-                <span class="metric-label">സ്വാഭാവികത</span>
-                <div id="m-natural" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+                <span class="metric-label">സ്വാഭാവികത // NATURALNESS</span>
+                <div id="m-natural" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
             </div>
 
-            <div id="msg-feedback-content" class="section-desc">Message നൽകി Analyze അല്ലെങ്കിൽ Rewrite തിരഞ്ഞെടുക്കുക.</div>
+            <div id="msg-feedback-container" style="background: #fff8fa; border: 1px solid var(--border-line); border-radius: 10px; padding: 14px; margin-bottom: 12px;">
+              <div class="metric-label" style="color: var(--accent-pink); margin-bottom: 6px; font-size: 11px;">AI ഫീഡ്‌ബാക്ക് & മാർഗ്ഗനിർദ്ദേശം:</div>
+              <div id="msg-feedback-content" class="section-desc" style="line-height: 1.6; color: var(--label-1); margin: 0; font-size: 13px;">Message ടൈപ്പ് ചെയ്യുമ്പോൾ തത്സമയ വിലയിരുത്തൽ ഇവിടെ കാണാം.</div>
+            </div>
+
             <div id="msg-rewrites-container" style="display: none; flex-direction: column; gap: 10px;"></div>
           </div>
         </div>
@@ -1518,6 +1547,7 @@
 
       if (viewKey === 'dashboard') loadStats();
       if (viewKey === 'journey') loadMilestones();
+      if (viewKey === 'message') runLiveMessageTelemetry();
     }
 
     function initRoute() {
@@ -1562,6 +1592,9 @@
       document.querySelectorAll('#msg-tones .pink-pill-tag').forEach(p => p.classList.remove('selected'));
       el.classList.add('selected');
       currentTone = el.innerText.trim();
+      if (currentMessageMode === 'improve') {
+        runLiveMessageTelemetry();
+      }
     }
 
     function setMessageMode(mode) {
@@ -1570,7 +1603,8 @@
       document.getElementById('mode-btn-improve').classList.toggle('active', mode === 'improve');
       document.getElementById('msg-tone-section').style.display = mode === 'improve' ? 'block' : 'none';
       document.getElementById('msg-input-label').innerText = mode === 'analyze' ? 'നിങ്ങളുടെ Message നൽകുക:' : 'മെച്ചപ്പെടുത്തേണ്ട Message നൽകുക:';
-      document.getElementById('btn-msg-run').innerText = mode === 'analyze' ? 'Message വിശകലനം ചെയ്യുക' : 'Message മെച്ചപ്പെടുത്തുക 💕';
+      document.getElementById('btn-msg-run').innerText = mode === 'analyze' ? '⚡ തത്സമയം വിശകലനം ചെയ്യുക' : '✨ തത്സമയം മെച്ചപ്പെടുത്തുക 💕';
+      runLiveMessageTelemetry();
     }
 
     async function loadStats() {
@@ -1600,11 +1634,11 @@
         title: "First, what’s the situation?",
         titleMl: "ആദ്യം, എന്താണ് നിങ്ങളുടെ അവസ്ഥ?",
         options: [
-          { label: "Just started catching feelings", labelMl: "ഇഷ്ടം തോന്നി തുടങ്ങിയിട്ടേയുള്ളൂ", value: 6, gif: "https://media.giphy.com/media/26hpKMT7M5vNUZ076/giphy.gif", comment: "Early days. The machine is cautiously optimistic." },
-          { label: "Official, still figuring it out", labelMl: "Official ആയി, എങ്കിലും പഠിച്ചുവരുന്നു", value: 12, gif: "https://media.giphy.com/media/l41K3tokYZuxVK8Za/giphy.gif", comment: "Solid footing. Proceed with mild chaos." },
-          { label: "In it for the long haul", labelMl: "ജീവിതകാലം മുഴുവൻ ഒരുമിച്ച് നിൽക്കാൻ", value: 18, gif: "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif", comment: "Certified veterans. Respect." },
-          { label: "Honestly? Complicated", labelMl: "സത്യം പറഞ്ഞാൽ... complicated ആണ്", value: 2, gif: "https://media.giphy.com/media/3o7527pa7qs9kCG78A/giphy.gif", comment: "The machine has no notes. Just vibes of concern." },
-          { label: "Ride-or-die friends, nothing more", labelMl: "തകർപ്പൻ കൂട്ടുകാർ, അതിനപ്പുറമില്ല", value: 9, gif: "https://media.giphy.com/media/d30mgvM8XajPe/giphy.gif", comment: "Platonic, powerful, unbothered." }
+          { label: "Just started catching feelings", labelMl: "ഇഷ്ടം തോന്നി തുടങ്ങിയിട്ടേയുള്ളൂ", value: 6, gif: "assets/gifs/status_feelings.gif", comment: "Early days. The machine is cautiously optimistic." },
+          { label: "Official, still figuring it out", labelMl: "Official ആയി, എങ്കിലും പഠിച്ചുവരുന്നു", value: 12, gif: "assets/gifs/status_official.gif", comment: "Solid footing. Proceed with mild chaos." },
+          { label: "In it for the long haul", labelMl: "ജീവിതകാലം മുഴുവൻ ഒരുമിച്ച് നിൽക്കാൻ", value: 18, gif: "assets/gifs/status_longhaul.gif", comment: "Certified veterans. Respect." },
+          { label: "Honestly? Complicated", labelMl: "സത്യം പറഞ്ഞാൽ... complicated ആണ്", value: 2, gif: "assets/gifs/status_complicated.gif", comment: "The machine has no notes. Just vibes of concern." },
+          { label: "Ride-or-die friends, nothing more", labelMl: "തകർപ്പൻ കൂട്ടുകാർ, അതിനപ്പുറമില്ല", value: 9, gif: "assets/gifs/status_friends.gif", comment: "Platonic, powerful, unbothered." }
         ]
       },
       {
@@ -1612,10 +1646,10 @@
         title: "If we hit a silent pause for more than 4 seconds on our first date, how do you handle it?",
         titleMl: "ആദ്യത്തെ ഡേറ്റിൽ 4 സെക്കൻഡിൽ കൂടുതൽ നിശബ്ദത വന്നാൽ നിങ്ങൾ എന്ത് ചെയ്യും?",
         options: [
-          { label: "Fake a sudden cough, whisper ‘system rebooting,’ stare straight ahead", labelMl: "ചുമച്ച് 'system rebooting' എന്ന് പറഞ്ഞ് മുന്നോട്ട് തന്നെ നോക്കിയിരിക്കും", value: 14, gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazgyaWs2ZWt4dTcyZ2k4bGlyZzhiaTR1M3owMDJzNDJvOTdlY2NldiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/mBcAMbc1Nu3UDYd9l4/giphy.gif", comment: "System rebooting... Staring contest initiated with maximum intensity." },
-          { label: "Bring up an obscure historical war fact with zero context", labelMl: "ഒരു ബന്ധവുമില്ലാത്ത പഴയ ചരിത്ര യുദ്ധക്കഥ എടുത്തിടും", value: 10, gif: "https://media.giphy.com/media/a5viI92PAF89q/giphy.gif", comment: "A bold pivot. Somewhere, a history teacher is proud." },
-          { label: "Pull out my phone, open Instagram, send reels", labelMl: "ഫോണെടുത്ത് Instagram തുറന്ന് reels അയക്കും", value: 6, gif: "https://media.giphy.com/media/tLqkXSi04vqM0/giphy.gif", comment: "The date has left the chat. The machine notes this." },
-          { label: "Simply scream until someone else breaks the tension", labelMl: "ആരെങ്കിലും മിണ്ടുന്നത് വരെ ഉറക്കെ നിലവിളിക്കും", value: 16, gif: "https://media.giphy.com/media/1FMaabePDEfgk/giphy.gif", comment: "Unhinged, but undeniably a strategy. Full marks for initiative." }
+          { label: "Fake a sudden cough, whisper ‘system rebooting,’ stare straight ahead", labelMl: "ചുമച്ച് 'system rebooting' എന്ന് പറഞ്ഞ് മുന്നോട്ട് തന്നെ നോക്കിയിരിക്കും", value: 14, gif: "assets/gifs/pause_reboot.gif", comment: "System rebooting... Staring contest initiated with maximum intensity." },
+          { label: "Bring up an obscure historical war fact with zero context", labelMl: "ഒരു ബന്ധവുമില്ലാത്ത പഴയ ചരിത്ര യുദ്ധക്കഥ എടുത്തിടും", value: 10, gif: "assets/gifs/pause_war.gif", comment: "A bold pivot. Somewhere, a history teacher is proud." },
+          { label: "Pull out my phone, open Instagram, send reels", labelMl: "ഫോണെടുത്ത് Instagram തുറന്ന് reels അയക്കും", value: 6, gif: "assets/gifs/pause_phone.gif", comment: "The date has left the chat. The machine notes this." },
+          { label: "Simply scream until someone else breaks the tension", labelMl: "ആരെങ്കിലും മിണ്ടുന്നത് വരെ ഉറക്കെ നിലവിളിക്കും", value: 16, gif: "assets/gifs/pause_scream.gif", comment: "Unhinged, but undeniably a strategy. Full marks for initiative." }
         ]
       },
       {
@@ -1623,10 +1657,10 @@
         title: "What’s your stance on sharing phone passwords?",
         titleMl: "ഫോൺ പാസ്‌വേഡ് പങ്കുവെക്കുന്നതിനെ കുറിച്ച് നിങ്ങളുടെ നിലപാട് എന്താണ്?",
         options: [
-          { label: "Hell nah, I’d rather die", labelMl: "ഒരിക്കലുമില്ല, ഞാൻ മരിക്കാൻ തയ്യാറാണ്", value: 8, gif: "https://media.giphy.com/media/COYGe9rZvf3Q4/giphy.gif", comment: "Healthy boundaries or a lot to hide. The machine won’t ask." },
-          { label: "Here’s the PIN, whatever trauma you find is on you", labelMl: "ദാ PIN, കണ്ട് പേടിച്ചാൽ ഞാൻ ഉത്തരവാദിയല്ല", value: 16, gif: "https://media.giphy.com/media/l0HlHJGHe3yAMhdQY/giphy.gif", comment: "Radical transparency. Bold move." },
-          { label: "Over my dead body. Literally. Corpse first.", labelMl: "എന്റെ ശവത്തിൽ ചവിട്ടി മാത്രം!", value: 4, gif: "https://media.giphy.com/media/E3L55VUAHqXSi05JK5/giphy.gif", comment: "Escalated quickly. Taking notes cautiously." },
-          { label: "Break Up", labelMl: "നേരെ Break Up!", value: 1, gif: "https://media.giphy.com/media/hFdi34861fa8XYYC5v/giphy.gif", comment: "Nuclear option confirmed. The machine salutes the commitment." }
+          { label: "Hell nah, I’d rather die", labelMl: "ഒരിക്കലുമില്ല, ഞാൻ മരിക്കാൻ തയ്യാറാണ്", value: 8, gif: "assets/gifs/pass_hellnah.gif", comment: "Healthy boundaries or a lot to hide. The machine won’t ask." },
+          { label: "Here’s the PIN, whatever trauma you find is on you", labelMl: "ദാ PIN, കണ്ട് പേടിച്ചാൽ ഞാൻ ഉത്തരവാദിയല്ല", value: 16, gif: "assets/gifs/pass_pin.gif", comment: "Radical transparency. Bold move." },
+          { label: "Over my dead body. Literally. Corpse first.", labelMl: "എന്റെ ശവത്തിൽ ചവിട്ടി മാത്രം!", value: 4, gif: "assets/gifs/pass_corpse.gif", comment: "Escalated quickly. Taking notes cautiously." },
+          { label: "Break Up", labelMl: "നേരെ Break Up!", value: 1, gif: "assets/gifs/pass_breakup.gif", comment: "Nuclear option confirmed. The machine salutes the commitment." }
         ]
       },
       {
@@ -1634,11 +1668,11 @@
         title: "How do you react when your crush posts a selfie with another human being?",
         titleMl: "Crush വേറൊരാളോടൊപ്പം സെൽഫി ഇടുമ്പോൾ നിങ്ങളുടെ പ്രതികരണം?",
         options: [
-          { label: "Background check already in progress", labelMl: "ആളെക്കുറിച്ചുള്ള അന്വേഷണം ആരംഭിച്ചു കഴിഞ്ഞു", value: 10, gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazgyaWs2ZWt4dTcyZ2k4bGlyZzhiaTR1M3owMDJzNDJvOTdlY2NldiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/FILQJbm0u832ry0HFT/giphy.gif", comment: "Surveillance mode activated. FBI level background check underway." },
-          { label: "Instant like. 0.2 seconds flat. Pure dominance.", labelMl: "0.2 സെക്കൻഡിൽ Instant like. Pure dominance!", value: 18, gif: "https://media.giphy.com/media/dWUQa4XebVz45VA7oW/giphy.gif", comment: "Confidence like this cannot be taught." },
-          { label: "Black screen story post. Cue the moody acoustic song.", labelMl: "ബ്ലാക്ക് സ്ക്രീൻ സ്റ്റോറി + സങ്കട പാട്ട്", value: 6, gif: "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif", comment: "A cinematic response. The machine appreciates the drama." },
-          { label: "Blocking everyone involved, including the photographer", labelMl: "ഫോട്ടോ എടുത്ത ആളെയടക്കം എല്ലാവരെയും ബ്ലോക്ക് ചെയ്യും", value: 3, gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3YWxhYWowM3V4cW9ldzd1bjF4ZHB3YTRkZTR5cDE0MXpqOTM4dmcxOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ygQzj314jbFdBf162A/giphy.gif", comment: "Blocking the photographer too?! The machine cannot stop laughing at the petty energy." },
-          { label: "Crying behind the screen", labelMl: "ഫോണിന്റെ പിന്നിലിരുന്ന് കരച്ചിൽ", value: 5, gif: "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3and3M2VqazYxcnBvMHVkMmdjM2xlcWI4eHJhcWw5Z3FlcXgxYjAwdyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/HJYTTrJMzBLyT5JDUa/giphy.gif", comment: "Smiling through the pain. Crying on the inside, grinning on the outside." }
+          { label: "Background check already in progress", labelMl: "ആളെക്കുറിച്ചുള്ള അന്വേഷണം ആരംഭിച്ചു കഴിഞ്ഞു", value: 10, gif: "assets/gifs/selfie_check.gif", comment: "Surveillance mode activated. FBI level background check underway." },
+          { label: "Instant like. 0.2 seconds flat. Pure dominance.", labelMl: "0.2 സെക്കൻഡിൽ Instant like. Pure dominance!", value: 18, gif: "assets/gifs/selfie_like.gif", comment: "Confidence like this cannot be taught." },
+          { label: "Black screen story post. Cue the moody acoustic song.", labelMl: "ബ്ലാക്ക് സ്ക്രീൻ സ്റ്റോറി + സങ്കട പാട്ട്", value: 6, gif: "assets/gifs/selfie_blackscreen.gif", comment: "A cinematic response. The machine appreciates the drama." },
+          { label: "Blocking everyone involved, including the photographer", labelMl: "ഫോട്ടോ എടുത്ത ആളെയടക്കം എല്ലാവരെയും ബ്ലോക്ക് ചെയ്യും", value: 3, gif: "assets/gifs/selfie_block.gif", comment: "Blocking the photographer too?! The machine cannot stop laughing at the petty energy." },
+          { label: "Crying behind the screen", labelMl: "ഫോണിന്റെ പിന്നിലിരുന്ന് കരച്ചിൽ", value: 5, gif: "assets/gifs/selfie_cry.gif", comment: "Smiling through the pain. Crying on the inside, grinning on the outside." }
         ]
       },
       {
@@ -1646,10 +1680,10 @@
         title: "It’s their birthday and you just remembered at 11:58 PM. What’s the move?",
         titleMl: "അവരുടെ ജന്മദിനം 11:58 PM-ന് മാത്രം ഓർമ്മ വന്നാൽ എന്താണ് പ്ലാൻ?",
         options: [
-          { label: "Panic-order a cake emoji bouquet and swear that was the plan all along", labelMl: "Cake emoji അയച്ച് ഇതാണ് പ്ലാൻ എന്ന് സ്ഥാപിക്കും", value: 12, gif: "https://media.giphy.com/media/1FMaabePDEfgk/giphy.gif", comment: "Improvisation at its finest." },
-          { label: "Call immediately, blame the time zone, hang up before they can respond", labelMl: "ഉടൻ വിളിച്ച് ടൈം സോണിനെ കുറ്റം പറഞ്ഞ് കോൾ കട്ട് ചെയ്യും", value: 6, gif: "https://media.giphy.com/media/3o7ZetIsjxiql9RNAs/giphy.gif", comment: "Bold strategy. Untraceable, allegedly." },
-          { label: "Show up empty-handed but with full chaotic energy and jazz hands", labelMl: "കൈയിൽ ഒന്നുമില്ലെങ്കിലും ഫുൾ എനർജിയോടെ മുന്നിൽ ചെല്ലും", value: 16, gif: "https://media.giphy.com/media/l0IxYD16t9Syvf89W/giphy.gif", comment: "Confidence over preparation. Somehow this might actually work." },
-          { label: "Smoothly pretend you didn’t forget: ‘so... how’s birthday week going?’", labelMl: "മറന്നില്ലെന്ന് അഭിനയിച്ച് ചോദിക്കും: ‘birthday week എങ്ങനെ പോകുന്നു?’", value: 18, gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazgyaWs2ZWt4dTcyZ2k4bGlyZzhiaTR1M3owMDJzNDJvOTdlY2NldiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ffOGmU3KipKPWY9MLW/giphy.gif", comment: "The ultimate 🤨 eyebrow raise. Nobody is buying that, but nice try." }
+          { label: "Panic-order a cake emoji bouquet and swear that was the plan all along", labelMl: "Cake emoji അയച്ച് ഇതാണ് പ്ലാൻ എന്ന് സ്ഥാപിക്കും", value: 12, gif: "assets/gifs/bday_panic.gif", comment: "Improvisation at its finest." },
+          { label: "Call immediately, blame the time zone, hang up before they can respond", labelMl: "ഉടൻ വിളിച്ച് ടൈം സോണിനെ കുറ്റം പറഞ്ഞ് കോൾ കട്ട് ചെയ്യും", value: 6, gif: "assets/gifs/bday_timezone.gif", comment: "Bold strategy. Untraceable, allegedly." },
+          { label: "Show up empty-handed but with full chaotic energy and jazz hands", labelMl: "കൈയിൽ ഒന്നുമില്ലെങ്കിലും ഫുൾ എനർജിയോടെ മുന്നിൽ ചെല്ലും", value: 16, gif: "assets/gifs/bday_jazz.gif", comment: "Confidence over preparation. Somehow this might actually work." },
+          { label: "Smoothly pretend you didn’t forget: ‘so... how’s birthday week going?’", labelMl: "മറന്നില്ലെന്ന് അഭിനയിച്ച് ചോദിക്കും: ‘birthday week എങ്ങനെ പോകുന്നു?’", value: 18, gif: "assets/gifs/bday_smooth.gif", comment: "The ultimate 🤨 eyebrow raise. Nobody is buying that, but nice try." }
         ]
       },
       {
@@ -1657,10 +1691,10 @@
         title: "Quick, no thinking: if your relationship were a kitchen appliance having an existential crisis, which one?",
         titleMl: "ഒരു നിമിഷം ചിന്തിക്കാതെ പറയൂ: നിങ്ങളുടെ ബന്ധം ഒരു അടുക്കള ഉപകരണമായിരുന്നെങ്കിൽ ഏതായിരിക്കും?",
         options: [
-          { label: "The toaster that only browns one side, out of spite", labelMl: "ഒരു വശം മാത്രം കരിയിക്കുന്ന ടോസ്റ്റർ", value: 14, gif: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif", comment: "Deeply relatable. The machine has been there." },
-          { label: "The blender that randomly turns on at 3 AM", labelMl: "രാത്രി 3 മണിക്ക് തനിയെ കറങ്ങുന്ന മിക്സി", value: 9, gif: "https://media.giphy.com/media/4pMX5rJ4PYA5a/giphy.gif", comment: "Ominous. Recommends therapy for the blender." },
-          { label: "The fridge that hums a different tune every day", labelMl: "ദിവസവും ഓരോ പാട്ട് മൂളുന്ന ഫ്രിഡ്ജ്", value: 16, gif: "https://media.giphy.com/media/l2JHRhYYnBo7B3BLG/giphy.gif", comment: "Chaotic, but the good kind of unpredictable." },
-          { label: "The microwave that beeps once and refuses to explain why", labelMl: "ഒരു തവണ ബീപ്പ് അടിച്ച് കാര്യം പറയാത്ത മൈക്രോവേവ്", value: 5, gif: "https://media.giphy.com/media/l0HlO4vdchLBZnxYc/giphy.gif", comment: "Mysterious and slightly threatening. Iconic." }
+          { label: "The toaster that only browns one side, out of spite", labelMl: "ഒരു വശം മാത്രം കരിയിക്കുന്ന ടോസ്റ്റർ", value: 14, gif: "assets/gifs/app_toaster.gif", comment: "Deeply relatable. The machine has been there." },
+          { label: "The blender that randomly turns on at 3 AM", labelMl: "രാത്രി 3 മണിക്ക് തനിയെ കറങ്ങുന്ന മിക്സി", value: 9, gif: "assets/gifs/app_blender.gif", comment: "Ominous. Recommends therapy for the blender." },
+          { label: "The fridge that hums a different tune every day", labelMl: "ദിവസവും ഓരോ പാട്ട് മൂളുന്ന ഫ്രിഡ്ജ്", value: 16, gif: "assets/gifs/app_fridge.gif", comment: "Chaotic, but the good kind of unpredictable." },
+          { label: "The microwave that beeps once and refuses to explain why", labelMl: "ഒരു തവണ ബീപ്പ് അടിച്ച് കാര്യം പറയാത്ത മൈക്രോവേവ്", value: 5, gif: "assets/gifs/app_microwave.gif", comment: "Mysterious and slightly threatening. Iconic." }
         ]
       }
     ];
@@ -2010,66 +2044,177 @@
       });
     }
 
-    async function runMessageAction() {
-      const msg = document.getElementById('msg-input').value.trim();
-      if (!msg) {
-        alert('ദയവായി ഒരു message നൽകുക.');
-        return;
+    // ==========================================
+    // LLM ENGINE & LIVE MESSAGE TELEMETRY LOGIC
+    // ==========================================
+    let msgDebounceTimer = null;
+
+    function getLlmApiKey() {
+      const inputVal = document.getElementById('gemini-api-key')?.value?.trim();
+      if (inputVal) return inputVal;
+      return localStorage.getItem('loveai_gemini_key') || '';
+    }
+
+    function toggleLlmDrawer() {
+      const drawer = document.getElementById('llm-config-drawer');
+      if (drawer) {
+        drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    async function saveLlmKey() {
+      const key = document.getElementById('gemini-api-key')?.value?.trim() || '';
+      localStorage.setItem('loveai_gemini_key', key);
+      try {
+        await fetch('/api/llm/key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ api_key: key, provider: 'gemini' })
+        });
+      } catch (e) {
+        console.warn('Backend LLM key sync error:', e);
+      }
+      updateLlmBadge(Boolean(key));
+      alert(key ? '✓ Gemini API Key വിജയകരമായി സേവ് ചെയ്തു!' : '✓ Gemini Key നീക്കം ചെയ്തു. ലൈവ് NLP എഞ്ചിനിലേക്ക് മാറി.');
+      runLiveMessageTelemetry();
+    }
+
+    function updateLlmBadge(hasKey) {
+      const badge = document.getElementById('msg-engine-source-badge');
+      const status = document.getElementById('llm-active-status');
+      if (hasKey) {
+        if (badge) badge.innerText = '✨ GEMINI 1.5 FLASH LIVE';
+        if (status) status.innerHTML = '✨ <strong style="color: #10b981;">Google Gemini 1.5 Flash Cloud LLM സജീവം</strong>';
+      } else {
+        if (badge) badge.innerText = '🧠 LIVE NLP ENGINE';
+        if (status) status.innerHTML = '🟢 <strong style="color: var(--label-1);">ലൈവ് സെമാന്റിക് NLP എഞ്ചിൻ സജീവം</strong>';
+      }
+    }
+
+    async function runLiveMessageTelemetry() {
+      const input = document.getElementById('msg-input');
+      if (!input) return;
+      const msg = input.value.trim();
+      const countEl = document.getElementById('msg-char-count');
+      if (countEl) countEl.innerText = `${input.value.length} chars`;
+
+      const statusEl = document.getElementById('live-typing-status');
+      if (statusEl) {
+        statusEl.innerText = '⚡ വിശകലനം ചെയ്യുന്നു...';
+        statusEl.style.color = 'var(--accent-pink)';
       }
 
       const metricsGrid = document.getElementById('msg-metrics-grid');
       const feedbackBox = document.getElementById('msg-feedback-content');
       const rewritesContainer = document.getElementById('msg-rewrites-container');
 
-      if (currentMessageMode === 'analyze') {
-        const res = await fetch('/api/message/analyze', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg })
-        });
-        const json = await res.json();
-        if (json.success) {
-          const d = json.result;
-          document.getElementById('msg-res-heading').innerText = 'TELEMETRY // വിശകലനം';
-          document.getElementById('m-tone').innerText = d.tone;
-          document.getElementById('m-clarity').innerText = d.clarity;
-          document.getElementById('m-pressure').innerText = d.pressure;
-          document.getElementById('m-natural').innerText = d.naturalness;
-          feedbackBox.innerText = d.feedback;
-          metricsGrid.style.display = 'grid';
-          rewritesContainer.style.display = 'none';
+      if (!msg) {
+        document.getElementById('m-tone').innerText = '--';
+        document.getElementById('m-clarity').innerText = '--';
+        document.getElementById('m-pressure').innerText = '--';
+        document.getElementById('m-natural').innerText = '--';
+        if (feedbackBox) feedbackBox.innerText = 'Message നൽകി ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക...';
+        if (statusEl) {
+          statusEl.innerText = '● LIVE WAITING';
+          statusEl.style.color = 'var(--label-3)';
         }
-      } else {
-        const res = await fetch('/api/message/improve', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg, tone: currentTone })
-        });
-        const json = await res.json();
-        if (json.success) {
-          const d = json.result;
-          document.getElementById('msg-res-heading').innerText = `TELEMETRY // REWRITES (${d.tone.toUpperCase()})`;
-          metricsGrid.style.display = 'none';
-          feedbackBox.innerText = '';
-          rewritesContainer.innerHTML = '';
-          rewritesContainer.style.display = 'flex';
-          d.options.forEach((opt, idx) => {
-            const card = document.createElement('div');
-            card.className = 'roadmap-step';
-            card.style.display = 'flex';
-            card.style.justifyContent = 'space-between';
-            card.style.alignItems = 'center';
-            card.innerHTML = `
-              <div>
-                <div class="step-id">OPTION ${idx+1}</div>
-                <div style="font-size: 14px; color: var(--label-1); margin-top: 4px; font-weight: 600;">"${opt}"</div>
-              </div>
-              <button class="action-btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="navigator.clipboard.writeText('${opt.replace(/'/g, "\\'")}'); alert('Copy ചെയ്തു!');">[ COPY ചെയ്യുക ]</button>
-            `;
-            rewritesContainer.appendChild(card);
+        return;
+      }
+
+      const apiKey = getLlmApiKey();
+
+      try {
+        if (currentMessageMode === 'analyze') {
+          const res = await fetch('/api/message/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg, api_key: apiKey, provider: 'gemini' })
           });
+          const json = await res.json();
+          if (json.success) {
+            const d = json.result;
+            const headingSpan = document.getElementById('msg-res-heading')?.querySelector('span');
+            if (headingSpan) headingSpan.innerText = 'MESSAGE TELEMETRY';
+            
+            document.getElementById('m-tone').innerText = d.tone;
+            document.getElementById('m-clarity').innerText = d.clarity;
+            
+            // Format pressure with live colors
+            const pressEl = document.getElementById('m-pressure');
+            pressEl.innerText = d.pressure;
+            const pLower = (d.pressure || '').toLowerCase();
+            if (pLower.includes('low') || pLower.includes('കുറവ്')) {
+              pressEl.style.color = '#10b981';
+            } else if (pLower.includes('high') || pLower.includes('കൂടുതൽ')) {
+              pressEl.style.color = '#ef4444';
+            } else {
+              pressEl.style.color = '#f59e0b';
+            }
+
+            document.getElementById('m-natural').innerText = d.naturalness;
+            if (feedbackBox) feedbackBox.innerText = d.feedback;
+            
+            if (metricsGrid) metricsGrid.style.display = 'grid';
+            if (rewritesContainer) rewritesContainer.style.display = 'none';
+            const fbParent = document.getElementById('msg-feedback-container');
+            if (fbParent) fbParent.style.display = 'block';
+
+            if (d.source === 'live_llm') {
+              updateLlmBadge(true);
+            } else {
+              updateLlmBadge(Boolean(apiKey));
+            }
+          }
+        } else {
+          // Improve / rewrite mode
+          const res = await fetch('/api/message/improve', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg, tone: currentTone, api_key: apiKey, provider: 'gemini' })
+          });
+          const json = await res.json();
+          if (json.success) {
+            const d = json.result;
+            const headingSpan = document.getElementById('msg-res-heading')?.querySelector('span');
+            if (headingSpan) headingSpan.innerText = `REWRITES // ${d.tone.toUpperCase()}`;
+            
+            if (metricsGrid) metricsGrid.style.display = 'none';
+            const fbParent = document.getElementById('msg-feedback-container');
+            if (fbParent) fbParent.style.display = 'none';
+            
+            if (rewritesContainer) {
+              rewritesContainer.innerHTML = '';
+              rewritesContainer.style.display = 'flex';
+              d.options.forEach((opt, idx) => {
+                const card = document.createElement('div');
+                card.className = 'roadmap-step';
+                card.style.display = 'flex';
+                card.style.justifyContent = 'space-between';
+                card.style.alignItems = 'center';
+                card.innerHTML = `
+                  <div>
+                    <div class="step-id">OPTION ${idx+1} // ${d.tone}</div>
+                    <div style="font-size: 14px; color: var(--label-1); margin-top: 4px; font-weight: 600;">"${opt}"</div>
+                  </div>
+                  <button class="action-btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="navigator.clipboard.writeText('${opt.replace(/'/g, "\\'")}'); alert('Copy ചെയ്തു!');">[ COPY ചെയ്യുക ]</button>
+                `;
+                rewritesContainer.appendChild(card);
+              });
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Live telemetry error:', e);
+      } finally {
+        if (statusEl) {
+          statusEl.innerText = '● LIVE ACTIVE';
+          statusEl.style.color = '#10b981';
         }
       }
+    }
+
+    function runMessageAction() {
+      runLiveMessageTelemetry();
     }
 
     async function loadMilestones() {
@@ -2128,6 +2273,30 @@
         });
         loadMilestones();
       }
+    }
+
+    // Initialize live typing listener for Message Assistant
+    const liveMsgInput = document.getElementById('msg-input');
+    if (liveMsgInput) {
+      const savedKey = localStorage.getItem('loveai_gemini_key') || '';
+      const keyInput = document.getElementById('gemini-api-key');
+      if (keyInput && savedKey) {
+        keyInput.value = savedKey;
+        updateLlmBadge(true);
+      }
+      liveMsgInput.addEventListener('input', () => {
+        const statusEl = document.getElementById('live-typing-status');
+        if (statusEl) {
+          statusEl.innerText = '⚡ ടൈപ്പ് ചെയ്യുന്നു...';
+          statusEl.style.color = 'var(--accent-pink)';
+        }
+        const countEl = document.getElementById('msg-char-count');
+        if (countEl) countEl.innerText = `${liveMsgInput.value.length} chars`;
+        clearTimeout(msgDebounceTimer);
+        msgDebounceTimer = setTimeout(() => {
+          runLiveMessageTelemetry();
+        }, 350);
+      });
     }
 
     // Initialize routing based on current path / hash
