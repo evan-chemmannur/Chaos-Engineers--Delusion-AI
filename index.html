@@ -1,1 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOVEAI 💕 — മലയാളം Romantic Edition</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png" />
+  <style>
+    :root {
+      --bg-canvas: #fff9fb;       /* Delicate porcelain white with soft pink warmth */
+      --bg-surface: #ffffff;      /* Pure crisp white for elevated cards */
+      --bg-elevated: #fff0f4;     /* Soft blush container */
+      --bg-input: #ffffff;        /* Crisp white inputs */
+      --border-line: #ffdbe4;     /* Delicate rose-pink border */
+      --border-line-hover: #ff4d79; /* Vibrant pink highlight on hover */
+      
+      --label-1: #1a1216;         /* Deep rich charcoal-rose for ultra-sharp readability */
+      --label-2: #5c4b54;         /* Soft warm gray-plum */
+      --label-3: #96808b;         /* Muted rose-ash */
+      --label-4: #c9b4bf;         /* Subtle faint guide */
+      
+      --accent-pink: #f43f5e;     /* Signature vibrant romantic pink */
+      --accent-pink-hover: #e11d48;
+      --accent-blush: #fb7185;
+      --accent-soft-pink: #ffe4eb;/* Sweet pastel pink */
+      --accent-glow: rgba(244, 63, 94, 0.16);
+      
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    ::selection { background-color: var(--accent-pink); color: #ffffff; }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--label-1);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* Fullscreen Interactive White & Pink Particle Canvas */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+      display: block;
+    }
+
+    /* Opening Romantic Preloader */
+    #preloader-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: radial-gradient(circle at center, #ffffff 0%, #fff0f5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 500ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .heart-pulse-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      animation: heartBeat 1.2s infinite ease-in-out;
+      filter: drop-shadow(0 4px 16px rgba(244, 63, 94, 0.4));
+    }
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.22); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+    .loader-track {
+      width: 160px;
+      height: 4px;
+      background: #ffdbe4;
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff4d79, #f43f5e);
+      border-radius: 999px;
+      transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.6);
+    }
+    .loader-caption {
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-pink);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Application Shell */
+    .app-shell {
+      position: relative;
+      z-index: 10;
+      pointer-events: none;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Fixed Header (Frosted Glass White & Pink) */
+    header.romantic-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-line);
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      pointer-events: auto;
+      box-shadow: 0 2px 20px rgba(244, 63, 94, 0.05);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--label-1);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.02em;
+      font-size: 16px;
+    }
+    .brand-title .pink-badge {
+      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.3);
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .white-pink-btn {
+      position: relative;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--label-2);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .white-pink-btn:hover {
+      color: var(--accent-pink);
+      border: 1px dotted var(--accent-pink);
+      background: var(--bg-elevated);
+    }
+    .white-pink-btn.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      font-weight: 800;
+      border: 1px solid #f43f5e;
+      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.35);
+    }
+
+    .meta-indicators {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--label-3);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+    .meta-indicators span.active-heart {
+      color: var(--accent-pink);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Main Viewport */
+    main.main-viewport {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 50px 36px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 46px;
+    }
+
+    /* Hero Section */
+    .hero-landing {
+      position: relative;
+      padding: 40px 44px;
+      background: linear-gradient(135deg, #ffffff 0%, #fff1f5 100%);
+      border: 1px solid var(--border-line);
+      border-radius: 18px;
+      box-shadow: 0 12px 40px rgba(244, 63, 94, 0.08);
+      pointer-events: auto;
+    }
+
+    .pink-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-pink);
+      background: #ffe6ed;
+      padding: 4px 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 24px;
+      border: 1px solid #ffd1dc;
+    }
+
+    /* Staggered Cinematic Headline Reveal */
+    .hero-headline {
+      font-size: clamp(3.2rem, 6.8vw, 5.8rem);
+      font-weight: 900;
+      line-height: 0.94;
+      text-transform: uppercase;
+      letter-spacing: -0.035em;
+      color: var(--label-1);
+      margin-bottom: 24px;
+    }
+    .reveal-line {
+      display: block;
+      overflow: hidden;
+    }
+    .reveal-word {
+      display: inline-block;
+      transform: translateY(105%);
+      opacity: 0;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.ready .reveal-word {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    .delay-1 { transition-delay: 0.1s !important; }
+    .delay-2 { transition-delay: 0.25s !important; }
+    .delay-3 {
+      transition-delay: 0.4s !important;
+      background: linear-gradient(90deg, #f43f5e, #ff6b8b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 14px rgba(244, 63, 94, 0.3));
+    }
+
+    .hero-layout-grid {
+      display: block;
+      max-width: 860px;
+    }
+
+    .hero-subtext {
+      font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+      color: var(--label-2);
+      line-height: 1.55;
+      font-weight: 400;
+      max-width: 780px;
+    }
+
+    /* Module Views */
+    .feature-view {
+      display: none;
+      flex-direction: column;
+      gap: 28px;
+      pointer-events: auto;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .feature-view.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Cards & Grids */
+    .romantic-grid-12 {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .romantic-card {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 24px rgba(244, 63, 94, 0.05);
+    }
+    .romantic-card:hover {
+      border-color: var(--border-line-hover);
+      box-shadow: 0 12px 36px rgba(244, 63, 94, 0.12);
+      transform: translateY(-2px);
+    }
+    .romantic-card .card-tag {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #fff0f4;
+      color: var(--accent-pink);
+      border-bottom-left-radius: 10px;
+      border-top-right-radius: 15px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      border-left: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .col-span-12 { grid-column: span 12; }
+    .col-span-6 { grid-column: span 6; }
+    .col-span-4 { grid-column: span 4; }
+    .col-span-8 { grid-column: span 8; }
+    .col-span-7 { grid-column: span 7; }
+    .col-span-5 { grid-column: span 5; }
+    @media (max-width: 860px) {
+      .col-span-6, .col-span-4, .col-span-8, .col-span-7, .col-span-5 { grid-column: span 12; }
+    }
+
+    .name-inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 600px) {
+      .name-inputs-grid { grid-template-columns: 1fr; }
+    }
+
+    .quiz-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      transition: all 0.2s ease;
+    }
+    .quiz-card:hover {
+      border-color: var(--border-line-hover);
+    }
+    .quiz-q-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .quiz-q-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--label-1);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .quiz-options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .quiz-opt-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      color: var(--label-2);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+    .quiz-opt-btn:hover {
+      border-color: var(--accent-pink);
+      background: #fff0f5;
+      color: var(--accent-pink);
+      transform: translateY(-1px);
+    }
+    .quiz-opt-btn.selected {
+      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      color: #ffffff;
+      border-color: #f43f5e;
+      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.35);
+      font-weight: 700;
+      transform: scale(1.02);
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--label-1);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--label-2);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* Inputs */
+    .input-field {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      color: var(--label-1);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 12px 16px;
+      outline: none;
+      transition: all 0.15s ease;
+      margin-bottom: 16px;
+    }
+    .input-field:focus {
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
+    }
+    label.field-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--label-2);
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    /* Buttons */
+    .action-btn-pink {
+      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 18px rgba(244, 63, 94, 0.25);
+    }
+    .action-btn-pink:hover {
+      background: linear-gradient(135deg, #ff3366, #e11d48);
+      box-shadow: 0 6px 24px rgba(244, 63, 94, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .action-btn-outline {
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: 10px;
+      color: var(--label-1);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 700;
+    }
+    .action-btn-outline:hover {
+      border-color: var(--accent-pink);
+      color: var(--accent-pink);
+      background: #fff5f8;
+    }
+
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .pink-pill-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      background: #ffffff;
+      border: 1px solid var(--border-line);
+      border-radius: 20px;
+      color: var(--label-2);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+      font-weight: 600;
+    }
+    .pink-pill-tag:hover {
+      border-color: var(--accent-pink);
+      color: var(--accent-pink);
+      background: #fff5f8;
+    }
+    .pink-pill-tag.selected {
+      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      color: #ffffff;
+      font-weight: 800;
+      border-color: #f43f5e;
+      box-shadow: 0 3px 12px rgba(244, 63, 94, 0.3);
+    }
+
+    .metric-display {
+      font-family: var(--font-mono);
+      font-size: clamp(3.2rem, 5vw, 4.8rem);
+      font-weight: 900;
+      color: var(--accent-pink);
+      line-height: 1;
+      margin: 12px 0;
+      letter-spacing: -0.03em;
+    }
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--label-3);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .roadmap-step {
+      border-left: 3px solid var(--accent-pink);
+      background: #fff9fb;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin-bottom: 14px;
+      border-top: 1px solid var(--border-line);
+      border-right: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+    }
+    .roadmap-step .step-id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-pink);
+      margin-bottom: 4px;
+    }
+    .roadmap-step .step-title {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--label-1);
+    }
+    .roadmap-step .step-body {
+      font-size: 13px;
+      color: var(--label-2);
+      line-height: 1.55;
+    }
+
+    .romantic-disclaimer {
+      border: 1px solid var(--border-line);
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--label-2);
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 4px 18px rgba(244, 63, 94, 0.04);
+    }
+    .romantic-disclaimer .badge {
+      background: #ffe6ed;
+      color: var(--accent-pink);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    footer.romantic-footer {
+      border-top: 1px solid var(--border-line);
+      padding: 30px 36px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--label-3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      pointer-events: auto;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Interactive White & Pink Particle Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Opening Romantic Preloader -->
+  <div id="preloader-overlay">
+    <div class="heart-pulse-icon">💕</div>
+    <div class="loader-track">
+      <div class="loader-fill" id="preloader-fill"></div>
+    </div>
+    <div class="loader-caption">LOVEAI // ബന്ധം തുടങ്ങുന്നു 💕</div>
+  </div>
+
+  <!-- Application Shell -->
+  <div class="app-shell">
+
+    <!-- Top Navigation Header -->
+    <header class="romantic-header">
+      <div class="brand-group">
+        <a href="/" class="brand-title" onclick="event.preventDefault(); switchView('home')">
+          <span>LOVEAI</span>
+          <span class="pink-badge">💕 ROMANCE AI</span>
+        </a>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <ul class="nav-tabs">
+        <li><button class="white-pink-btn active" onclick="switchView('home')">ഡാഷ്ബോർഡ്</button></li>
+        <li><button class="white-pink-btn" onclick="switchView('compatibility')">പൊരുത്തം</button></li>
+        <li><button class="white-pink-btn" onclick="switchView('image')">ചിത്ര സാമ്യം</button></li>
+        <li><button class="white-pink-btn" onclick="switchView('advisor')">AI ഉപദേശം</button></li>
+        <li><button class="white-pink-btn" onclick="switchView('message')">സന്ദേശ സഹായി</button></li>
+        <li><button class="white-pink-btn" onclick="switchView('journey')">യാത്ര</button></li>
+      </ul>
+
+      <!-- Real-time Status -->
+      <div class="meta-indicators">
+        <span id="live-clock">GMT+5:30 --:--:--</span>
+        <span id="mouse-coords">0000 X 0000 Y</span>
+        <span class="active-heart">♥ ACTIVE</span>
+      </div>
+    </header>
+
+    <!-- Main Viewport -->
+    <main class="main-viewport">
+
+      <!-- ==================== VIEW 1: HOME / DASHBOARD ==================== -->
+      <section id="view-dashboard" class="feature-view active">
+        <!-- Hero Landing Section (Visible only in home path) -->
+        <div class="hero-landing">
+          <div class="pink-pill">💕 AI ബന്ധ സഹായി & റൊമാന്റിക് മാർഗ്ഗനിർദ്ദേശം</div>
+          
+          <div class="hero-layout-grid">
+            <div>
+              <h1 class="hero-headline">
+                <span class="reveal-line"><span class="reveal-word delay-1">മനസ്സിലാക്കുക.</span></span>
+                <span class="reveal-line"><span class="reveal-word delay-2">സംസാരിക്കുക.</span></span>
+                <span class="reveal-line"><span class="reveal-word delay-3">ബന്ധപ്പെടുക. 💕</span></span>
+              </h1>
+              <p class="hero-subtext">
+                സ്നേഹവും പരസ്പര ബഹുമാനവുമുള്ള ഒരു യഥാർത്ഥ റൊമാന്റിക് കണക്ഷൻ വളർത്തുക. ഗണിത-അധിഷ്ഠിത പൊരുത്ത പരിശോധനയും, OpenCV ചിത്ര സാമ്യവും, കൃത്യമായ AI റോഡ്‌മാപ്പുകളും ഒരുമിച്ച് നൽകുന്നു.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="romantic-grid-12">
+          
+          <div class="romantic-card col-span-6">
+            <div class="card-tag">SYSTEM 01</div>
+            <div class="section-title">💘 പൊരുത്തം ANALYZER</div>
+            <div class="metric-display" id="dash-comp-metric">--%</div>
+            <p class="section-desc" id="dash-comp-desc">പേരുകളും താൽപര്യങ്ങളും വെച്ച് നിങ്ങളുടെ പൊരുത്തം കണ്ടെത്തുക.</p>
+            <button class="action-btn-outline" onclick="switchView('compatibility')">പൊരുത്തം കണക്കാക്കുക →</button>
+          </div>
+
+          <div class="romantic-card col-span-6">
+            <div class="card-tag">SYSTEM 02</div>
+            <div class="section-title">📸 ചിത്ര സാമ്യം ENGINE</div>
+            <div class="metric-display" style="color: var(--label-1);">OPENCV</div>
+            <p class="section-desc">Color histograms, pixel structural delta, കൂടാതെ ORB features ഉപയോഗിച്ച് Photos compare ചെയ്യുക.</p>
+            <button class="action-btn-outline" onclick="switchView('image')">Photos Compare ചെയ്യുക →</button>
+          </div>
+
+          <div class="romantic-card col-span-6">
+            <div class="card-tag">SYSTEM 03</div>
+            <div class="section-title">🤖 AI ബന്ധ ഉപദേശം</div>
+            <p class="section-desc" style="margin-top: 14px;">പരസ്പര ബഹുമാനവും അതിരുകളും കാത്തുസൂക്ഷിച്ചുള്ള 6-ഘട്ട communication roadmap.</p>
+            <button class="action-btn-pink" onclick="switchView('advisor')">Roadmap ഉണ്ടാക്കുക →</button>
+          </div>
+
+          <div class="romantic-card col-span-6">
+            <div class="card-tag">SYSTEM 04</div>
+            <div class="section-title">💬 സന്ദേശ സഹായി</div>
+            <p class="section-desc" style="margin-top: 14px;">നിങ്ങളുടെ Message-ലെ സമ്മർദ്ദവും ടോണും വിശകലനം ചെയ്യുക, അല്ലെങ്കിൽ മികച്ച രീതിയിൽ rewrite ചെയ്യുക.</p>
+            <button class="action-btn-outline" onclick="switchView('message')">Message Assistant തുറക്കുക →</button>
+          </div>
+
+          <div class="romantic-card col-span-12">
+            <div class="card-tag">SYSTEM 05</div>
+            <div class="section-title">❤️ ബന്ധത്തിന്റെ യാത്ര</div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0;">
+              <span class="metric-label" id="dash-journey-caption">പൂർത്തിയായ MILESTONES</span>
+              <span style="font-family: var(--font-mono); color: var(--accent-pink); font-weight: 800;" id="dash-journey-pct">0%</span>
+            </div>
+            <div style="background: #ffeef2; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 20px; overflow: hidden;">
+              <div id="dash-journey-fill" style="background: linear-gradient(90deg, #ff4d79, #f43f5e); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);"></div>
+            </div>
+            <button class="action-btn-outline" onclick="switchView('journey')">യാത്ര കാണുക →</button>
+          </div>
+
+        </div>
+
+        <div class="romantic-disclaimer">
+          <span class="badge">ശ്രദ്ധിക്കുക</span>
+          <div>LoveAI ഒരു entertainment & communication-support ആപ്പ് മാത്രമാണ്. ഇത് ഒരിക്കലും ആളുകളുടെ മനസ്സിലെ താല്പര്യങ്ങളോ സ്നേഹമോ ശാസ്ത്രീയമായി പ്രവചിക്കുന്നില്ല.</div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 2: COMPATIBILITY ==================== -->
+      <section id="view-compatibility" class="feature-view" style="align-items: center;">
+        <div style="width: 100%; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+
+          <!-- Centered Name Entry Input Card -->
+          <div class="romantic-card" style="width: 100%;">
+            <div class="card-tag">വിവരങ്ങൾ</div>
+            <div class="section-title">റൊമാന്റിക് പൊരുത്തം കണക്കാക്കൽ</div>
+            <p class="section-desc">പേരുകളും vibe quiz-ഉം വെച്ച് നിങ്ങളുടെ പൊരുത്തം കണ്ടെത്താം.</p>
+
+            <div class="name-inputs-grid">
+              <div>
+                <label class="field-label">നിങ്ങളുടെ പേര്:</label>
+                <input type="text" class="input-field" id="comp-name1" placeholder="ഉദാ: Rahul" style="margin-bottom: 0;" />
+              </div>
+              <div>
+                <label class="field-label">അവരുടെ പേര്:</label>
+                <input type="text" class="input-field" id="comp-name2" placeholder="ഉദാ: Ananya" style="margin-bottom: 0;" />
+              </div>
+            </div>
+
+            <!-- Unhinged Random Compatibility Quiz Section -->
+            <div class="quiz-section" style="margin-top: 6px; margin-bottom: 22px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <label class="field-label" style="margin-bottom: 0;">🎲 RANDOM VIBE QUIZ:</label>
+                <button type="button" class="action-btn-outline" style="padding: 4px 12px; font-size: 11px; border-radius: 999px;" onclick="renderRandomQuiz()">[ 🎲 ചോദ്യങ്ങൾ മാറ്റുക ]</button>
+              </div>
+              <div id="quiz-container" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Dynamically injected questions -->
+              </div>
+            </div>
+
+            <button class="action-btn-pink" id="btn-comp-run" style="width: 100%;" onclick="runCompatibility()">പൊരുത്തം കണക്കാക്കുക 💕</button>
+          </div>
+
+          <!-- Compatibility Result Card (Centered Below) -->
+          <div class="romantic-card" id="comp-result-box" style="width: 100%; display: none; text-align: center;">
+            <div class="card-tag">പൊരുത്തം</div>
+            <div class="section-title" id="comp-verdict-title">നിങ്ങളുടെ Score</div>
+            <div class="metric-display" id="comp-score-combined" style="margin: 12px 0;">--%</div>
+            <p class="section-desc" id="comp-verdict-desc" style="margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">പേരുകളും താൽപര്യങ്ങളും വെച്ച് പൊരുത്തം കണക്കാക്കി കഴിഞ്ഞു.</p>
+
+            <div style="border-top: 1px solid var(--border-line); padding-top: 18px; display: flex; justify-content: space-around; align-items: center; text-align: center;">
+              <div>
+                <span class="metric-label">പേര് പൊരുത്തം</span>
+                <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 800; margin-top: 4px;" id="comp-score-name">--%</div>
+              </div>
+              <div style="border-left: 1px solid var(--border-line); height: 48px;"></div>
+              <div>
+                <span class="metric-label">താൽപ്പര്യങ്ങളുടെ Score</span>
+                <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 800; color: var(--accent-pink); margin-top: 4px;" id="comp-score-interest">--%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="romantic-disclaimer" style="width: 100%; margin-top: 0;">
+            <span class="badge">ശ്രദ്ധിക്കുക</span>
+            <div>പൊരുത്തം scores entertainment-ന് വേണ്ടി മാത്രമാണ്. ഇത് ഒരിക്കലും relationship success-ഓ മറ്റുള്ളവരുടെ മനസ്സോ തീരുമാനിക്കുന്നില്ല.</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 3: IMAGE SIMILARITY ==================== -->
+      <section id="view-image" class="feature-view">
+        <div class="romantic-grid-12">
+          <div class="romantic-card col-span-6" style="text-align: center; cursor: pointer; background: #fffbfd;" onclick="document.getElementById('file-img1').click()">
+            <div class="card-tag">PHOTO 1</div>
+            <input type="file" id="file-img1" accept="image/*" style="display: none;" onchange="previewImg(this, 'p-img1')" />
+            <div id="p-label1" style="font-family: var(--font-mono); font-size: 12px; color: var(--label-2); padding: 40px 0; font-weight: 600;">[ ആദ്യത്തെ Photo തിരഞ്ഞെടുക്കുക ]</div>
+            <img id="p-img1" style="max-height: 220px; width: auto; margin: 0 auto; display: none; border-radius: 10px; border: 1px solid var(--border-line);" />
+          </div>
+
+          <div class="romantic-card col-span-6" style="text-align: center; cursor: pointer; background: #fffbfd;" onclick="document.getElementById('file-img2').click()">
+            <div class="card-tag">PHOTO 2</div>
+            <input type="file" id="file-img2" accept="image/*" style="display: none;" onchange="previewImg(this, 'p-img2')" />
+            <div id="p-label2" style="font-family: var(--font-mono); font-size: 12px; color: var(--label-2); padding: 40px 0; font-weight: 600;">[ രണ്ടാമത്തെ Photo തിരഞ്ഞെടുക്കുക ]</div>
+            <img id="p-img2" style="max-height: 220px; width: auto; margin: 0 auto; display: none; border-radius: 10px; border: 1px solid var(--border-line);" />
+          </div>
+
+          <div class="col-span-12">
+            <button class="action-btn-pink" style="width: 100%;" id="btn-run-cv" onclick="runImageComparison()">Images Compare ചെയ്യുക 📸</button>
+          </div>
+
+          <div class="romantic-card col-span-12" id="img-result-panel" style="display: none;">
+            <div class="card-tag">OPENCV RESULT</div>
+            <div class="section-title" id="img-verdict-tag">സാമ്യം SCORE</div>
+            <div class="metric-display" id="img-score-total">--%</div>
+            <div class="romantic-grid-12" style="border-top: 1px solid var(--border-line); padding-top: 16px;">
+              <div class="col-span-6">
+                <span class="metric-label">COLOR PALETTE സാമ്യം</span>
+                <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 800;" id="img-score-color">--%</div>
+              </div>
+              <div class="col-span-6">
+                <span class="metric-label">PIXEL & FEATURE സാമ്യം</span>
+                <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent-pink);" id="img-score-feat">--%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="romantic-disclaimer">
+          <span class="badge">ശ്രദ്ധിക്കുക</span>
+          <div>ഈ feature ചിത്രങ്ങളുടെ visual സാമ്യം മാത്രമേ നോക്കുന്നുള്ളൂ. ഇത് ആളെ തിരിച്ചറിയുന്നതോ, പ്രണയമോ attraction-ഓ കണക്കാക്കുന്നതോ അല്ല.</div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 4: AI ADVISOR ==================== -->
+      <section id="view-advisor" class="feature-view">
+        <div class="romantic-grid-12">
+          <div class="romantic-card col-span-5">
+            <div class="card-tag">സാഹചര്യം</div>
+            <div class="section-title">ബന്ധത്തിന്റെ അവസ്ഥ</div>
+
+            <label class="field-label">ഇപ്പോഴത്തെ ബന്ധം:</label>
+            <select class="input-field" id="adv-status">
+              <option value="Stranger">Stranger (അറിയില്ല)</option>
+              <option value="Classmate" selected>Classmate (പഠിക്കുന്നവർ)</option>
+              <option value="Acquaintance">Acquaintance (പരിചയക്കാർ)</option>
+              <option value="Friend">Friend (സുഹൃത്ത്)</option>
+              <option value="Close Friend">Close Friend (അടുത്ത സുഹൃത്ത്)</option>
+              <option value="Already talking">Already talking (സംസാരിക്കാറുണ്ട്)</option>
+            </select>
+
+            <label class="field-label">Communication എത്ര തവണ നടക്കുന്നു:</label>
+            <select class="input-field" id="adv-freq">
+              <option value="Rarely">അപ്പോഴൊക്കെ (Rarely)</option>
+              <option value="Sometimes" selected>ഇടയ്ക്കിടെ (Sometimes)</option>
+              <option value="Often">കൂടുതൽ തവണ (Often)</option>
+              <option value="Daily">ദിവസവും (Daily)</option>
+            </select>
+
+            <label class="field-label">നിങ്ങളുടെ ലക്ഷ്യം:</label>
+            <select class="input-field" id="adv-goal">
+              <option value="Start talking">സംസാരം തുടങ്ങുക</option>
+              <option value="Become better friends">നല്ല friends ആവുക</option>
+              <option value="Spend more time together">ഒരുമിച്ച് കൂടുതൽ സമയം ചിലവഴിക്കുക</option>
+              <option value="Ask them to hang out" selected>Hangout ചെയ്യാൻ ക്ഷണിക്കുക</option>
+              <option value="Express feelings">ഇഷ്ടം തുറന്നു പറയുക</option>
+              <option value="Ask them on a date">Date-ന് ക്ഷണിക്കുക</option>
+              <option value="Improve an existing relationship">ബന്ധം കൂടുതൽ മികച്ചതാക്കുക</option>
+            </select>
+
+            <label class="field-label">നിങ്ങളുടെ Situation പറയുക:</label>
+            <textarea class="input-field" id="adv-situation" rows="4">ഞങ്ങൾ class-ൽ അടുത്തിരുന്ന് project കാര്യങ്ങൾ സംസാരിക്കാറുണ്ട്, പക്ഷെ കോളേജിന് പുറത്ത് ഇതുവരെ ഒരുമിച്ച് പോയിട്ടില്ല. ഒരു awkwardness-ഉം ഇല്ലാതെ coffee കുടിക്കാൻ വിളിക്കണം എന്നാണ് ആഗ്രഹം.</textarea>
+
+            <button class="action-btn-pink" style="width: 100%;" id="btn-adv-exec" onclick="runAdvisor()">AI ഉപദേശം നൽകുക 🤖</button>
+          </div>
+
+          <div class="romantic-card col-span-7">
+            <div class="card-tag">ROADMAP</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div class="section-title" style="margin-bottom: 0;">STEP-BY-STEP മാർഗ്ഗനിർദ്ദേശം</div>
+              <button class="action-btn-outline" style="padding: 4px 12px; font-size: 11px;" onclick="copyAdvRoadmap()">[ COPY ചെയ്യുക ]</button>
+            </div>
+            <div id="adv-steps-container">
+              <p class="section-desc">നിങ്ങളുടെ situation നൽകിയാൽ step-by-step roadmap ഇവിടെ ലഭിക്കും.</p>
+            </div>
+            <div id="adv-reminder-box" style="display: none; border-top: 1px solid var(--border-line); padding-top: 16px; margin-top: 16px;">
+              <span class="metric-label" style="color: var(--accent-pink);">ഓർമ്മയ്ക്കായി</span>
+              <p class="section-desc" id="adv-reminder-text" style="margin-top: 6px;"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 5: MESSAGE ASSISTANT ==================== -->
+      <section id="view-message" class="feature-view">
+        <div class="romantic-grid-12">
+          <div class="romantic-card col-span-6">
+            <div class="card-tag">MESSAGE</div>
+            <div class="section-title">MESSAGE ഉണ്ടാക്കുക</div>
+
+            <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+              <button class="white-pink-btn active" id="mode-btn-analyze" onclick="setMessageMode('analyze')">01 // വിശകലനം</button>
+              <button class="white-pink-btn" id="mode-btn-improve" onclick="setMessageMode('improve')">02 // മെച്ചപ്പെടുത്തുക</button>
+            </div>
+
+            <label class="field-label" id="msg-input-label">നിങ്ങളുടെ Message നൽകുക:</label>
+            <textarea class="input-field" id="msg-input" rows="4">Hey! ഈ വ്യാഴാഴ്ച നമുക്ക് ഒരുമിച്ച് coffee കുടിക്കാനോ പഠിക്കാനോ സമയം ഉണ്ടോ?</textarea>
+
+            <div id="msg-tone-section" style="display: none; margin-bottom: 14px;">
+              <label class="field-label">ആവശ്യമായ Tone:</label>
+              <div class="tag-grid" id="msg-tones">
+                <span class="pink-pill-tag selected" onclick="selectTone(this)">Casual</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Friendly</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Funny</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Confident</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Sweet</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Direct</span>
+                <span class="pink-pill-tag" onclick="selectTone(this)">Short</span>
+              </div>
+            </div>
+
+            <button class="action-btn-pink" style="width: 100%;" id="btn-msg-run" onclick="runMessageAction()">Message വിശകലനം ചെയ്യുക</button>
+          </div>
+
+          <div class="romantic-card col-span-6" id="msg-result-panel">
+            <div class="card-tag">TELEMETRY</div>
+            <div class="section-title" id="msg-res-heading">MESSAGE TELEMETRY</div>
+
+            <div id="msg-metrics-grid" style="display: none; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
+              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
+                <span class="metric-label">TONE</span>
+                <div id="m-tone" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+              </div>
+              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
+                <span class="metric-label">വ്യക്തത</span>
+                <div id="m-clarity" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+              </div>
+              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
+                <span class="metric-label">സമ്മർദ്ദം</span>
+                <div id="m-pressure" style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-pink); margin-top: 4px;">--</div>
+              </div>
+              <div class="romantic-card" style="padding: 16px; background: #fff9fb;">
+                <span class="metric-label">സ്വാഭാവികത</span>
+                <div id="m-natural" style="font-family: var(--font-mono); font-weight: 800; margin-top: 4px; color: var(--label-1);">--</div>
+              </div>
+            </div>
+
+            <div id="msg-feedback-content" class="section-desc">Message നൽകി Analyze അല്ലെങ്കിൽ Rewrite തിരഞ്ഞെടുക്കുക.</div>
+            <div id="msg-rewrites-container" style="display: none; flex-direction: column; gap: 10px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VIEW 6: JOURNEY ==================== -->
+      <section id="view-journey" class="feature-view">
+        <div class="romantic-card">
+          <div class="card-tag">യാത്ര</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <div class="section-title">ബന്ധത്തിന്റെ യാത്ര</div>
+              <span class="metric-label" id="j-status-text">SQLITE MEMORY-ൽ സൂക്ഷിക്കുന്നു</span>
+            </div>
+            <button class="action-btn-pink" style="padding: 8px 18px; font-size: 11px;" onclick="promptAddMilestone()">+ Milestone ചേർക്കുക</button>
+          </div>
+
+          <div style="background: #ffeef2; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 24px; overflow: hidden;">
+            <div id="j-progress-bar" style="background: linear-gradient(90deg, #ff4d79, #f43f5e); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);"></div>
+          </div>
+
+          <div id="milestones-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Romantic Technical Footer -->
+    <footer class="romantic-footer">
+      <div>LOVEAI 💕 © 2026 // MALAYALAM ROMANTIC EDITION</div>
+      <div>മനസ്സിലാക്കുക. സംസാരിക്കുക. ബന്ധപ്പെടുക.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ==========================================================
+       1. PRELOADER & INITIAL REVEAL ANIMATION
+       ========================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      const fill = document.getElementById('preloader-fill');
+      const overlay = document.getElementById('preloader-overlay');
+      
+      setTimeout(() => { fill.style.width = '100%'; }, 60);
+
+      setTimeout(() => {
+        overlay.style.opacity = '0';
+        document.body.classList.add('ready');
+        setTimeout(() => { overlay.style.display = 'none'; }, 500);
+      }, 750);
+    });
+
+    /* ==========================================================
+       2. INTERACTIVE WHITE & PINK FLOATING HEARTS & PARTICLES CANVAS
+       ========================================================== */
+    const canvas = document.getElementById('ambient-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let targetMouseX = mouseX, targetMouseY = mouseY;
+    let ripples = [];
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Spawn ambient floating pink hearts & stardust
+    for (let i = 0; i < 48; i++) {
+      particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: Math.random() * 2.2 + 0.8,
+        speedY: -(Math.random() * 0.45 + 0.15),
+        speedX: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.45 + 0.25,
+        isHeart: Math.random() < 0.35
+      });
+    }
+
+    // Track mouse with smooth spring inertia
+    window.addEventListener('mousemove', (e) => {
+      targetMouseX = e.clientX;
+      targetMouseY = e.clientY;
+
+      const x = String(e.clientX).padStart(4, '0');
+      const y = String(e.clientY).padStart(4, '0');
+      document.getElementById('mouse-coords').innerText = `${x} X ${y} Y`;
+
+      // Spawn pastel pink ripple rings on pointer movement
+      const dx = targetMouseX - mouseX;
+      const dy = targetMouseY - mouseY;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+      if (speed > 4 && ripples.length < 24) {
+        ripples.push({
+          x: e.clientX,
+          y: e.clientY,
+          radius: 8,
+          maxRadius: 110 + speed * 1.5,
+          alpha: 0.35,
+          speed: 2.2 + speed * 0.05
+        });
+      }
+    });
+
+    function drawMiniHeart(ctx, x, y, size, alpha) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.beginPath();
+      const topCurveHeight = size * 0.3;
+      ctx.moveTo(0, topCurveHeight);
+      ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
+      ctx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, (size + topCurveHeight) / 1.5, 0, size);
+      ctx.bezierCurveTo(0, (size + topCurveHeight) / 1.5, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
+      ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
+      ctx.fillStyle = `rgba(244, 63, 94, ${alpha})`;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      document.getElementById('live-clock').innerText = `GMT+5:30 ${timeStr}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Canvas Animation Loop
+    let time = 0;
+    function renderCanvas() {
+      time += 0.015;
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Soft radial pink aura around pointer
+      const radial = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 340);
+      radial.addColorStop(0, 'rgba(255, 107, 149, 0.09)');
+      radial.addColorStop(0.5, 'rgba(255, 107, 149, 0.025)');
+      radial.addColorStop(1, 'transparent');
+      ctx.fillStyle = radial;
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. Floating pink hearts & stardust
+      for (let p of particles) {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
+        if (p.x < -20) p.x = width + 20;
+        if (p.x > width + 20) p.x = -20;
+
+        if (p.isHeart) {
+          drawMiniHeart(ctx, p.x, p.y, p.size * 3.5, p.alpha * 0.65);
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 140, 175, ${p.alpha * 0.75})`;
+          ctx.fill();
+        }
+      }
+
+      // 3. Expanding soft pink ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.radius += r.speed;
+        r.alpha -= 0.007;
+
+        if (r.alpha <= 0 || r.radius >= r.maxRadius) {
+          ripples.splice(i, 1);
+          continue;
+        }
+
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(244, 63, 94, ${r.alpha})`;
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(renderCanvas);
+    }
+    renderCanvas();
+
+    /* ==========================================================
+       3. INTERACTIVE LOGIC & BACKEND CONNECTIONS
+       ========================================================== */
+    let currentTone = 'Casual';
+    let currentMessageMode = 'analyze';
+    let lastAdvisorText = '';
+
+    const pathToView = {
+      '/': 'dashboard',
+      '/home': 'dashboard',
+      '/dashboard': 'dashboard',
+      '/compatibility': 'compatibility',
+      '/image': 'image',
+      '/advisor': 'advisor',
+      '/message': 'message',
+      '/journey': 'journey',
+      '/milestones': 'journey'
+    };
+
+    const viewToPath = {
+      'dashboard': '/',
+      'home': '/',
+      'compatibility': '/compatibility',
+      'image': '/image',
+      'advisor': '/advisor',
+      'message': '/message',
+      'journey': '/journey'
+    };
+
+    function switchView(name, updateHistory = true) {
+      const viewKey = (name === 'home' || name === 'dashboard') ? 'dashboard' : name;
+
+      document.querySelectorAll('.feature-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.white-pink-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById('view-' + viewKey);
+      if (target) target.classList.add('active');
+
+      const btn = Array.from(document.querySelectorAll('.white-pink-btn')).find(b => {
+        const attr = b.getAttribute('onclick') || '';
+        return attr.includes(`'${viewKey}'`) || (viewKey === 'dashboard' && (attr.includes("'home'") || attr.includes("'dashboard'")));
+      });
+      if (btn) btn.classList.add('active');
+
+      // Ensure landing page is only visible in home path
+      const isHome = (viewKey === 'dashboard');
+      const hero = document.querySelector('.hero-landing');
+      if (hero) {
+        hero.style.display = isHome ? 'block' : 'none';
+      }
+
+      if (updateHistory) {
+        const targetPath = viewToPath[viewKey] || `/${viewKey}`;
+        try {
+          if (window.location.protocol !== 'file:') {
+            if (window.location.pathname !== targetPath) {
+              history.pushState({ view: viewKey }, '', targetPath);
+            }
+          } else {
+            const hash = isHome ? '' : targetPath.replace(/^\//, '');
+            if (window.location.hash !== (hash ? '#' + hash : '')) {
+              window.location.hash = hash;
+            }
+          }
+        } catch (e) {
+          console.warn('Navigation history update failed:', e);
+        }
+      }
+
+      if (viewKey === 'dashboard') loadStats();
+      if (viewKey === 'journey') loadMilestones();
+      if (viewKey === 'compatibility' && currentQuizQuestions.length === 0) renderRandomQuiz();
+    }
+
+    function initRoute() {
+      let view = 'dashboard';
+      const hash = window.location.hash.replace(/^#\/?/, '').trim();
+      if (hash) {
+        const mapped = pathToView['/' + hash] || hash;
+        if (document.getElementById('view-' + mapped)) {
+          view = mapped;
+        }
+      } else if (window.location.protocol !== 'file:') {
+        const pathname = window.location.pathname;
+        if (pathToView[pathname]) {
+          view = pathToView[pathname];
+        } else {
+          const clean = pathname.replace(/^\/+|\/+$/g, '');
+          if (clean && document.getElementById('view-' + clean)) {
+            view = clean;
+          }
+        }
+      }
+      switchView(view, false);
+    }
+
+    window.addEventListener('popstate', (e) => {
+      if (e.state && e.state.view) {
+        switchView(e.state.view, false);
+      } else {
+        initRoute();
+      }
+    });
+
+    window.addEventListener('hashchange', () => {
+      initRoute();
+    });
+
+    function togglePill(el) {
+      el.classList.toggle('selected');
+    }
+
+    function selectTone(el) {
+      document.querySelectorAll('#msg-tones .pink-pill-tag').forEach(p => p.classList.remove('selected'));
+      el.classList.add('selected');
+      currentTone = el.innerText.trim();
+    }
+
+    function setMessageMode(mode) {
+      currentMessageMode = mode;
+      document.getElementById('mode-btn-analyze').classList.toggle('active', mode === 'analyze');
+      document.getElementById('mode-btn-improve').classList.toggle('active', mode === 'improve');
+      document.getElementById('msg-tone-section').style.display = mode === 'improve' ? 'block' : 'none';
+      document.getElementById('msg-input-label').innerText = mode === 'analyze' ? 'നിങ്ങളുടെ Message നൽകുക:' : 'മെച്ചപ്പെടുത്തേണ്ട Message നൽകുക:';
+      document.getElementById('btn-msg-run').innerText = mode === 'analyze' ? 'Message വിശകലനം ചെയ്യുക' : 'Message മെച്ചപ്പെടുത്തുക 💕';
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        if (data.latest_compatibility) {
+          document.getElementById('dash-comp-metric').innerText = data.latest_compatibility.combined_score + '%';
+          document.getElementById('dash-comp-desc').innerText = `Latest: ${data.latest_compatibility.name1} & ${data.latest_compatibility.name2}`;
+        }
+        if (data.journey) {
+          document.getElementById('dash-journey-caption').innerText = `${data.journey.completed} / ${data.journey.total} MILESTONES പൂർത്തിയായി`;
+          document.getElementById('dash-journey-pct').innerText = data.journey.percentage + '%';
+          document.getElementById('dash-journey-fill').style.width = data.journey.percentage + '%';
+        }
+      } catch (e) {
+        console.error('Failed to load stats', e);
+      }
+    }
+
+    /* ==========================================================
+       RANDOM COMPATIBILITY QUIZ QUESTION POOL (MALAYALAM)
+       ========================================================== */
+    const RANDOM_QUESTIONS = [
+      {
+        id: "potato",
+        q: "നിങ്ങൾ ഒരു ഉരുളക്കിഴങ്ങായി പുനർജനിച്ചാൽ, ഏത് രൂപമായിരിക്കും എടുക്കുക?",
+        options: [
+          "🍟 നല്ല ക്രിസ്പി french fry",
+          "🥔 നല്ല ബട്ടർ ചേർത്ത garlic mash",
+          "🍸 ഹൈ-ക്ലാസ് potato vodka ആയി മാറിയത്",
+          "🕳️ ഇരുട്ടത്ത് വെറുതെ ഇരിക്കുന്ന പച്ച ഉരുളക്കിഴങ്ങ്"
+        ]
+      },
+      {
+        id: "spider",
+        q: "ബാത്ത്റൂമിൽ വലിയൊരു എട്ടുകാലി! നിങ്ങളുടെ തന്ത്രപരമായ പ്രതികരണം എന്താണ്?",
+        options: [
+          "🥛 ഗ്ലാസ്സ് കമഴ്ത്തി പിടിച്ചു 'Gerald' എന്ന് പേരിടും",
+          "🔥 വീട് മുഴുവനും ഇപ്പോൾത്തന്നെ തീയിട്ടു കത്തിക്കും",
+          "📜 അതുമായി ഒരു സമാധാന കരാർ ഉണ്ടാക്കും",
+          "😱 ആരെങ്കിലും വന്ന് മാറ്റുന്നത് വരെ ഉറക്കെ നിലവിളിക്കും"
+        ]
+      },
+      {
+        id: "superpower",
+        q: "താഴെ പറയുന്ന mildly cursed superpowers-ൽ ഏത് തിരഞ്ഞെടുക്കും?",
+        options: [
+          "🕊️ പ്രാവുകളോട് സംസാരിക്കാം (പക്ഷെ അവർക്ക് പരദൂഷണം മാത്രമേയുള്ളൂ)",
+          "🔌 USB എപ്പോഴും ആദ്യ തവണ തന്നെ ശരിയായി കുത്താം",
+          "🍞 ദേഷ്യമുള്ള ടോസ്റ്ററുമായി മനസ്സിൽ സംസാരിക്കാം",
+          "💨 ഉറക്കെ തുമ്മുമ്പോൾ മാത്രം ആരും കാണില്ല"
+        ]
+      },
+      {
+        id: "microwave",
+        q: "Microwave timer 00:01-ൽ എത്തി. നിങ്ങൾ എന്ത് ചെയ്യും?",
+        options: [
+          "💣 ബോംബ് നിർവീര്യമാക്കുന്ന ഏജന്റിനെപ്പോലെ 00:01-ൽ നിർത്തും",
+          "🔊 വീട്ടിൽ ആധിപത്യം കാണിക്കാൻ 5 തവണ ബീപ്പ് അടിക്കാൻ വിടും",
+          "👁️ കറങ്ങുന്ന പ്ലേറ്റിലേക്ക് നോക്കി existential crisis അനുഭവിക്കും",
+          "🏃 അത് തുറന്നിട്ട് രാത്രിയിലേക്ക് ഓടും"
+        ]
+      },
+      {
+        id: "aliens",
+        q: "Aliens വന്ന് ഭൂമിയുടെ നേതാവിനോട് സംസാരിക്കണം എന്ന് പറഞ്ഞു. നിങ്ങൾ ആരെ കൊണ്ടുപോകും?",
+        options: [
+          "🐱 എന്റെ പൂച്ച (വീട് ഭരിക്കുന്നത് അതാണ്)",
+          "☕ അവർക്കൊരു cold coffee കൊടുത്ത് മനുഷ്യരെ കുറിച്ച് കുറ്റം പറയും",
+          "🏎️ ഭൂമിക്ക് വേണ്ടി Mario Kart ചലഞ്ച് ചെയ്യും",
+          "👽 വഴിതെറ്റി വന്ന വേറൊരു alien ആണെന്ന് ഞാൻ അഭിനയിക്കും"
+        ]
+      },
+      {
+        id: "pizza",
+        q: "Pizza-യിൽ പൈനാപ്പിൾ ഇടുന്നതിനെ കുറിച്ച് നിങ്ങളുടെ അഭിപ്രായം എന്താണ്?",
+        options: [
+          "👑 പാചകകലയിലെ ഏറ്റവും മികച്ച masterpiece",
+          "🚨 നേരെ romance ജയിലിലേക്ക് വിടേണ്ട കുറ്റം",
+          "📦 അതിന് പകരം ഞാൻ ഡെലിവറി കാർഡ്ബോർഡ് ബോക്സ് തിന്നോളാം",
+          "🌪️ Unfiltered chaos ആണ് എന്റെ യഥാർത്ഥ love language"
+        ]
+      },
+      {
+        id: "forest_door",
+        q: "കാട്ടിൽ തിളങ്ങുന്ന ഒരു പ്രത്യേക വാതിൽ കണ്ടു. നിങ്ങൾ എന്ത് ചെയ്യും?",
+        options: [
+          "🚪 ഒരു പേടിയും കൂടാതെ ചവിട്ടിത്തുറക്കും (side quest unlocked!)",
+          "🍪 മര്യാദയ്ക്ക് മുട്ടി ഒരു പ്ലേറ്റ് കുക്കീസ് നീട്ടും",
+          "📸 അതിന്റെ മുന്നിൽ നിന്ന് ഒരു aesthetic സെൽഫി എടുക്കും",
+          "🏃 എന്തിനാ വെറുതെ പ്രശ്നം എന്ന് കരുതി തിരിച്ച് ഓടും"
+        ]
+      },
+      {
+        id: "desktop",
+        q: "ഇപ്പോൾ നിങ്ങളുടെ കമ്പ്യൂട്ടർ ഡെസ്ക്ടോപ്പ് എങ്ങനെയാണ് ഇരിക്കുന്നത്?",
+        options: [
+          "✨ സീറോ ഐക്കണുകൾ, നല്ല neat & clean zen minimalism",
+          "🌪️ സ്ക്രീൻ മുഴുവൻ downloads & screenshots",
+          "📁 'stuff_2026_final_v2' എന്ന വലിയൊരു ഫോൾഡർ മാത്രം",
+          "🤷 വാൾപേപ്പർ കണ്ടിട്ട് ഇപ്പോൾ 4 വർഷമായി"
+        ]
+      },
+      {
+        id: "ghost",
+        q: "നിങ്ങൾ ഒരു പ്രേതമായാൽ (ghost), എങ്ങനെയായിരിക്കും പേടിപ്പിക്കുക?",
+        options: [
+          "🧦 കഴുകിയ തുണിയിൽ നിന്ന് ഓരോ കാൽസഞ്ചി (sock) മാത്രം മോഷ്ടിക്കും",
+          "📺 Netflix സബ്‌ടൈറ്റിൽ മാറ്റി ഗ്രീക്ക് ആക്കും",
+          "☕ ചൂടില്ലാത്ത ചായ/കോഫി തട്ടിയിടും",
+          "🔑 താക്കോൽ തപ്പുന്ന ആളുകളെ സഹായിക്കുന്ന നല്ല പ്രേതമാകും"
+        ]
+      },
+      {
+        id: "zombie",
+        q: "Zombie apocalypse വരുമ്പോൾ നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന ആയുധം ഏത്?",
+        options: [
+          "🍳 നല്ല കട്ടിയുള്ള cast-iron പാൻ (അടിച്ച് തല പൊട്ടിക്കാൻ)",
+          "🧀 Zombies-നെ കൂട്ടുകാരാക്കാൻ snacks നീട്ടും",
+          "🗡️ തൊട്ടാൽ പൊട്ടുന്ന ഒരു fancy ഷോ വാൾ (katana)",
+          "🛋️ പ്രശ്നം തീരുന്നത് വരെ blanket-ന്റെ ഉള്ളിൽ ഒളിച്ചിരിക്കും"
+        ]
+      },
+      {
+        id: "alarm",
+        q: "രാവിലെ അലാറം ക്ലോക്കുമായി നിങ്ങളുടെ ബന്ധം എങ്ങനെയാണ്?",
+        options: [
+          "⏰ ബെല്ലടിക്കുന്നതിന് 2 മിനിറ്റ് മുൻപ് സ്വാഭാവികമായി ഉണരും",
+          "😴 3 മിനിറ്റ് ഇടവേളയിൽ വെച്ച 14 അലാറങ്ങൾ",
+          "🎶 കേൾക്കുകയേ ചെയ്യാത്ത soft പക്ഷി ശബ്ദങ്ങൾ",
+          "💥 നെഞ്ചിടിച്ചുകൊണ്ടുള്ള ഞെട്ടിത്തെറിച്ച ചാട്ടം"
+        ]
+      },
+      {
+        id: "raccoon",
+        q: "രാത്രി 3 മണിക്ക് ഒരു കുറുക്കൻ നിങ്ങൾക്ക് ഒരു ബ്രീഫ്കേസ് തന്നാൽ:",
+        options: [
+          "💼 ചോദ്യമൊന്നും ചോദിക്കാതെ സൈലന്റായി വാങ്ങും",
+          "🥪 അർദ്ധരാത്രി സാൻഡ്‌വിച്ചിന്റെ പകുതി അതിന് കൊടുക്കും",
+          "🏃 തിരിഞ്ഞു നോക്കാതെ ജീവനും കൊണ്ട് ഓടും",
+          "🤝 ഗ്യാങ്ങിൽ ഒഴിവുണ്ടോ എന്ന് റെസ്യൂമെ കൊടുത്ത് ചോദിക്കും"
+        ]
+      }
+    ];
+
+    let currentQuizQuestions = [];
+    let quizSelectedAnswers = {};
+
+    function renderRandomQuiz() {
+      const container = document.getElementById('quiz-container');
+      if (!container) return;
+
+      quizSelectedAnswers = {};
+
+      // Pick 3 random distinct questions
+      const shuffled = [...RANDOM_QUESTIONS].sort(() => 0.5 - Math.random());
+      currentQuizQuestions = shuffled.slice(0, 3);
+
+      container.innerHTML = '';
+      currentQuizQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'quiz-card';
+
+        const qLabel = document.createElement('div');
+        qLabel.className = 'quiz-q-label';
+        qLabel.innerHTML = `<span>ചോദ്യം 0${idx + 1} // RANDOM VIBE CHECK</span><span id="quiz-badge-${q.id}" style="color: var(--label-3); font-size: 10px; font-weight: 600;">ഉത്തരം നൽകിയില്ല</span>`;
+        card.appendChild(qLabel);
+
+        const qText = document.createElement('div');
+        qText.className = 'quiz-q-text';
+        qText.innerText = q.q;
+        card.appendChild(qText);
+
+        const optionsGrid = document.createElement('div');
+        optionsGrid.className = 'quiz-options-grid';
+
+        q.options.forEach(opt => {
+          const optBtn = document.createElement('button');
+          optBtn.type = 'button';
+          optBtn.className = 'quiz-opt-btn';
+          optBtn.innerText = opt;
+          optBtn.onclick = () => selectQuizOption(q.id, opt, optBtn, optionsGrid);
+          optionsGrid.appendChild(optBtn);
+        });
+
+        card.appendChild(optionsGrid);
+        container.appendChild(card);
+      });
+    }
+
+    function selectQuizOption(qId, text, clickedBtn, parentGrid) {
+      const isAlreadySelected = clickedBtn.classList.contains('selected');
+
+      // Clear selection in this question
+      parentGrid.querySelectorAll('.quiz-opt-btn').forEach(b => b.classList.remove('selected'));
+      const badge = document.getElementById(`quiz-badge-${qId}`);
+
+      if (isAlreadySelected) {
+        delete quizSelectedAnswers[qId];
+        if (badge) {
+          badge.innerText = 'ഉത്തരം നൽകിയില്ല';
+          badge.style.color = 'var(--label-3)';
+        }
+      } else {
+        clickedBtn.classList.add('selected');
+        quizSelectedAnswers[qId] = text;
+        if (badge) {
+          badge.innerText = '✓ ഉത്തരം നൽകി';
+          badge.style.color = 'var(--accent-pink)';
+        }
+      }
+    }
+
+    async function runCompatibility() {
+      const name1 = document.getElementById('comp-name1').value.trim();
+      const name2 = document.getElementById('comp-name2').value.trim();
+      const tags = Object.values(quizSelectedAnswers);
+
+      if (!name1 || !name2) {
+        alert('ദയവായി രണ്ട് പേരുകളും നൽകുക.');
+        return;
+      }
+
+      if (tags.length === 0) {
+        alert('താഴെയുള്ള Random Quiz-ൽ നിന്ന് കുറഞ്ഞത് ഒരു ഉത്തരമെങ്കിലും തിരഞ്ഞെടുക്കുക! 🎲');
+        return;
+      }
+
+      const btn = document.getElementById('btn-comp-run');
+      if (btn) {
+        btn.innerText = 'പൊരുത്തം കണക്കാക്കുകയാണ് 💕...';
+        btn.disabled = true;
+      }
+
+      try {
+        const res = await fetch('/api/compatibility', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name1, name2, interests: tags })
+        });
+        const json = await res.json();
+        if (json.success) {
+          const r = json.result;
+          document.getElementById('comp-score-combined').innerText = r.combined_score + '%';
+          document.getElementById('comp-score-name').innerText = r.name_score + '%';
+          document.getElementById('comp-score-interest').innerText = r.interest_score + '%';
+          document.getElementById('comp-verdict-title').innerText = r.verdict_title || 'നിങ്ങളുടെ Score';
+          document.getElementById('comp-verdict-desc').innerText = r.verdict_description;
+          const resBox = document.getElementById('comp-result-box');
+          if (resBox) {
+            resBox.style.display = 'block';
+            resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        } else {
+          alert('പ്രശ്നം: ' + (json.error || 'പൊരുത്തം കണക്കാക്കാൻ കഴിഞ്ഞില്ല.'));
+        }
+      } catch (e) {
+        alert('പൊരുത്തം കണക്കാക്കുന്നതിൽ പ്രശ്നം: ' + e);
+      } finally {
+        if (btn) {
+          btn.innerText = 'പൊരുത്തം കണക്കാക്കുക 💕';
+          btn.disabled = false;
+        }
+      }
+    }
+
+    function previewImg(input, imgId) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.getElementById(imgId);
+          img.src = e.target.result;
+          img.style.display = 'block';
+          const labelId = imgId === 'p-img1' ? 'p-label1' : 'p-label2';
+          document.getElementById(labelId).style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    async function runImageComparison() {
+      const f1 = document.getElementById('file-img1').files[0];
+      const f2 = document.getElementById('file-img2').files[0];
+      if (!f1 || !f2) {
+        alert('ദയവായി Photo 1-ഉം Photo 2-ഉം തിരഞ്ഞെടുക്കുക.');
+        return;
+      }
+      const btn = document.getElementById('btn-run-cv');
+      btn.innerText = 'ചിത്രങ്ങൾ Compare ചെയ്യുകയാണ്...';
+      btn.disabled = true;
+
+      const fd = new FormData();
+      fd.append('image1', f1);
+      fd.append('image2', f2);
+
+      try {
+        const res = await fetch('/api/image-similarity', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          const r = json.result;
+          document.getElementById('img-verdict-tag').innerText = `RESULT: ${r.rating.toUpperCase()}`;
+          document.getElementById('img-score-total').innerText = r.similarity_score + '%';
+          document.getElementById('img-score-color').innerText = r.breakdown.color_similarity + '%';
+          document.getElementById('img-score-feat').innerText = r.breakdown.feature_similarity + '%';
+          document.getElementById('img-result-panel').style.display = 'block';
+        } else {
+          alert('പ്രശ്നം: ' + json.error);
+        }
+      } catch (e) {
+        alert('CV പ്രശ്നം: ' + e);
+      } finally {
+        btn.innerText = 'Images Compare ചെയ്യുക 📸';
+        btn.disabled = false;
+      }
+    }
+
+    async function runAdvisor() {
+      const status = document.getElementById('adv-status').value;
+      const freq = document.getElementById('adv-freq').value;
+      const goal = document.getElementById('adv-goal').value;
+      const situation = document.getElementById('adv-situation').value.trim();
+
+      const btn = document.getElementById('btn-adv-exec');
+      btn.innerText = 'ROADMAP തയ്യാറാക്കുകയാണ് 💕...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/advisor', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ relationship_status: status, communication_freq: freq, goal, situation })
+        });
+        const json = await res.json();
+        if (json.success) {
+          const r = json.result;
+          lastAdvisorText = r.raw_text;
+          const container = document.getElementById('adv-steps-container');
+          container.innerHTML = '';
+          r.steps.forEach(s => {
+            const el = document.createElement('div');
+            el.className = 'roadmap-step';
+            el.innerHTML = `
+              <div class="step-id">STEP // ${s.step_num}</div>
+              <div class="step-title">${s.title}</div>
+              <div class="step-body">${s.description}</div>
+            `;
+            container.appendChild(el);
+          });
+          document.getElementById('adv-reminder-text').innerText = r.reminder;
+          document.getElementById('adv-reminder-box').style.display = 'block';
+        }
+      } catch (e) {
+        alert('Advisor പ്രശ്നം: ' + e);
+      } finally {
+        btn.innerText = 'AI ഉപദേശം നൽകുക 🤖';
+        btn.disabled = false;
+      }
+    }
+
+    function copyAdvRoadmap() {
+      navigator.clipboard.writeText(lastAdvisorText);
+      alert('✓ Roadmap പൂർണ്ണമായി copy ചെയ്തു.');
+    }
+
+    async function runMessageAction() {
+      const msg = document.getElementById('msg-input').value.trim();
+      if (!msg) {
+        alert('ദയവായി ഒരു message നൽകുക.');
+        return;
+      }
+
+      const metricsGrid = document.getElementById('msg-metrics-grid');
+      const feedbackBox = document.getElementById('msg-feedback-content');
+      const rewritesContainer = document.getElementById('msg-rewrites-container');
+
+      if (currentMessageMode === 'analyze') {
+        const res = await fetch('/api/message/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg })
+        });
+        const json = await res.json();
+        if (json.success) {
+          const d = json.result;
+          document.getElementById('msg-res-heading').innerText = 'TELEMETRY // വിശകലനം';
+          document.getElementById('m-tone').innerText = d.tone;
+          document.getElementById('m-clarity').innerText = d.clarity;
+          document.getElementById('m-pressure').innerText = d.pressure;
+          document.getElementById('m-natural').innerText = d.naturalness;
+          feedbackBox.innerText = d.feedback;
+          metricsGrid.style.display = 'grid';
+          rewritesContainer.style.display = 'none';
+        }
+      } else {
+        const res = await fetch('/api/message/improve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg, tone: currentTone })
+        });
+        const json = await res.json();
+        if (json.success) {
+          const d = json.result;
+          document.getElementById('msg-res-heading').innerText = `TELEMETRY // REWRITES (${d.tone.toUpperCase()})`;
+          metricsGrid.style.display = 'none';
+          feedbackBox.innerText = '';
+          rewritesContainer.innerHTML = '';
+          rewritesContainer.style.display = 'flex';
+          d.options.forEach((opt, idx) => {
+            const card = document.createElement('div');
+            card.className = 'roadmap-step';
+            card.style.display = 'flex';
+            card.style.justifyContent = 'space-between';
+            card.style.alignItems = 'center';
+            card.innerHTML = `
+              <div>
+                <div class="step-id">OPTION ${idx+1}</div>
+                <div style="font-size: 14px; color: var(--label-1); margin-top: 4px; font-weight: 600;">"${opt}"</div>
+              </div>
+              <button class="action-btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="navigator.clipboard.writeText('${opt.replace(/'/g, "\\'")}'); alert('Copy ചെയ്തു!');">[ COPY ചെയ്യുക ]</button>
+            `;
+            rewritesContainer.appendChild(card);
+          });
+        }
+      }
+    }
+
+    async function loadMilestones() {
+      const res = await fetch('/api/milestones');
+      const data = await res.json();
+      if (data.success) {
+        const list = document.getElementById('milestones-list');
+        list.innerHTML = '';
+        let completed = 0;
+        data.milestones.forEach(m => {
+          if (m.completed) completed++;
+          const row = document.createElement('div');
+          row.className = 'roadmap-step';
+          row.style.display = 'flex';
+          row.style.justifyContent = 'space-between';
+          row.style.alignItems = 'center';
+          row.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <input type="checkbox" ${m.completed ? 'checked' : ''} onchange="toggleMilestone(${m.id})" style="accent-color: var(--accent-pink); width: 18px; height: 18px; cursor: pointer;" />
+              <div>
+                <div style="font-weight: 800; color: ${m.completed ? 'var(--label-1)' : 'var(--label-3)'}; font-size: 14px;">${m.title}</div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--label-2);">${m.description || ''} ${m.event_date ? '— ' + m.event_date : ''}</div>
+              </div>
+            </div>
+            <button class="action-btn-outline" style="padding: 4px 8px; font-size: 11px; color: var(--accent-pink);" onclick="deleteMilestone(${m.id})">[ DELETE ]</button>
+          `;
+          list.appendChild(row);
+        });
+
+        const total = data.milestones.length;
+        const pct = total > 0 ? Math.round(completed / total * 100) : 0;
+        document.getElementById('j-status-text').innerText = `${completed} / ${total} MILESTONES പൂർത്തിയായി (${pct}%)`;
+        document.getElementById('j-progress-bar').style.width = pct + '%';
+      }
+    }
+
+    async function toggleMilestone(id) {
+      await fetch(`/api/milestones/${id}/toggle`, { method: 'POST' });
+      loadMilestones();
+    }
+
+    async function deleteMilestone(id) {
+      if (confirm('ഈ milestone delete ചെയ്യണോ?')) {
+        await fetch(`/api/milestones/${id}`, { method: 'DELETE' });
+        loadMilestones();
+      }
+    }
+
+    async function promptAddMilestone() {
+      const title = prompt('Milestone പേര് നൽകുക:');
+      if (title && title.trim()) {
+        await fetch('/api/milestones', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: title.trim() })
+        });
+        loadMilestones();
+      }
+    }
+
+    // Initialize routing based on current path / hash
+    initRoute();
+    renderRandomQuiz();
+  </script>
+</body>
+</html>

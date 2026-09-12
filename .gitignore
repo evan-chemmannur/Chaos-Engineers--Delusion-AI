@@ -1,0 +1,32 @@
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# SQLite databases
+*.db
+database/*.db
+!database/.gitkeep
+
+# PyInstaller / Build artifacts
+build/
+dist/
+*.spec
+
+# IDEs
+.vscode/
+.idea/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
