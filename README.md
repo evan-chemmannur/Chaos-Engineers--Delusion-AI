@@ -70,7 +70,7 @@ https://drive.google.com/drive/folders/1OgPm-mmbdaFQi4j7pH2DZHa2T0MI7PG3?usp=sha
 
 # Diagrams
 
-*Flask REST API → Single Page HTML App → Gemini LLM for live message telemetry*
+*Flask REST API → Single Page HTML App → Groq LLM for live message telemetry*
 
 ### DEPLOYMENT
 
