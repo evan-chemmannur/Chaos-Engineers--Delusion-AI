@@ -6,20 +6,20 @@
 
 
 ## Basic Details
-### Team Name: Chaos Engineers
+### TEAM NAME: CHAOS ENGINEERS
 
 
-### Team Members
+### TEAM MEMBERS
 - Team Lead: Evan Chemmannur
 - Member 2: Christy Varghese
 
-### Project Description
+### PROJECT DESCRIPTION
 ഇഷ്ടAI is a Malayalam-first AI-powered romantic communication assistant. It helps you figure out your "compatibility score" with your crush (spoiler: it's random), analyse the stress level of your messages, and track your relationship journey — all while looking gorgeous with a scroll-driven cinematic intro animation.
 
-### The Problem (that doesn't exist)
+### THE PROBLEM (that doesn't exist)
 You've been staring at that text draft for 45 minutes. Is it too eager? Too cold? Does using a full stop make you seem passive-aggressive? Nobody knows. Nobody asked. This is a crisis.
 
-### The Solution (that nobody asked for)
+### THE SOLUTION (that nobody asked for)
 A beautifully over-engineered AI app that:
 - Calculates a mathematically meaningless but emotionally satisfying **compatibility percentage** between two names.
 - Analyses your unsent messages for **stress, tone, and desperation levels** in real time using an LLM.
@@ -27,7 +27,7 @@ A beautifully over-engineered AI app that:
 - Opens with a **300-frame scroll-driven cinematic animation** because first impressions matter.
 
 
-## Technical Details
+## TECHICAL ANALYSIS
 ### Technologies/Components Used
 For Software:
 - **Languages:** Python 3.12, HTML5, CSS3, JavaScript (ES6+)
@@ -43,7 +43,7 @@ For Hardware:
 - Emotional vulnerability (required)
 
 
-### Implementation
+### IMPLEMENTATION
 For Software:
 # Installation
 ```bash
@@ -62,7 +62,7 @@ python app/server.py
 # Open http://127.0.0.1:5000 in your browser
 ```
 
-### Project Documentation
+### PROJECT DOCUMENTATION
 For Software:
 
 # Screenshots 
@@ -72,12 +72,12 @@ https://drive.google.com/drive/folders/1OgPm-mmbdaFQi4j7pH2DZHa2T0MI7PG3?usp=sha
 
 *Flask REST API → Single Page HTML App → Gemini LLM for live message telemetry*
 
-### Deployment
+### DEPLOYMENT
 
 https://chaos-engineers-delusion-ai.onrender.com
 
 
-## Team Contributions
+## TEAM CONTRIBUTIONS
 - Evan Chemmannur: Frontend — HTML/CSS/JS, UI/UX, scroll animation, Malayalam localization
 - Christy Varghese: Backend — Flask server, REST API, Gemini LLM integration, database & tests
 
