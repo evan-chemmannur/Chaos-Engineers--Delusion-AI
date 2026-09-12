@@ -3,6 +3,15 @@
 import os
 import sys
 from pathlib import Path
+
+# Configure UTF-8 for console output on Windows
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 from flask import Flask, request, jsonify, send_from_directory, render_template_string, redirect
 
 # Ensure project root is in sys.path
@@ -37,7 +46,7 @@ def index():
         with open(index_path, "r", encoding="utf-8") as f:
             content = f.read()
         return render_template_string(content)
-    return "LoveAI Server is running. index.html not found.", 404
+    return "ഇഷ്ടAI Server is running. index.html not found.", 404
 
 # Redirect removed feature routes to home
 @app.route("/image")
@@ -245,7 +254,10 @@ def delete_milestone_endpoint(milestone_id):
 
 def run_server(port=5000, host="127.0.0.1"):
     print("==================================================")
-    print("LoveAI Web Server is running!")
+    try:
+        print("ഇഷ്ടAI (IshtaAI) Web Server is running!")
+    except Exception:
+        print("IshtaAI Web Server is running!")
     print(f"Open in your browser: http://{host}:{port}")
     print("==================================================")
     app.run(host=host, port=port, debug=False)

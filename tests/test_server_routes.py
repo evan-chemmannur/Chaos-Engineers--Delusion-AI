@@ -11,7 +11,7 @@ class TestServerRoutes(unittest.TestCase):
         """Home path '/' should return index.html with 200 OK."""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"LOVEAI", response.data)
+        self.assertIn("ഇഷ്ടAI".encode("utf-8"), response.data)
         self.assertIn(b"hero-landing", response.data)
 
     def test_home_named_route(self):
@@ -32,7 +32,7 @@ class TestServerRoutes(unittest.TestCase):
         for route in routes:
             response = self.client.get(route)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b"LOVEAI", response.data)
+            self.assertIn("ഇഷ്ടAI".encode("utf-8"), response.data)
 
     def test_removed_routes_redirect(self):
         """Removed paths ('/image', '/advisor') should redirect to '/' with 302."""

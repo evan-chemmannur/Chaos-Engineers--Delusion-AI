@@ -25,9 +25,9 @@ else:
     load_dotenv()
 
 # App Branding
-APP_NAME = "LoveAI"
+APP_NAME = "ഇഷ്ടAI"
 APP_VERSION = "1.0.0"
-APP_TAGLINE = "മനസ്സിലാക്കുക. സംസാരിക്കുക. ബന്ധപ്പെടുക. 💕"
+APP_TAGLINE = "Understand. Communicate. Connect."
 WINDOW_TITLE = f"{APP_NAME} — {APP_TAGLINE}"
 WINDOW_MIN_WIDTH = 1100
 WINDOW_MIN_HEIGHT = 720
@@ -44,7 +44,7 @@ IMAGE_DISCLAIMER = (
 )
 
 GENERAL_DISCLAIMER = (
-    "LoveAI ഒരു entertainment & communication-support ആപ്പ് മാത്രമാണ്. "
+    "ഇഷ്ടAI ഒരു entertainment & communication-support ആപ്പ് മാത്രമാണ്. "
     "AI-generated ഉപദേശം മാർഗ്ഗനിർദ്ദേശം മാത്രമാണ്, മറ്റുള്ളവരുടെ മനസ്സോ "
     "തീരുമാനങ്ങളോ ഇത് പ്രവചിക്കുന്നില്ല. Always respect consent and boundaries."
 )
