@@ -1529,7 +1529,7 @@
       '/home': 'dashboard',
       '/dashboard': 'dashboard',
       '/compatibility': 'compatibility',
-      '/image': 'image',
+      '/image': 'dashboard',
       '/advisor': 'advisor',
       '/message': 'message',
       '/journey': 'journey',
@@ -1540,7 +1540,6 @@
       'dashboard': '/',
       'home': '/',
       'compatibility': '/compatibility',
-      'image': '/image',
       'advisor': '/advisor',
       'message': '/message',
       'journey': '/journey'
@@ -2078,56 +2077,6 @@
         if (mount) mount.innerHTML = "";
         showScreen(0);
       });
-    }
-
-    function previewImg(input, imgId) {
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const img = document.getElementById(imgId);
-          img.src = e.target.result;
-          img.style.display = 'block';
-          const labelId = imgId === 'p-img1' ? 'p-label1' : 'p-label2';
-          document.getElementById(labelId).style.display = 'none';
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    async function runImageComparison() {
-      const f1 = document.getElementById('file-img1').files[0];
-      const f2 = document.getElementById('file-img2').files[0];
-      if (!f1 || !f2) {
-        alert('ദയവായി Photo 1-ഉം Photo 2-ഉം തിരഞ്ഞെടുക്കുക.');
-        return;
-      }
-      const btn = document.getElementById('btn-run-cv');
-      btn.innerText = 'ചിത്രങ്ങൾ Compare ചെയ്യുകയാണ്...';
-      btn.disabled = true;
-
-      const fd = new FormData();
-      fd.append('image1', f1);
-      fd.append('image2', f2);
-
-      try {
-        const res = await fetch('/api/image-similarity', { method: 'POST', body: fd });
-        const json = await res.json();
-        if (json.success) {
-          const r = json.result;
-          document.getElementById('img-verdict-tag').innerText = `RESULT: ${r.rating.toUpperCase()}`;
-          document.getElementById('img-score-total').innerText = r.similarity_score + '%';
-          document.getElementById('img-score-color').innerText = r.breakdown.color_similarity + '%';
-          document.getElementById('img-score-feat').innerText = r.breakdown.feature_similarity + '%';
-          document.getElementById('img-result-panel').style.display = 'block';
-        } else {
-          alert('പ്രശ്നം: ' + json.error);
-        }
-      } catch (e) {
-        alert('CV പ്രശ്നം: ' + e);
-      } finally {
-        btn.innerText = 'Images Compare ചെയ്യുക 📸';
-        btn.disabled = false;
-      }
     }
 
     async function runAdvisor() {
