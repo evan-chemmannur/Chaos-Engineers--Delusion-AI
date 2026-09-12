@@ -92,6 +92,9 @@ def calculate_compatibility():
     if not success:
         return jsonify({"success": False, "error": err}), 400
         
+    if "score" in data and isinstance(data["score"], (int, float)):
+        result["combined_score"] = max(0, min(100, int(data["score"])))
+        
     db.save_compatibility_result(
         name1=result["name1"],
         name2=result["name2"],

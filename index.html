@@ -1049,7 +1049,6 @@
       <ul class="nav-tabs">
         <li><button class="white-pink-btn active" onclick="switchView('home')">ഡാഷ്ബോർഡ്</button></li>
         <li><button class="white-pink-btn" onclick="switchView('compatibility')">പൊരുത്തം</button></li>
-        <li><button class="white-pink-btn" onclick="switchView('image')">ചിത്ര സാമ്യം</button></li>
         <li><button class="white-pink-btn" onclick="switchView('advisor')">AI ഉപദേശം</button></li>
         <li><button class="white-pink-btn" onclick="switchView('message')">സന്ദേശ സഹായി</button></li>
         <li><button class="white-pink-btn" onclick="switchView('journey')">യാത്ര</button></li>
@@ -1080,7 +1079,7 @@
                 <span class="reveal-line"><span class="reveal-word delay-3">ബന്ധപ്പെടുക. 💕</span></span>
               </h1>
               <p class="hero-subtext">
-                സ്നേഹവും പരസ്പര ബഹുമാനവുമുള്ള ഒരു യഥാർത്ഥ റൊമാന്റിക് കണക്ഷൻ വളർത്തുക. ഗണിത-അധിഷ്ഠിത പൊരുത്ത പരിശോധനയും, OpenCV ചിത്ര സാമ്യവും, കൃത്യമായ AI റോഡ്‌മാപ്പുകളും ഒരുമിച്ച് നൽകുന്നു.
+                സ്നേഹവും പരസ്പര ബഹുമാനവുമുള്ള ഒരു യഥാർത്ഥ റൊമാന്റിക് കണക്ഷൻ വളർത്തുക. ഗണിത-അധിഷ്ഠിത പൊരുത്ത പരിശോധനയും, കൃത്യമായ AI റോഡ്‌മാപ്പുകളും ഒരുമിച്ച് നൽകുന്നു.
               </p>
             </div>
           </div>
@@ -1088,7 +1087,7 @@
 
         <div class="romantic-grid-12">
           
-          <div class="romantic-card col-span-6">
+          <div class="romantic-card col-span-4">
             <div class="card-tag">SYSTEM 01</div>
             <div class="section-title">💘 പൊരുത്തം ANALYZER</div>
             <div class="metric-display" id="dash-comp-metric">--%</div>
@@ -1096,30 +1095,22 @@
             <button class="action-btn-outline" onclick="switchView('compatibility')">പൊരുത്തം കണക്കാക്കുക →</button>
           </div>
 
-          <div class="romantic-card col-span-6">
+          <div class="romantic-card col-span-4">
             <div class="card-tag">SYSTEM 02</div>
-            <div class="section-title">📸 ചിത്ര സാമ്യം ENGINE</div>
-            <div class="metric-display" style="color: var(--label-1);">OPENCV</div>
-            <p class="section-desc">Color histograms, pixel structural delta, കൂടാതെ ORB features ഉപയോഗിച്ച് Photos compare ചെയ്യുക.</p>
-            <button class="action-btn-outline" onclick="switchView('image')">Photos Compare ചെയ്യുക →</button>
-          </div>
-
-          <div class="romantic-card col-span-6">
-            <div class="card-tag">SYSTEM 03</div>
             <div class="section-title">🤖 AI ബന്ധ ഉപദേശം</div>
             <p class="section-desc" style="margin-top: 14px;">പരസ്പര ബഹുമാനവും അതിരുകളും കാത്തുസൂക്ഷിച്ചുള്ള 6-ഘട്ട communication roadmap.</p>
             <button class="action-btn-pink" onclick="switchView('advisor')">Roadmap ഉണ്ടാക്കുക →</button>
           </div>
 
-          <div class="romantic-card col-span-6">
-            <div class="card-tag">SYSTEM 04</div>
+          <div class="romantic-card col-span-4">
+            <div class="card-tag">SYSTEM 03</div>
             <div class="section-title">💬 സന്ദേശ സഹായി</div>
             <p class="section-desc" style="margin-top: 14px;">നിങ്ങളുടെ Message-ലെ സമ്മർദ്ദവും ടോണും വിശകലനം ചെയ്യുക, അല്ലെങ്കിൽ മികച്ച രീതിയിൽ rewrite ചെയ്യുക.</p>
             <button class="action-btn-outline" onclick="switchView('message')">Message Assistant തുറക്കുക →</button>
           </div>
 
           <div class="romantic-card col-span-12">
-            <div class="card-tag">SYSTEM 05</div>
+            <div class="card-tag">SYSTEM 04</div>
             <div class="section-title">❤️ ബന്ധത്തിന്റെ യാത്ര</div>
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0;">
               <span class="metric-label" id="dash-journey-caption">പൂർത്തിയായ MILESTONES</span>
@@ -1215,51 +1206,7 @@
         </div>
       </section>
 
-      <!-- ==================== VIEW 3: IMAGE SIMILARITY ==================== -->
-      <section id="view-image" class="feature-view">
-        <div class="romantic-grid-12">
-          <div class="romantic-card col-span-6" style="text-align: center; cursor: pointer; background: #fffbfd;" onclick="document.getElementById('file-img1').click()">
-            <div class="card-tag">PHOTO 1</div>
-            <input type="file" id="file-img1" accept="image/*" style="display: none;" onchange="previewImg(this, 'p-img1')" />
-            <div id="p-label1" style="font-family: var(--font-mono); font-size: 12px; color: var(--label-2); padding: 40px 0; font-weight: 600;">[ ആദ്യത്തെ Photo തിരഞ്ഞെടുക്കുക ]</div>
-            <img id="p-img1" style="max-height: 220px; width: auto; margin: 0 auto; display: none; border-radius: 10px; border: 1px solid var(--border-line);" />
-          </div>
-
-          <div class="romantic-card col-span-6" style="text-align: center; cursor: pointer; background: #fffbfd;" onclick="document.getElementById('file-img2').click()">
-            <div class="card-tag">PHOTO 2</div>
-            <input type="file" id="file-img2" accept="image/*" style="display: none;" onchange="previewImg(this, 'p-img2')" />
-            <div id="p-label2" style="font-family: var(--font-mono); font-size: 12px; color: var(--label-2); padding: 40px 0; font-weight: 600;">[ രണ്ടാമത്തെ Photo തിരഞ്ഞെടുക്കുക ]</div>
-            <img id="p-img2" style="max-height: 220px; width: auto; margin: 0 auto; display: none; border-radius: 10px; border: 1px solid var(--border-line);" />
-          </div>
-
-          <div class="col-span-12">
-            <button class="action-btn-pink" style="width: 100%;" id="btn-run-cv" onclick="runImageComparison()">Images Compare ചെയ്യുക 📸</button>
-          </div>
-
-          <div class="romantic-card col-span-12" id="img-result-panel" style="display: none;">
-            <div class="card-tag">OPENCV RESULT</div>
-            <div class="section-title" id="img-verdict-tag">സാമ്യം SCORE</div>
-            <div class="metric-display" id="img-score-total">--%</div>
-            <div class="romantic-grid-12" style="border-top: 1px solid var(--border-line); padding-top: 16px;">
-              <div class="col-span-6">
-                <span class="metric-label">COLOR PALETTE സാമ്യം</span>
-                <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 800;" id="img-score-color">--%</div>
-              </div>
-              <div class="col-span-6">
-                <span class="metric-label">PIXEL & FEATURE സാമ്യം</span>
-                <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent-pink);" id="img-score-feat">--%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="romantic-disclaimer">
-          <span class="badge">ശ്രദ്ധിക്കുക</span>
-          <div>ഈ feature ചിത്രങ്ങളുടെ visual സാമ്യം മാത്രമേ നോക്കുന്നുള്ളൂ. ഇത് ആളെ തിരിച്ചറിയുന്നതോ, പ്രണയമോ attraction-ഓ കണക്കാക്കുന്നതോ അല്ല.</div>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 4: AI ADVISOR ==================== -->
+      <!-- ==================== VIEW 3: AI ADVISOR ==================== -->
       <section id="view-advisor" class="feature-view">
         <div class="romantic-grid-12">
           <div class="romantic-card col-span-5">
@@ -1641,7 +1588,6 @@
 
       if (viewKey === 'dashboard') loadStats();
       if (viewKey === 'journey') loadMilestones();
-      if (viewKey === 'compatibility' && currentQuizQuestions.length === 0) renderRandomQuiz();
     }
 
     function initRoute() {
@@ -1948,18 +1894,27 @@
       const n1 = (name1Input ? name1Input.value : "").trim();
       const n2 = (name2Input ? name2Input.value : "").trim();
 
-      const base = nameScore(n1, n2);
-      const qTotal = Object.values(answers).reduce((a,b) => a+b, 0);
-      const qMax = QUESTIONS.reduce((sum,q) => sum + Math.max(...q.options.map(o=>o.value)), 0);
-      const qPct = Math.round((qTotal / qMax) * 100);
-
-      const score = Math.max(0, Math.min(100, Math.round(base * 0.4 + qPct * 0.6)));
+      // Random percentage (1% to 100%)
+      const score = Math.floor(Math.random() * 100) + 1;
 
       const resNames = document.getElementById("resultNames");
       if (resNames) resNames.textContent = `${n1} × ${n2}`;
 
       const scoreNum = document.getElementById("scoreNum");
-      if (scoreNum) scoreNum.innerHTML = `${score}<span>%</span>`;
+      if (scoreNum) {
+        const duration = 1000;
+        const startTime = performance.now();
+        function animateCounter(now) {
+          const progress = Math.min(1, (now - startTime) / duration);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const val = Math.round(easeOut * score);
+          scoreNum.innerHTML = `${val}<span>%</span>`;
+          if (progress < 1) {
+            requestAnimationFrame(animateCounter);
+          }
+        }
+        requestAnimationFrame(animateCounter);
+      }
 
       const v = verdictFor(score);
       const verdictText = document.getElementById("verdictText");
@@ -1987,7 +1942,7 @@
         fetch('/api/compatibility', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name1: n1, name2: n2, interests: Object.keys(answers) })
+          body: JSON.stringify({ name1: n1, name2: n2, interests: Object.keys(answers), score: score })
         }).then(() => loadStats()).catch(e => console.warn('API sync error', e));
       } catch (e) {
         console.warn('API fetch error', e);
@@ -2345,7 +2300,6 @@
 
     // Initialize routing based on current path / hash
     initRoute();
-    renderRandomQuiz();
   </script>
 </body>
 </html>
