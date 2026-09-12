@@ -59,6 +59,11 @@ def redirect_removed_routes():
 def serve_asset(filename):
     return send_from_directory(BASE_DIR / "assets", filename)
 
+# Serve images (scroll animation frames)
+@app.route("/images/<path:filename>")
+def serve_image(filename):
+    return send_from_directory(BASE_DIR / "images", filename)
+
 # ----------------- REST API Endpoints ----------------- #
 
 @app.route("/api/config", methods=["GET"])

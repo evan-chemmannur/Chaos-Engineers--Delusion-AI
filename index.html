@@ -10,23 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-canvas: #fff9fb;       /* Delicate porcelain white with soft pink warmth */
-      --bg-surface: #ffffff;      /* Pure crisp white for elevated cards */
-      --bg-elevated: #fff0f4;     /* Soft blush container */
-      --bg-input: #ffffff;        /* Crisp white inputs */
-      --border-line: #ffdbe4;     /* Delicate rose-pink border */
-      --border-line-hover: #ff4d79; /* Vibrant pink highlight on hover */
+      /* Warm Champagne & Rose Gold Theme (from user image) */
+      --bg-canvas: #f8f1e9;         /* Glowing warm champagne cream background */
+      --bg-surface: #ffffff;        /* Pure crisp white for elevated cards */
+      --bg-elevated: #fdf8f4;       /* Soft luminous blush-champagne container */
+      --bg-input: #ffffff;          /* Crisp white inputs */
+      --border-line: #ecd8cb;       /* Elegant rose-gold / champagne border */
+      --border-line-hover: #c88270; /* Warm rose-gold highlight on hover */
       
-      --label-1: #1a1216;         /* Deep rich charcoal-rose for ultra-sharp readability */
-      --label-2: #5c4b54;         /* Soft warm gray-plum */
-      --label-3: #96808b;         /* Muted rose-ash */
-      --label-4: #c9b4bf;         /* Subtle faint guide */
+      --label-1: #2a1b17;           /* Deep rich espresso-charcoal for crisp contrast */
+      --label-2: #6d4f46;           /* Warm cocoa rose */
+      --label-3: #9e7e74;           /* Muted warm taupe */
+      --label-4: #ceb5a8;           /* Soft faint guide */
       
-      --accent-pink: #f43f5e;     /* Signature vibrant romantic pink */
-      --accent-pink-hover: #e11d48;
-      --accent-blush: #fb7185;
-      --accent-soft-pink: #ffe4eb;/* Sweet pastel pink */
-      --accent-glow: rgba(244, 63, 94, 0.16);
+      --accent-pink: #c88270;       /* Signature warm rose-gold */
+      --accent-pink-hover: #b36b59; /* Deeper metallic rose-bronze on hover */
+      --accent-blush: #d99a8a;      /* Soft rose-gold blush */
+      --accent-soft-pink: #faece5;  /* Delicate warm champagne-rose tint */
+      --accent-glow: rgba(200, 130, 112, 0.22);
       
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -36,7 +37,12 @@
     ::selection { background-color: var(--accent-pink); color: #ffffff; }
 
     body {
-      background-color: var(--bg-canvas);
+      background-color: #f7eee4;
+      background-image: url('/assets/theme_bg_hd.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-attachment: fixed;
       color: var(--label-1);
       font-family: var(--font-sans);
       min-height: 100vh;
@@ -45,7 +51,7 @@
       position: relative;
     }
 
-    /* Fullscreen Interactive White & Pink Particle Canvas */
+    /* Fullscreen Interactive Champagne & Rose Gold Particle Canvas */
     #ambient-canvas {
       position: fixed;
       top: 0;
@@ -53,7 +59,7 @@
       width: 100vw;
       height: 100vh;
       z-index: 1;
-      pointer-events: auto;
+      pointer-events: none;
       display: block;
     }
 
@@ -62,7 +68,7 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: radial-gradient(circle at center, #ffffff 0%, #fff0f5 100%);
+      background: radial-gradient(circle at center, #ffffff 0%, #f7eee5 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -73,7 +79,7 @@
       font-size: 36px;
       margin-bottom: 16px;
       animation: heartBeat 1.2s infinite ease-in-out;
-      filter: drop-shadow(0 4px 16px rgba(244, 63, 94, 0.4));
+      filter: drop-shadow(0 4px 16px rgba(200, 130, 112, 0.45));
     }
     @keyframes heartBeat {
       0% { transform: scale(1); }
@@ -85,7 +91,7 @@
     .loader-track {
       width: 160px;
       height: 4px;
-      background: #ffdbe4;
+      background: #ecd8cb;
       border-radius: 999px;
       overflow: hidden;
       position: relative;
@@ -96,10 +102,10 @@
       top: 0;
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #ff4d79, #f43f5e);
+      background: linear-gradient(90deg, #d89685, #b76d5b);
       border-radius: 999px;
       transition: width 700ms cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 0 12px rgba(244, 63, 94, 0.6);
+      box-shadow: 0 0 12px rgba(183, 109, 91, 0.6);
     }
     .loader-caption {
       margin-top: 14px;
@@ -121,12 +127,12 @@
       flex-direction: column;
     }
 
-    /* Fixed Header (Frosted Glass White & Pink) */
+    /* Fixed Header (Frosted Glass Champagne & Rose Gold) */
     header.romantic-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 253, 250, 0.92);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border-line);
       padding: 16px 36px;
@@ -136,7 +142,7 @@
       font-family: var(--font-mono);
       font-size: 13px;
       pointer-events: auto;
-      box-shadow: 0 2px 20px rgba(244, 63, 94, 0.05);
+      box-shadow: 0 4px 25px rgba(183, 109, 91, 0.07);
     }
 
     .brand-title {
@@ -151,13 +157,13 @@
       font-size: 16px;
     }
     .brand-title .pink-badge {
-      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
       color: #ffffff;
       font-size: 10px;
       font-weight: 800;
       padding: 3px 8px;
       border-radius: 4px;
-      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.3);
+      box-shadow: 0 2px 10px rgba(183, 109, 91, 0.3);
     }
 
     .nav-tabs {
@@ -189,10 +195,10 @@
     }
     .white-pink-btn.active {
       color: #ffffff;
-      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
       font-weight: 800;
-      border: 1px solid #f43f5e;
-      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.35);
+      border: 1px solid #b76d5b;
+      box-shadow: 0 4px 16px rgba(183, 109, 91, 0.35);
     }
 
     .meta-indicators {
@@ -226,18 +232,18 @@
     .hero-landing {
       position: relative;
       padding: 40px 44px;
-      background: linear-gradient(135deg, #ffffff 0%, #fff1f5 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #fdf7f2 60%, #faede4 100%);
       border: 1px solid var(--border-line);
       border-radius: 18px;
-      box-shadow: 0 12px 40px rgba(244, 63, 94, 0.08);
+      box-shadow: 0 12px 40px rgba(183, 109, 91, 0.09);
       pointer-events: auto;
     }
 
     .pink-pill {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--accent-pink);
-      background: #ffe6ed;
+      color: #9e5948;
+      background: #f7e8df;
       padding: 4px 12px;
       border-radius: 999px;
       display: inline-flex;
@@ -246,7 +252,7 @@
       font-weight: 800;
       letter-spacing: 0.06em;
       margin-bottom: 24px;
-      border: 1px solid #ffd1dc;
+      border: 1px solid #ecd2c4;
     }
 
     /* Staggered Cinematic Headline Reveal */
@@ -277,10 +283,10 @@
     .delay-2 { transition-delay: 0.25s !important; }
     .delay-3 {
       transition-delay: 0.4s !important;
-      background: linear-gradient(90deg, #f43f5e, #ff6b8b);
+      background: linear-gradient(90deg, #b76d5b, #d89685);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 14px rgba(244, 63, 94, 0.3));
+      filter: drop-shadow(0 2px 14px rgba(183, 109, 91, 0.3));
     }
 
     .hero-layout-grid {
@@ -321,19 +327,19 @@
       padding: 32px;
       position: relative;
       transition: all 0.22s ease;
-      box-shadow: 0 4px 24px rgba(244, 63, 94, 0.05);
+      box-shadow: 0 4px 24px rgba(183, 109, 91, 0.06);
     }
     .romantic-card:hover {
       border-color: var(--border-line-hover);
-      box-shadow: 0 12px 36px rgba(244, 63, 94, 0.12);
+      box-shadow: 0 12px 36px rgba(183, 109, 91, 0.14);
       transform: translateY(-2px);
     }
     .romantic-card .card-tag {
       position: absolute;
       top: 0;
       right: 0;
-      background: #fff0f4;
-      color: var(--accent-pink);
+      background: #fdf5ef;
+      color: #9e5948;
       border-bottom-left-radius: 10px;
       border-top-right-radius: 15px;
       font-family: var(--font-mono);
@@ -417,15 +423,15 @@
     }
     .quiz-opt-btn:hover {
       border-color: var(--accent-pink);
-      background: #fff0f5;
+      background: #fdf5ef;
       color: var(--accent-pink);
       transform: translateY(-1px);
     }
     .quiz-opt-btn.selected {
-      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
       color: #ffffff;
-      border-color: #f43f5e;
-      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.35);
+      border-color: #b76d5b;
+      box-shadow: 0 2px 10px rgba(183, 109, 91, 0.35);
       font-weight: 700;
       transform: scale(1.02);
     }
@@ -462,7 +468,7 @@
     }
     .input-field:focus {
       border-color: var(--accent-pink);
-      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
+      box-shadow: 0 0 0 3px rgba(183, 109, 91, 0.16);
     }
     label.field-label {
       font-family: var(--font-mono);
@@ -477,7 +483,7 @@
 
     /* Buttons */
     .action-btn-pink {
-      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
       color: #ffffff;
       border: none;
       border-radius: 10px;
@@ -493,11 +499,11 @@
       gap: 10px;
       transition: all 0.2s;
       letter-spacing: 0.04em;
-      box-shadow: 0 4px 18px rgba(244, 63, 94, 0.25);
+      box-shadow: 0 4px 18px rgba(183, 109, 91, 0.28);
     }
     .action-btn-pink:hover {
-      background: linear-gradient(135deg, #ff3366, #e11d48);
-      box-shadow: 0 6px 24px rgba(244, 63, 94, 0.45);
+      background: linear-gradient(135deg, #c88270, #a25846);
+      box-shadow: 0 6px 24px rgba(183, 109, 91, 0.45);
       transform: translateY(-1px);
     }
 
@@ -517,7 +523,7 @@
     .action-btn-outline:hover {
       border-color: var(--accent-pink);
       color: var(--accent-pink);
-      background: #fff5f8;
+      background: #fdf5ef;
     }
 
     .tag-grid {
@@ -543,14 +549,14 @@
     .pink-pill-tag:hover {
       border-color: var(--accent-pink);
       color: var(--accent-pink);
-      background: #fff5f8;
+      background: #fdf5ef;
     }
     .pink-pill-tag.selected {
-      background: linear-gradient(135deg, #ff4d79, #f43f5e);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
       color: #ffffff;
       font-weight: 800;
-      border-color: #f43f5e;
-      box-shadow: 0 3px 12px rgba(244, 63, 94, 0.3);
+      border-color: #b76d5b;
+      box-shadow: 0 3px 12px rgba(183, 109, 91, 0.3);
     }
 
     .metric-display {
@@ -572,7 +578,7 @@
 
     .roadmap-step {
       border-left: 3px solid var(--accent-pink);
-      background: #fff9fb;
+      background: var(--bg-elevated);
       border-radius: 10px;
       padding: 18px 24px;
       margin-bottom: 14px;
@@ -611,10 +617,10 @@
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      box-shadow: 0 4px 18px rgba(244, 63, 94, 0.04);
+      box-shadow: 0 4px 18px rgba(183, 109, 91, 0.06);
     }
     .romantic-disclaimer .badge {
-      background: #ffe6ed;
+      background: #f7e8df;
       color: var(--accent-pink);
       border-radius: 4px;
       padding: 3px 8px;
@@ -641,15 +647,15 @@
        LOVE-O-METER INTEGRATED FEATURE STYLES
        ========================================================== */
     :root {
-      --meter-cream: #FBEEE0;
-      --meter-paper: #FFF8F0;
-      --meter-ink: #2B1B14;
-      --meter-burgundy: #7A1330;
-      --meter-red: #C1272D;
-      --meter-gold: #D9A441;
-      --meter-gold-light: #F0C875;
-      --meter-green: #4C7A5C;
-      --meter-line: rgba(122, 19, 48, 0.18);
+      --meter-cream: #F5EAE0;
+      --meter-paper: #FFFDFC;
+      --meter-ink: #2A1B17;
+      --meter-burgundy: #9E5948;
+      --meter-red: #B54A42;
+      --meter-gold: #D89685;
+      --meter-gold-light: #F7E8DF;
+      --meter-green: #5A7E64;
+      --meter-line: rgba(158, 89, 72, 0.2);
     }
 
     .machine {
@@ -661,7 +667,7 @@
       padding: 36px 30px 32px;
       box-shadow:
         0 1px 0 rgba(255,255,255,0.7) inset,
-        0 24px 60px -15px rgba(122, 19, 48, 0.18),
+        0 24px 60px -15px rgba(183, 109, 91, 0.18),
         0 0 0 1px var(--meter-line);
       border: 1px solid var(--meter-line);
       margin: 0 auto;
@@ -673,7 +679,7 @@
       content: "";
       position: absolute;
       inset: 12px;
-      border: 1.5px dashed rgba(122, 19, 48, 0.28);
+      border: 1.5px dashed rgba(158, 89, 72, 0.3);
       border-radius: 14px;
       pointer-events: none;
     }
@@ -739,7 +745,7 @@
       height: 96px;
       border-radius: 50%;
       background: var(--meter-cream);
-      border: 2px dashed rgba(122, 19, 48, 0.35);
+      border: 2px dashed rgba(158, 89, 72, 0.35);
       margin: 0 auto 8px;
       display: flex;
       align-items: center;
@@ -752,13 +758,13 @@
       line-height: 1.3;
       padding: 6px;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(122, 19, 48, 0.08);
+      box-shadow: 0 4px 12px rgba(183, 109, 91, 0.08);
       user-select: none;
     }
     .photo-circle:hover {
       border-color: var(--meter-burgundy);
       transform: scale(1.04);
-      box-shadow: 0 6px 18px rgba(122, 19, 48, 0.16);
+      box-shadow: 0 6px 18px rgba(183, 109, 91, 0.16);
     }
     .photo-circle img {
       width: 100%;
@@ -785,7 +791,7 @@
       font-size: 15px;
       padding: 12px 16px;
       border-radius: 10px;
-      border: 1.5px solid rgba(122, 19, 48, 0.25);
+      border: 1.5px solid rgba(158, 89, 72, 0.25);
       background: var(--meter-cream);
       color: var(--meter-ink);
       margin-bottom: 18px;
@@ -794,7 +800,7 @@
     }
     .meter-input:focus {
       border-color: var(--meter-burgundy);
-      box-shadow: 0 0 0 3px rgba(122, 19, 48, 0.12);
+      box-shadow: 0 0 0 3px rgba(183, 109, 91, 0.12);
     }
 
     .meter-btn {
@@ -806,18 +812,18 @@
       padding: 14px 20px;
       border-radius: 12px;
       border: none;
-      background: linear-gradient(135deg, #7A1330, #9E1B42);
-      color: var(--meter-cream);
+      background: linear-gradient(135deg, #d89685, #b76d5b);
+      color: #ffffff;
       font-family: 'Work Sans', sans-serif;
       font-weight: 700;
       font-size: 15px;
       cursor: pointer;
       transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 16px rgba(122, 19, 48, 0.25);
+      box-shadow: 0 4px 16px rgba(183, 109, 91, 0.25);
     }
     .meter-btn:hover {
-      background: linear-gradient(135deg, #611026, #871638);
-      box-shadow: 0 6px 22px rgba(122, 19, 48, 0.35);
+      background: linear-gradient(135deg, #c88270, #a25846);
+      box-shadow: 0 6px 22px rgba(183, 109, 91, 0.35);
     }
     .meter-btn:active { transform: scale(0.98); }
     .meter-btn:disabled {
@@ -829,11 +835,11 @@
     .meter-btn.ghost {
       background: transparent;
       color: var(--meter-burgundy);
-      border: 1.5px solid rgba(122, 19, 48, 0.3);
+      border: 1.5px solid rgba(158, 89, 72, 0.3);
       box-shadow: none;
     }
     .meter-btn.ghost:hover {
-      background: rgba(122, 19, 48, 0.06);
+      background: rgba(158, 89, 72, 0.06);
     }
 
     .progress-row {
@@ -846,7 +852,7 @@
       width: 28px;
       height: 5px;
       border-radius: 3px;
-      background: rgba(122, 19, 48, 0.18);
+      background: rgba(158, 89, 72, 0.18);
       transition: background 0.25s ease;
     }
     .tick.done { background: var(--meter-gold); }
@@ -872,7 +878,7 @@
       text-align: left;
       padding: 13px 16px;
       border-radius: 12px;
-      border: 1.5px solid rgba(122, 19, 48, 0.2);
+      border: 1.5px solid rgba(158, 89, 72, 0.2);
       background: var(--meter-cream);
       color: var(--meter-ink);
       font-family: 'Work Sans', sans-serif;
@@ -937,7 +943,7 @@
       max-width: 360px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+      box-shadow: 0 25px 50px rgba(42, 27, 23, 0.35);
       transform: scale(0.7) translateY(20px);
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -1020,6 +1026,29 @@
   </style>
 </head>
 <body>
+
+  <!-- ===================== SCROLL-DRIVEN FRAME ANIMATION ===================== -->
+  <!-- Tall scroll space: 300 frames × ~10px per frame = 3000px of virtual scroll -->
+  <div id="scroll-intro-wrapper">
+    <div id="scroll-intro-sticky">
+      <!-- Frame canvas -->
+      <canvas id="scroll-canvas"></canvas>
+      <!-- Overlay text that fades while scrolling -->
+      <div id="scroll-intro-text">
+        <div class="scroll-brand-name">ഇഷ്ടAI 💕</div>
+        <div class="scroll-tagline">Understand. Communicate. Connect.</div>
+        <div class="scroll-hint">
+          <span class="scroll-arrow">↓</span>
+          <span>scroll to begin</span>
+        </div>
+      </div>
+      <!-- Progress bar at bottom -->
+      <div id="scroll-progress-bar"><div id="scroll-progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== MAIN APP (appears after scroll animation) ===================== -->
+  <div id="main-app" style="opacity:0; pointer-events:none;">
 
   <!-- Fullscreen Interactive White & Pink Particle Canvas -->
   <canvas id="ambient-canvas"></canvas>
@@ -1108,8 +1137,8 @@
               <span class="metric-label" id="dash-journey-caption">പൂർത്തിയായ MILESTONES</span>
               <span style="font-family: var(--font-mono); color: var(--accent-pink); font-weight: 800;" id="dash-journey-pct">0%</span>
             </div>
-            <div style="background: #ffeef2; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 20px; overflow: hidden;">
-              <div id="dash-journey-fill" style="background: linear-gradient(90deg, #ff4d79, #f43f5e); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);"></div>
+            <div style="background: #f7ede5; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 20px; overflow: hidden;">
+              <div id="dash-journey-fill" style="background: linear-gradient(90deg, #d89685, #b76d5b); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(183, 109, 91, 0.4);"></div>
             </div>
             <button class="action-btn-outline" onclick="switchView('journey')">യാത്ര കാണുക →</button>
           </div>
@@ -1166,12 +1195,12 @@
               <div class="gauge-wrap">
                 <div class="names-line" id="resultNames"></div>
                 <svg id="gauge" width="280" height="170" viewBox="0 0 300 170">
-                  <path d="M20,150 A130,130 0 0,1 105,29" fill="none" stroke="#C1272D" stroke-width="18" stroke-linecap="round"/>
-                  <path d="M105,29 A130,130 0 0,1 195,29" fill="none" stroke="#D9A441" stroke-width="18" stroke-linecap="round"/>
-                  <path d="M195,29 A130,130 0 0,1 280,150" fill="none" stroke="#4C7A5C" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M20,150 A130,130 0 0,1 105,29" fill="none" stroke="#B54A42" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M105,29 A130,130 0 0,1 195,29" fill="none" stroke="#D89685" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M195,29 A130,130 0 0,1 280,150" fill="none" stroke="#5A7E64" stroke-width="18" stroke-linecap="round"/>
                   <g class="needle" id="needle">
-                    <line x1="150" y1="150" x2="150" y2="38" stroke="#2B1B14" stroke-width="4" stroke-linecap="round"/>
-                    <circle cx="150" cy="150" r="9" fill="#2B1B14"/>
+                    <line x1="150" y1="150" x2="150" y2="38" stroke="#2A1B17" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="150" cy="150" r="9" fill="#2A1B17"/>
                   </g>
                 </svg>
               </div>
@@ -1208,7 +1237,7 @@
             </div>
             
             <!-- Collapsible LLM Config Drawer -->
-            <div id="llm-config-drawer" style="display: none; background: #fff5f8; border: 1px solid var(--border-line); border-radius: 10px; padding: 12px; margin-bottom: 14px;">
+            <div id="llm-config-drawer" style="display: none; background: #fdf8f4; border: 1px solid var(--border-line); border-radius: 10px; padding: 12px; margin-bottom: 14px;">
               <div style="font-size: 12px; font-weight: 700; color: var(--accent-pink); margin-bottom: 6px;">Google Gemini API Key (Live Cloud LLM):</div>
               <div style="display: flex; gap: 8px;">
                 <input type="password" id="gemini-api-key" class="input-field" style="margin-bottom: 0; padding: 6px 10px; font-size: 12px;" placeholder="AIzaSy... (Enter key for direct Gemini LLM)" />
@@ -1251,7 +1280,7 @@
           <div class="romantic-card col-span-6" id="msg-result-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
               <div class="card-tag" id="msg-telemetry-status-tag">🟢 LIVE TELEMETRY</div>
-              <span id="msg-engine-source-badge" style="font-size: 10px; font-family: var(--font-mono); color: var(--accent-pink); background: #ffeef2; padding: 2px 8px; border-radius: 12px; border: 1px solid var(--border-line);">🧠 LIVE NLP ENGINE</span>
+              <span id="msg-engine-source-badge" style="font-size: 10px; font-family: var(--font-mono); color: var(--accent-pink); background: #f7e8df; padding: 2px 8px; border-radius: 12px; border: 1px solid var(--border-line);">🧠 LIVE NLP ENGINE</span>
             </div>
             <div class="section-title" id="msg-res-heading" style="display: flex; justify-content: space-between; align-items: baseline;">
               <span>MESSAGE TELEMETRY</span>
@@ -1259,25 +1288,25 @@
             </div>
 
             <div id="msg-metrics-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
-              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+              <div class="romantic-card" style="padding: 14px; background: #fdf8f4; border-color: rgba(183,109,91,0.2);">
                 <span class="metric-label">TONE // ടോൺ</span>
                 <div id="m-tone" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
-              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+              <div class="romantic-card" style="padding: 14px; background: #fdf8f4; border-color: rgba(183,109,91,0.2);">
                 <span class="metric-label">വ്യക്തത // CLARITY</span>
                 <div id="m-clarity" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
-              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+              <div class="romantic-card" style="padding: 14px; background: #fdf8f4; border-color: rgba(183,109,91,0.2);">
                 <span class="metric-label">സമ്മർദ്ദം // PRESSURE</span>
                 <div id="m-pressure" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: #10b981;">--</div>
               </div>
-              <div class="romantic-card" style="padding: 14px; background: #fff9fb; border-color: rgba(244,63,94,0.15);">
+              <div class="romantic-card" style="padding: 14px; background: #fdf8f4; border-color: rgba(183,109,91,0.2);">
                 <span class="metric-label">സ്വാഭാവികത // NATURALNESS</span>
                 <div id="m-natural" style="font-family: var(--font-body); font-weight: 800; margin-top: 6px; font-size: 14px; color: var(--label-1);">--</div>
               </div>
             </div>
 
-            <div id="msg-feedback-container" style="background: #fff8fa; border: 1px solid var(--border-line); border-radius: 10px; padding: 14px; margin-bottom: 12px;">
+            <div id="msg-feedback-container" style="background: #fdf8f4; border: 1px solid var(--border-line); border-radius: 10px; padding: 14px; margin-bottom: 12px;">
               <div class="metric-label" style="color: var(--accent-pink); margin-bottom: 6px; font-size: 11px;">AI ഫീഡ്‌ബാക്ക് & മാർഗ്ഗനിർദ്ദേശം:</div>
               <div id="msg-feedback-content" class="section-desc" style="line-height: 1.6; color: var(--label-1); margin: 0; font-size: 13px;">Message ടൈപ്പ് ചെയ്യുമ്പോൾ തത്സമയ വിലയിരുത്തൽ ഇവിടെ കാണാം.</div>
             </div>
@@ -1299,8 +1328,8 @@
             <button class="action-btn-pink" style="padding: 8px 18px; font-size: 11px;" onclick="promptAddMilestone()">+ Milestone ചേർക്കുക</button>
           </div>
 
-          <div style="background: #ffeef2; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 24px; overflow: hidden;">
-            <div id="j-progress-bar" style="background: linear-gradient(90deg, #ff4d79, #f43f5e); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);"></div>
+          <div style="background: #f7ede5; height: 10px; border-radius: 6px; border: 1px solid var(--border-line); margin-bottom: 24px; overflow: hidden;">
+            <div id="j-progress-bar" style="background: linear-gradient(90deg, #d89685, #b76d5b); height: 100%; width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px rgba(183, 109, 91, 0.4);"></div>
           </div>
 
           <div id="milestones-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
@@ -1360,17 +1389,47 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Spawn ambient floating pink hearts & stardust
-    for (let i = 0; i < 48; i++) {
-      particles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 2.2 + 0.8,
-        speedY: -(Math.random() * 0.45 + 0.15),
-        speedX: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.45 + 0.25,
-        isHeart: Math.random() < 0.35
-      });
+    // Spawn ambient champagne bokeh orbs, stardust & floating rose-gold hearts
+    const TOTAL_PARTICLES = 68;
+    for (let i = 0; i < TOTAL_PARTICLES; i++) {
+      const pType = Math.random();
+      if (pType < 0.40) {
+        // Soft Champagne Bokeh Orb
+        particles.push({
+          type: 'bokeh',
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 42 + 20,
+          speedY: -(Math.random() * 0.25 + 0.1),
+          speedX: (Math.random() - 0.5) * 0.2,
+          alpha: Math.random() * 0.16 + 0.08,
+          phase: Math.random() * Math.PI * 2
+        });
+      } else if (pType < 0.82) {
+        // Twinkling Golden/Champagne Stardust
+        particles.push({
+          type: 'stardust',
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 2.2 + 1.0,
+          speedY: -(Math.random() * 0.35 + 0.12),
+          speedX: (Math.random() - 0.5) * 0.25,
+          alpha: Math.random() * 0.5 + 0.35,
+          phase: Math.random() * Math.PI * 2
+        });
+      } else {
+        // Floating Rose-Gold Mini Glass Heart
+        particles.push({
+          type: 'heart',
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 3.5 + 2.2,
+          speedY: -(Math.random() * 0.45 + 0.2),
+          speedX: (Math.random() - 0.5) * 0.3,
+          alpha: Math.random() * 0.45 + 0.25,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
     }
 
     // Track mouse with smooth spring inertia
@@ -1380,9 +1439,10 @@
 
       const x = String(e.clientX).padStart(4, '0');
       const y = String(e.clientY).padStart(4, '0');
-      document.getElementById('mouse-coords').innerText = `${x} X ${y} Y`;
+      const coords = document.getElementById('mouse-coords');
+      if (coords) coords.innerText = `${x} X ${y} Y`;
 
-      // Spawn pastel pink ripple rings on pointer movement
+      // Spawn warm champagne/rose-gold ripple rings on pointer movement
       const dx = targetMouseX - mouseX;
       const dy = targetMouseY - mouseY;
       const speed = Math.sqrt(dx * dx + dy * dy);
@@ -1391,8 +1451,8 @@
           x: e.clientX,
           y: e.clientY,
           radius: 8,
-          maxRadius: 110 + speed * 1.5,
-          alpha: 0.35,
+          maxRadius: 120 + speed * 1.5,
+          alpha: 0.32,
           speed: 2.2 + speed * 0.05
         });
       }
@@ -1408,8 +1468,15 @@
       ctx.bezierCurveTo(-size / 2, (size + topCurveHeight) / 2, 0, (size + topCurveHeight) / 1.5, 0, size);
       ctx.bezierCurveTo(0, (size + topCurveHeight) / 1.5, size / 2, (size + topCurveHeight) / 2, size / 2, topCurveHeight);
       ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
-      ctx.fillStyle = `rgba(244, 63, 94, ${alpha})`;
+      
+      // Warm translucent rose-gold glass body
+      ctx.fillStyle = `rgba(200, 130, 112, ${alpha * 0.45})`;
       ctx.fill();
+      
+      // Subtle metallic highlight outline
+      ctx.strokeStyle = `rgba(240, 195, 180, ${alpha * 0.75})`;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
       ctx.restore();
     }
 
@@ -1417,7 +1484,8 @@
     function updateClock() {
       const now = new Date();
       const timeStr = now.toTimeString().split(' ')[0];
-      document.getElementById('live-clock').innerText = `GMT+5:30 ${timeStr}`;
+      const clock = document.getElementById('live-clock');
+      if (clock) clock.innerText = `GMT+5:30 ${timeStr}`;
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -1431,33 +1499,49 @@
 
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Soft radial pink aura around pointer
-      const radial = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 340);
-      radial.addColorStop(0, 'rgba(255, 107, 149, 0.09)');
-      radial.addColorStop(0.5, 'rgba(255, 107, 149, 0.025)');
+      // 1. Soft radial champagne aura around pointer
+      const radial = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 320);
+      radial.addColorStop(0, 'rgba(255, 246, 236, 0.16)');
+      radial.addColorStop(0.5, 'rgba(245, 228, 210, 0.05)');
       radial.addColorStop(1, 'transparent');
       ctx.fillStyle = radial;
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Floating pink hearts & stardust
+      // 2. Floating Champagne Bokeh, Stardust & Rose-Gold Hearts
       for (let p of particles) {
         p.y += p.speedY;
-        p.x += p.speedX;
-        if (p.y < -20) { p.y = height + 20; p.x = Math.random() * width; }
-        if (p.x < -20) p.x = width + 20;
-        if (p.x > width + 20) p.x = -20;
+        p.x += p.speedX + Math.sin(time + p.phase) * 0.25;
+        if (p.y < -p.size * 2) { p.y = height + p.size * 2; p.x = Math.random() * width; }
+        if (p.x < -p.size * 2) p.x = width + p.size * 2;
+        if (p.x > width + p.size * 2) p.x = -p.size * 2;
 
-        if (p.isHeart) {
-          drawMiniHeart(ctx, p.x, p.y, p.size * 3.5, p.alpha * 0.65);
-        } else {
+        if (p.type === 'bokeh') {
+          // Soft out-of-focus camera lens bokeh disc
+          const bGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+          bGrad.addColorStop(0, `rgba(255, 250, 242, ${p.alpha * 1.2})`);
+          bGrad.addColorStop(0.55, `rgba(247, 230, 215, ${p.alpha * 0.6})`);
+          bGrad.addColorStop(0.85, `rgba(235, 210, 190, ${p.alpha * 0.2})`);
+          bGrad.addColorStop(1, 'rgba(225, 195, 175, 0)');
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 140, 175, ${p.alpha * 0.75})`;
+          ctx.fillStyle = bGrad;
           ctx.fill();
+        } else if (p.type === 'heart') {
+          drawMiniHeart(ctx, p.x, p.y, p.size * 3.5, p.alpha * 0.7);
+        } else {
+          // Shimmering Golden/Champagne Stardust
+          const twinkle = p.alpha * (0.65 + 0.35 * Math.sin(time * 3 + p.phase));
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 244, 228, ${twinkle})`;
+          ctx.shadowColor = 'rgba(240, 205, 175, 0.6)';
+          ctx.shadowBlur = 4;
+          ctx.fill();
+          ctx.shadowBlur = 0; // reset
         }
       }
 
-      // 3. Expanding soft pink ripples
+      // 3. Expanding soft champagne & rose-gold ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
         const r = ripples[i];
         r.radius += r.speed;
@@ -1470,7 +1554,7 @@
 
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(244, 63, 94, ${r.alpha})`;
+        ctx.strokeStyle = `rgba(216, 150, 133, ${r.alpha})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
       }
@@ -1917,12 +2001,12 @@
       ctx.save();
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI*2);
-      ctx.fillStyle = "#F0C875";
+      ctx.fillStyle = "#F7E8DF";
       ctx.fill();
-      ctx.strokeStyle = "#7A1330";
+      ctx.strokeStyle = "#B76D5B";
       ctx.lineWidth = 4;
       ctx.stroke();
-      ctx.fillStyle = "#7A1330";
+      ctx.fillStyle = "#8B4B3D";
       ctx.font = "700 40px Fraunces, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -1943,7 +2027,7 @@
       ctx.restore();
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI*2);
-      ctx.strokeStyle = "#7A1330";
+      ctx.strokeStyle = "#B76D5B";
       ctx.lineWidth = 4;
       ctx.stroke();
     }
@@ -1954,16 +2038,16 @@
       const ctx = canvas.getContext("2d");
       const W = canvas.width, H = canvas.height;
 
-      ctx.fillStyle = "#F6E4CE";
+      ctx.fillStyle = "#FAF2EA";
       ctx.fillRect(0, 0, W, H);
 
       ctx.setLineDash([6,6]);
-      ctx.strokeStyle = "rgba(122,19,48,0.35)";
+      ctx.strokeStyle = "rgba(183,109,91,0.35)";
       ctx.lineWidth = 2;
       ctx.strokeRect(14, 14, W-28, H-28);
       ctx.setLineDash([]);
 
-      ctx.fillStyle = "#7A1330";
+      ctx.fillStyle = "#8B4B3D";
       ctx.font = "700 13px 'Work Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("LOVE-O-METER — OFFICIAL ROMANTIC CERTIFICATE", W/2, 46);
@@ -1988,24 +2072,24 @@
         remaining--;
         if (remaining > 0) return;
 
-        ctx.fillStyle = "#D9A441";
+        ctx.fillStyle = "#D89685";
         ctx.font = "italic 600 40px Fraunces, serif";
         ctx.textAlign = "center";
         ctx.fillText("&", W/2, cy + 14);
 
-        ctx.fillStyle = "#2B1B14";
+        ctx.fillStyle = "#2A1B17";
         ctx.font = "700 20px 'Work Sans', sans-serif";
         ctx.fillText(`${n1}  &  ${n2}`, W/2, 235);
 
-        ctx.fillStyle = "#7A1330";
+        ctx.fillStyle = "#B76D5B";
         ctx.font = "700 46px Fraunces, serif";
         ctx.fillText(`${score}%`, W/2, 295);
 
-        ctx.fillStyle = "#2B1B14";
+        ctx.fillStyle = "#2A1B17";
         ctx.font = "600 15px 'Work Sans', sans-serif";
         ctx.fillText(verdictText, W/2, 328);
 
-        ctx.fillStyle = "rgba(43,27,20,0.55)";
+        ctx.fillStyle = "rgba(42,27,23,0.55)";
         ctx.font = "12px 'Work Sans', sans-serif";
         ctx.fillText("not peer reviewed · for romantic entertainment only", W/2, 358);
       }
@@ -2302,5 +2386,252 @@
     // Initialize routing based on current path / hash
     initRoute();
   </script>
+
+  <!-- Close #main-app wrapper -->
+  </div><!-- /#main-app -->
+
+  <!-- ===================== SCROLL ANIMATION STYLES ===================== -->
+  <style>
+    /* ---- Scroll Wrapper: creates the tall scroll zone ---- */
+    #scroll-intro-wrapper {
+      position: relative;
+      width: 100%;
+      /* 300 frames × 10px = 3000px of scrollable height */
+      height: 3000px;
+      /* Sit on top of everything */
+      z-index: 9999;
+    }
+
+    /* ---- Sticky container that stays fixed while user scrolls through wrapper ---- */
+    #scroll-intro-sticky {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #1a0a12;
+    }
+
+    /* ---- Canvas fills the sticky area ---- */
+    #scroll-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---- Overlay text on top of the canvas ---- */
+    #scroll-intro-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      z-index: 10;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-brand-name {
+      font-family: 'Noto Sans Malayalam', sans-serif, Georgia, serif;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      text-shadow: 0 0 40px rgba(255,150,180,0.8), 0 2px 8px rgba(0,0,0,0.4);
+      line-height: 1.1;
+    }
+
+    .scroll-tagline {
+      font-family: 'Courier New', monospace;
+      font-size: clamp(0.85rem, 2.2vw, 1.25rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,200,220,0.9);
+      margin-top: 14px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    .scroll-hint {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,200,220,0.7);
+      animation: bounceHint 1.8s ease-in-out infinite;
+    }
+
+    .scroll-arrow {
+      font-size: 1.6rem;
+      display: block;
+    }
+
+    @keyframes bounceHint {
+      0%, 100% { transform: translateY(0); opacity: 0.7; }
+      50%       { transform: translateY(8px); opacity: 1; }
+    }
+
+    /* ---- Bottom progress bar ---- */
+    #scroll-progress-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      z-index: 20;
+    }
+
+    #scroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff6b9d, #ff9ebe, #ffcad4);
+      transition: width 0.05s linear;
+    }
+
+    /* ---- Main app starts hidden; JS reveals it ---- */
+    #main-app {
+      transition: opacity 0.6s ease;
+    }
+  </style>
+
+  <!-- ===================== SCROLL ANIMATION SCRIPT ===================== -->
+  <script>
+  (function() {
+    const TOTAL_FRAMES = 300;
+    const FOLDER = '/images/ezgif-3cbc9f8a2656a2f5-jpg/';
+    const PRELOAD_BATCH = 20; // preload first N frames immediately
+
+    const wrapper   = document.getElementById('scroll-intro-wrapper');
+    const canvas    = document.getElementById('scroll-canvas');
+    const ctx       = canvas.getContext('2d');
+    const overlayTx = document.getElementById('scroll-intro-text');
+    const progFill  = document.getElementById('scroll-progress-fill');
+    const mainApp   = document.getElementById('main-app');
+
+    // ---- Image pool ----
+    const frames = new Array(TOTAL_FRAMES);
+    let loadedCount = 0;
+    let animationDone = false;
+
+    function framePath(n) {
+      // n is 0-based, file names are 001-300 (3-digit padded)
+      const padded = String(n + 1).padStart(3, '0');
+      return `${FOLDER}ezgif-frame-${padded}.jpg`;
+    }
+
+    function loadFrame(n) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          frames[n] = img;
+          loadedCount++;
+          resolve();
+        };
+        img.onerror = resolve; // skip if missing
+        img.src = framePath(n);
+      });
+    }
+
+    // Preload first batch synchronously-ish, rest lazily
+    async function preloadInitial() {
+      const promises = [];
+      for (let i = 0; i < Math.min(PRELOAD_BATCH, TOTAL_FRAMES); i++) {
+        promises.push(loadFrame(i));
+      }
+      await Promise.all(promises);
+      // Now kick off the rest in background
+      for (let i = PRELOAD_BATCH; i < TOTAL_FRAMES; i++) {
+        loadFrame(i); // fire and forget
+      }
+    }
+
+    // ---- Resize canvas to fill viewport ----
+    function resizeCanvas() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      drawFrame(currentFrame);
+    }
+
+    let currentFrame = 0;
+
+    function drawFrame(idx) {
+      if (!ctx) return;
+      const img = frames[idx];
+      if (!img) return;
+
+      const cw = canvas.width, ch = canvas.height;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
+
+      // Cover-style drawing
+      const scale = Math.max(cw / iw, ch / ih);
+      const dw = iw * scale, dh = ih * scale;
+      const dx = (cw - dw) / 2, dy = (ch - dh) / 2;
+
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(img, dx, dy, dw, dh);
+    }
+
+    // ---- Scroll handler ----
+    function onScroll() {
+      if (animationDone) return;
+
+      const wrapperTop    = wrapper.getBoundingClientRect().top + window.scrollY;
+      const wrapperHeight = wrapper.offsetHeight;
+      const scrolled      = Math.max(0, window.scrollY - wrapperTop);
+      const progress      = Math.min(scrolled / (wrapperHeight - window.innerHeight), 1);
+
+      // Which frame to show
+      const frameIdx = Math.min(Math.floor(progress * TOTAL_FRAMES), TOTAL_FRAMES - 1);
+      if (frameIdx !== currentFrame) {
+        currentFrame = frameIdx;
+        drawFrame(frameIdx);
+      }
+
+      // Progress bar
+      progFill.style.width = (progress * 100) + '%';
+
+      // Fade out overlay text in the first 15% of scroll
+      const textOpacity = Math.max(0, 1 - progress / 0.15);
+      overlayTx.style.opacity = textOpacity;
+
+      // When animation completes, reveal main app
+      if (progress >= 1 && !animationDone) {
+        animationDone = true;
+        revealMainApp();
+      }
+    }
+
+    function revealMainApp() {
+      // Hide scroll intro wrapper (keep space collapsed)
+      wrapper.style.height = '0px';
+      wrapper.style.display = 'none';
+
+      // Reveal main app with a fade
+      mainApp.style.opacity  = '1';
+      mainApp.style.pointerEvents = 'auto';
+
+      // Scroll to top of main app
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // ---- Init ----
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    resizeCanvas();
+    preloadInitial().then(() => {
+      drawFrame(0);
+    });
+
+  })();
+  </script>
+
 </body>
 </html>
