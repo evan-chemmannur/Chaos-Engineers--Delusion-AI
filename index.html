@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LOVEAI 💕 — മലയാളം Romantic Edition</title>
   <link rel="icon" href="/assets/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-canvas: #fff9fb;       /* Delicate porcelain white with soft pink warmth */
@@ -633,6 +636,387 @@
       pointer-events: auto;
       background: #ffffff;
     }
+
+    /* ==========================================================
+       LOVE-O-METER INTEGRATED FEATURE STYLES
+       ========================================================== */
+    :root {
+      --meter-cream: #FBEEE0;
+      --meter-paper: #FFF8F0;
+      --meter-ink: #2B1B14;
+      --meter-burgundy: #7A1330;
+      --meter-red: #C1272D;
+      --meter-gold: #D9A441;
+      --meter-gold-light: #F0C875;
+      --meter-green: #4C7A5C;
+      --meter-line: rgba(122, 19, 48, 0.18);
+    }
+
+    .machine {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      background: var(--meter-paper);
+      border-radius: 20px;
+      padding: 36px 30px 32px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.7) inset,
+        0 24px 60px -15px rgba(122, 19, 48, 0.18),
+        0 0 0 1px var(--meter-line);
+      border: 1px solid var(--meter-line);
+      margin: 0 auto;
+      font-family: 'Work Sans', sans-serif;
+      color: var(--meter-ink);
+    }
+
+    .machine::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1.5px dashed rgba(122, 19, 48, 0.28);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .machine .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .machine .brand .kicker {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--meter-burgundy);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .machine .brand h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 38px;
+      line-height: 1.05;
+      margin: 8px 0 6px;
+      color: var(--meter-burgundy);
+    }
+
+    .machine .brand p {
+      font-size: 13.5px;
+      color: rgba(43, 27, 20, 0.7);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 320px;
+    }
+
+    .screen {
+      display: none;
+      animation: rise 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .screen.active { display: block; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .photo-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+    .photo-slot {
+      flex: 1;
+      text-align: center;
+      max-width: 140px;
+    }
+    .photo-circle {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--meter-cream);
+      border: 2px dashed rgba(122, 19, 48, 0.35);
+      margin: 0 auto 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+      color: var(--meter-burgundy);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.3;
+      padding: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(122, 19, 48, 0.08);
+      user-select: none;
+    }
+    .photo-circle:hover {
+      border-color: var(--meter-burgundy);
+      transform: scale(1.04);
+      box-shadow: 0 6px 18px rgba(122, 19, 48, 0.16);
+    }
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-slot span {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(43, 27, 20, 0.65);
+    }
+
+    .meter-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--meter-burgundy);
+      margin: 0 0 6px;
+    }
+
+    .meter-input {
+      width: 100%;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 15px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(122, 19, 48, 0.25);
+      background: var(--meter-cream);
+      color: var(--meter-ink);
+      margin-bottom: 18px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .meter-input:focus {
+      border-color: var(--meter-burgundy);
+      box-shadow: 0 0 0 3px rgba(122, 19, 48, 0.12);
+    }
+
+    .meter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #7A1330, #9E1B42);
+      color: var(--meter-cream);
+      font-family: 'Work Sans', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(122, 19, 48, 0.25);
+    }
+    .meter-btn:hover {
+      background: linear-gradient(135deg, #611026, #871638);
+      box-shadow: 0 6px 22px rgba(122, 19, 48, 0.35);
+    }
+    .meter-btn:active { transform: scale(0.98); }
+    .meter-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .meter-btn.ghost {
+      background: transparent;
+      color: var(--meter-burgundy);
+      border: 1.5px solid rgba(122, 19, 48, 0.3);
+      box-shadow: none;
+    }
+    .meter-btn.ghost:hover {
+      background: rgba(122, 19, 48, 0.06);
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .tick {
+      width: 28px;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(122, 19, 48, 0.18);
+      transition: background 0.25s ease;
+    }
+    .tick.done { background: var(--meter-gold); }
+    .tick.now { background: var(--meter-burgundy); }
+
+    .q-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0 0 18px;
+      color: var(--meter-ink);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .opt {
+      text-align: left;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(122, 19, 48, 0.2);
+      background: var(--meter-cream);
+      color: var(--meter-ink);
+      font-family: 'Work Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+    }
+    .opt:hover {
+      border-color: var(--meter-burgundy);
+      background: #f3e2cb;
+    }
+    .opt:active { transform: scale(0.99); }
+    .opt.picked {
+      border-color: var(--meter-burgundy);
+      background: var(--meter-gold-light);
+      font-weight: 600;
+    }
+    .opt:disabled { cursor: default; opacity: 0.7; }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(43, 27, 20, 0.55);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Work Sans', sans-serif;
+      font-weight: 600;
+    }
+    .back-link:hover { color: var(--meter-burgundy); }
+
+    /* Full-Screen GIF Pop-up Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(43, 27, 20, 0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      pointer-events: auto;
+    }
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .popup-card {
+      background: var(--meter-paper);
+      border: 2px solid var(--meter-burgundy);
+      border-radius: 18px;
+      padding: 24px;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+      transform: scale(0.7) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .popup-overlay.active .popup-card {
+      transform: scale(1) translateY(0);
+    }
+    .popup-gif {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .popup-comment {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--meter-burgundy);
+      line-height: 1.45;
+    }
+
+    /* Gauge */
+    .gauge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .names-line {
+      text-align: center;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--meter-burgundy);
+      margin-bottom: 12px;
+    }
+    svg#gauge { display: block; }
+    .needle {
+      transform-origin: 150px 150px;
+      transition: transform 1.2s cubic-bezier(.2,.9,.25,1.1);
+    }
+    .score-num {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 48px;
+      text-align: center;
+      color: var(--meter-burgundy);
+      margin: 6px 0 2px;
+    }
+    .score-num span { font-size: 24px; font-weight: 600; }
+    .verdict {
+      text-align: center;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--meter-ink);
+      margin: 0 0 6px;
+    }
+    .verdict-sub {
+      text-align: center;
+      font-size: 13.5px;
+      color: rgba(43,27,20,0.65);
+      line-height: 1.5;
+      margin: 0 0 18px;
+      padding: 0 10px;
+    }
+    .certificate-wrap {
+      margin: 12px 0 20px;
+      display: flex;
+      justify-content: center;
+    }
+    #certCanvas {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px -8px rgba(43,27,20,0.35);
+    }
+    .result-actions {
+      display: flex;
+      gap: 12px;
+    }
   </style>
 </head>
 <body>
@@ -755,66 +1139,79 @@
         </div>
       </section>
 
-      <!-- ==================== VIEW 2: COMPATIBILITY ==================== -->
+      <!-- ==================== VIEW 2: COMPATIBILITY / LOVE-O-METER ==================== -->
       <section id="view-compatibility" class="feature-view" style="align-items: center;">
-        <div style="width: 100%; max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+        <div class="machine">
+          <div class="brand">
+            <div class="kicker">EST. TODAY &middot; NOT PEER REVIEWED // റൊമാന്റിക് പ്രണയ മീറ്റർ</div>
+            <h1>Love-O-Meter</h1>
+            <p>Six questions, zero credentials, one unshakeable verdict. 💕</p>
+          </div>
 
-          <!-- Centered Name Entry Input Card -->
-          <div class="romantic-card" style="width: 100%;">
-            <div class="card-tag">വിവരങ്ങൾ</div>
-            <div class="section-title">റൊമാന്റിക് പൊരുത്തം കണക്കാക്കൽ</div>
-            <p class="section-desc">പേരുകളും vibe quiz-ഉം വെച്ച് നിങ്ങളുടെ പൊരുത്തം കണ്ടെത്താം.</p>
+          <div class="stage">
 
-            <div class="name-inputs-grid">
-              <div>
-                <label class="field-label">നിങ്ങളുടെ പേര്:</label>
-                <input type="text" class="input-field" id="comp-name1" placeholder="ഉദാ: Rahul" style="margin-bottom: 0;" />
+            <!-- SCREEN 0: photos + names -->
+            <div class="screen active" data-screen="0">
+              <div class="photo-row">
+                <div class="photo-slot">
+                  <div class="photo-circle" id="photo1Circle">
+                    <span>+ Photo ചേർക്കുക<br>(You)</span>
+                  </div>
+                  <span>നിങ്ങൾ (You)</span>
+                  <input type="file" accept="image/*" id="photo1Input" style="display:none" />
+                </div>
+                <div class="photo-slot">
+                  <div class="photo-circle" id="photo2Circle">
+                    <span>+ Photo ചേർക്കുക<br>(Them)</span>
+                  </div>
+                  <span>അവർ (Them)</span>
+                  <input type="file" accept="image/*" id="photo2Input" style="display:none" />
+                </div>
               </div>
-              <div>
-                <label class="field-label">അവരുടെ പേര്:</label>
-                <input type="text" class="input-field" id="comp-name2" placeholder="ഉദാ: Ananya" style="margin-bottom: 0;" />
+              <label class="meter-label" for="comp-name1">നിങ്ങളുടെ പേര് (Your name)</label>
+              <input type="text" class="meter-input" id="comp-name1" placeholder="e.g. Rahul" autocomplete="off" />
+              <label class="meter-label" for="comp-name2">അവരുടെ പേര് (Their name)</label>
+              <input type="text" class="meter-input" id="comp-name2" placeholder="e.g. Ananya" autocomplete="off" />
+              <button class="meter-btn" id="startBtn" disabled>Begin the reading // പൊരുത്തം പരിശോധിക്കുക 💕</button>
+            </div>
+
+            <!-- SCREENS: questions injected by JS -->
+            <div id="questionMount"></div>
+
+            <!-- SCREEN result -->
+            <div class="screen" data-screen="6">
+              <div class="gauge-wrap">
+                <div class="names-line" id="resultNames"></div>
+                <svg id="gauge" width="280" height="170" viewBox="0 0 300 170">
+                  <path d="M20,150 A130,130 0 0,1 105,29" fill="none" stroke="#C1272D" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M105,29 A130,130 0 0,1 195,29" fill="none" stroke="#D9A441" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M195,29 A130,130 0 0,1 280,150" fill="none" stroke="#4C7A5C" stroke-width="18" stroke-linecap="round"/>
+                  <g class="needle" id="needle">
+                    <line x1="150" y1="150" x2="150" y2="38" stroke="#2B1B14" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="150" cy="150" r="9" fill="#2B1B14"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="score-num" id="scoreNum">0<span>%</span></div>
+              <div class="verdict" id="verdictText"></div>
+              <div class="verdict-sub" id="verdictSub"></div>
+
+              <div class="certificate-wrap">
+                <canvas id="certCanvas" width="600" height="380"></canvas>
+              </div>
+
+              <div class="result-actions">
+                <button class="meter-btn ghost" id="downloadBtn">Download certificate 📜</button>
+                <button class="meter-btn" id="restartBtn">Read another pair 🔄</button>
               </div>
             </div>
 
-            <!-- Unhinged Random Compatibility Quiz Section -->
-            <div class="quiz-section" style="margin-top: 6px; margin-bottom: 22px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <label class="field-label" style="margin-bottom: 0;">🎲 RANDOM VIBE QUIZ:</label>
-                <button type="button" class="action-btn-outline" style="padding: 4px 12px; font-size: 11px; border-radius: 999px;" onclick="renderRandomQuiz()">[ 🎲 ചോദ്യങ്ങൾ മാറ്റുക ]</button>
-              </div>
-              <div id="quiz-container" style="display: flex; flex-direction: column; gap: 12px;">
-                <!-- Dynamically injected questions -->
-              </div>
-            </div>
-
-            <button class="action-btn-pink" id="btn-comp-run" style="width: 100%;" onclick="runCompatibility()">പൊരുത്തം കണക്കാക്കുക 💕</button>
           </div>
+        </div>
 
-          <!-- Compatibility Result Card (Centered Below) -->
-          <div class="romantic-card" id="comp-result-box" style="width: 100%; display: none; text-align: center;">
-            <div class="card-tag">പൊരുത്തം</div>
-            <div class="section-title" id="comp-verdict-title">നിങ്ങളുടെ Score</div>
-            <div class="metric-display" id="comp-score-combined" style="margin: 12px 0;">--%</div>
-            <p class="section-desc" id="comp-verdict-desc" style="margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">പേരുകളും താൽപര്യങ്ങളും വെച്ച് പൊരുത്തം കണക്കാക്കി കഴിഞ്ഞു.</p>
-
-            <div style="border-top: 1px solid var(--border-line); padding-top: 18px; display: flex; justify-content: space-around; align-items: center; text-align: center;">
-              <div>
-                <span class="metric-label">പേര് പൊരുത്തം</span>
-                <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 800; margin-top: 4px;" id="comp-score-name">--%</div>
-              </div>
-              <div style="border-left: 1px solid var(--border-line); height: 48px;"></div>
-              <div>
-                <span class="metric-label">താൽപ്പര്യങ്ങളുടെ Score</span>
-                <div style="font-family: var(--font-mono); font-size: 24px; font-weight: 800; color: var(--accent-pink); margin-top: 4px;" id="comp-score-interest">--%</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="romantic-disclaimer" style="width: 100%; margin-top: 0;">
-            <span class="badge">ശ്രദ്ധിക്കുക</span>
-            <div>പൊരുത്തം scores entertainment-ന് വേണ്ടി മാത്രമാണ്. ഇത് ഒരിക്കലും relationship success-ഓ മറ്റുള്ളവരുടെ മനസ്സോ തീരുമാനിക്കുന്നില്ല.</div>
-          </div>
-
+        <div class="romantic-disclaimer" style="width: 100%; max-width: 520px; margin-top: 14px;">
+          <span class="badge">ശ്രദ്ധിക്കുക</span>
+          <div>പൊരുത്തം scores entertainment-ന് വേണ്ടി മാത്രമാണ്. ഇത് ഒരിക്കലും relationship success-ഓ മറ്റുള്ളവരുടെ മനസ്സോ തീരുമാനിക്കുന്നില്ല.</div>
         </div>
       </section>
 
@@ -1009,6 +1406,14 @@
       <div>മനസ്സിലാക്കുക. സംസാരിക്കുക. ബന്ധപ്പെടുക.</div>
     </footer>
 
+  </div>
+
+  <!-- Pop-up Overlay Container -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-card">
+      <img src="" alt="reaction gif" class="popup-gif" id="popupGif" />
+      <div class="popup-comment" id="popupComment"></div>
+    </div>
   </div>
 
   <script>
@@ -1311,250 +1716,413 @@
     }
 
     /* ==========================================================
-       RANDOM COMPATIBILITY QUIZ QUESTION POOL (MALAYALAM)
+       LOVE-O-METER QUESTION POOL & REACTION GIF ENGINE
        ========================================================== */
-    const RANDOM_QUESTIONS = [
+    const QUESTIONS = [
       {
-        id: "potato",
-        q: "നിങ്ങൾ ഒരു ഉരുളക്കിഴങ്ങായി പുനർജനിച്ചാൽ, ഏത് രൂപമായിരിക്കും എടുക്കുക?",
+        key: "status",
+        title: "First, what’s the situation?",
+        titleMl: "ആദ്യം, എന്താണ് നിങ്ങളുടെ അവസ്ഥ?",
         options: [
-          "🍟 നല്ല ക്രിസ്പി french fry",
-          "🥔 നല്ല ബട്ടർ ചേർത്ത garlic mash",
-          "🍸 ഹൈ-ക്ലാസ് potato vodka ആയി മാറിയത്",
-          "🕳️ ഇരുട്ടത്ത് വെറുതെ ഇരിക്കുന്ന പച്ച ഉരുളക്കിഴങ്ങ്"
+          { label: "Just started catching feelings", labelMl: "ഇഷ്ടം തോന്നി തുടങ്ങിയിട്ടേയുള്ളൂ", value: 6, gif: "https://media.giphy.com/media/26hpKMT7M5vNUZ076/giphy.gif", comment: "Early days. The machine is cautiously optimistic." },
+          { label: "Official, still figuring it out", labelMl: "Official ആയി, എങ്കിലും പഠിച്ചുവരുന്നു", value: 12, gif: "https://media.giphy.com/media/l41K3tokYZuxVK8Za/giphy.gif", comment: "Solid footing. Proceed with mild chaos." },
+          { label: "In it for the long haul", labelMl: "ജീവിതകാലം മുഴുവൻ ഒരുമിച്ച് നിൽക്കാൻ", value: 18, gif: "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif", comment: "Certified veterans. Respect." },
+          { label: "Honestly? Complicated", labelMl: "സത്യം പറഞ്ഞാൽ... complicated ആണ്", value: 2, gif: "https://media.giphy.com/media/3o7527pa7qs9kCG78A/giphy.gif", comment: "The machine has no notes. Just vibes of concern." },
+          { label: "Ride-or-die friends, nothing more", labelMl: "തകർപ്പൻ കൂട്ടുകാർ, അതിനപ്പുറമില്ല", value: 9, gif: "https://media.giphy.com/media/d30mgvM8XajPe/giphy.gif", comment: "Platonic, powerful, unbothered." }
         ]
       },
       {
-        id: "spider",
-        q: "ബാത്ത്റൂമിൽ വലിയൊരു എട്ടുകാലി! നിങ്ങളുടെ തന്ത്രപരമായ പ്രതികരണം എന്താണ്?",
+        key: "pause",
+        title: "If we hit a silent pause for more than 4 seconds on our first date, how do you handle it?",
+        titleMl: "ആദ്യത്തെ ഡേറ്റിൽ 4 സെക്കൻഡിൽ കൂടുതൽ നിശബ്ദത വന്നാൽ നിങ്ങൾ എന്ത് ചെയ്യും?",
         options: [
-          "🥛 ഗ്ലാസ്സ് കമഴ്ത്തി പിടിച്ചു 'Gerald' എന്ന് പേരിടും",
-          "🔥 വീട് മുഴുവനും ഇപ്പോൾത്തന്നെ തീയിട്ടു കത്തിക്കും",
-          "📜 അതുമായി ഒരു സമാധാന കരാർ ഉണ്ടാക്കും",
-          "😱 ആരെങ്കിലും വന്ന് മാറ്റുന്നത് വരെ ഉറക്കെ നിലവിളിക്കും"
+          { label: "Fake a sudden cough, whisper ‘system rebooting,’ stare straight ahead", labelMl: "ചുമച്ച് 'system rebooting' എന്ന് പറഞ്ഞ് മുന്നോട്ട് തന്നെ നോക്കിയിരിക്കും", value: 14, gif: "https://media.giphy.com/media/H5C8CevNMbpBqNvFjl/giphy.gif", comment: "Chaotic but oddly endearing. The machine respects the commitment." },
+          { label: "Bring up an obscure historical war fact with zero context", labelMl: "ഒരു ബന്ധവുമില്ലാത്ത പഴയ ചരിത്ര യുദ്ധക്കഥ എടുത്തിടും", value: 10, gif: "https://media.giphy.com/media/a5viI92PAF89q/giphy.gif", comment: "A bold pivot. Somewhere, a history teacher is proud." },
+          { label: "Pull out my phone, open Instagram, send reels", labelMl: "ഫോണെടുത്ത് Instagram തുറന്ന് reels അയക്കും", value: 6, gif: "https://media.giphy.com/media/tLqkXSi04vqM0/giphy.gif", comment: "The date has left the chat. The machine notes this." },
+          { label: "Simply scream until someone else breaks the tension", labelMl: "ആരെങ്കിലും മിണ്ടുന്നത് വരെ ഉറക്കെ നിലവിളിക്കും", value: 16, gif: "https://media.giphy.com/media/1FMaabePDEfgk/giphy.gif", comment: "Unhinged, but undeniably a strategy. Full marks for initiative." }
         ]
       },
       {
-        id: "superpower",
-        q: "താഴെ പറയുന്ന mildly cursed superpowers-ൽ ഏത് തിരഞ്ഞെടുക്കും?",
+        key: "passwords",
+        title: "What’s your stance on sharing phone passwords?",
+        titleMl: "ഫോൺ പാസ്‌വേഡ് പങ്കുവെക്കുന്നതിനെ കുറിച്ച് നിങ്ങളുടെ നിലപാട് എന്താണ്?",
         options: [
-          "🕊️ പ്രാവുകളോട് സംസാരിക്കാം (പക്ഷെ അവർക്ക് പരദൂഷണം മാത്രമേയുള്ളൂ)",
-          "🔌 USB എപ്പോഴും ആദ്യ തവണ തന്നെ ശരിയായി കുത്താം",
-          "🍞 ദേഷ്യമുള്ള ടോസ്റ്ററുമായി മനസ്സിൽ സംസാരിക്കാം",
-          "💨 ഉറക്കെ തുമ്മുമ്പോൾ മാത്രം ആരും കാണില്ല"
+          { label: "Hell nah, I’d rather die", labelMl: "ഒരിക്കലുമില്ല, ഞാൻ മരിക്കാൻ തയ്യാറാണ്", value: 8, gif: "https://media.giphy.com/media/COYGe9rZvf3Q4/giphy.gif", comment: "Healthy boundaries or a lot to hide. The machine won’t ask." },
+          { label: "Here’s the PIN, whatever trauma you find is on you", labelMl: "ദാ PIN, കണ്ട് പേടിച്ചാൽ ഞാൻ ഉത്തരവാദിയല്ല", value: 16, gif: "https://media.giphy.com/media/l0HlHJGHe3yAMhdQY/giphy.gif", comment: "Radical transparency. Bold move." },
+          { label: "Over my dead body. Literally. Corpse first.", labelMl: "എന്റെ ശവത്തിൽ ചവിട്ടി മാത്രം!", value: 4, gif: "https://media.giphy.com/media/E3L55VUAHqXSi05JK5/giphy.gif", comment: "Escalated quickly. Taking notes cautiously." },
+          { label: "Break Up", labelMl: "നേരെ Break Up!", value: 1, gif: "https://media.giphy.com/media/hFdi34861fa8XYYC5v/giphy.gif", comment: "Nuclear option confirmed. The machine salutes the commitment." }
         ]
       },
       {
-        id: "microwave",
-        q: "Microwave timer 00:01-ൽ എത്തി. നിങ്ങൾ എന്ത് ചെയ്യും?",
+        key: "selfie",
+        title: "How do you react when your crush posts a selfie with another human being?",
+        titleMl: "Crush വേറൊരാളോടൊപ്പം സെൽഫി ഇടുമ്പോൾ നിങ്ങളുടെ പ്രതികരണം?",
         options: [
-          "💣 ബോംബ് നിർവീര്യമാക്കുന്ന ഏജന്റിനെപ്പോലെ 00:01-ൽ നിർത്തും",
-          "🔊 വീട്ടിൽ ആധിപത്യം കാണിക്കാൻ 5 തവണ ബീപ്പ് അടിക്കാൻ വിടും",
-          "👁️ കറങ്ങുന്ന പ്ലേറ്റിലേക്ക് നോക്കി existential crisis അനുഭവിക്കും",
-          "🏃 അത് തുറന്നിട്ട് രാത്രിയിലേക്ക് ഓടും"
+          { label: "Background check already in progress", labelMl: "ആളെക്കുറിച്ചുള്ള അന്വേഷണം ആരംഭിച്ചു കഴിഞ്ഞു", value: 10, gif: "https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif", comment: "Thorough. Slightly concerning. Very committed." },
+          { label: "Instant like. 0.2 seconds flat. Pure dominance.", labelMl: "0.2 സെക്കൻഡിൽ Instant like. Pure dominance!", value: 18, gif: "https://media.giphy.com/media/dWUQa4XebVz45VA7oW/giphy.gif", comment: "Confidence like this cannot be taught." },
+          { label: "Black screen story post. Cue the moody acoustic song.", labelMl: "ബ്ലാക്ക് സ്ക്രീൻ സ്റ്റോറി + സങ്കട പാട്ട്", value: 6, gif: "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif", comment: "A cinematic response. The machine appreciates the drama." },
+          { label: "Blocking everyone involved, including the photographer", labelMl: "ഫോട്ടോ എടുത്ത ആളെയടക്കം എല്ലാവരെയും ബ്ലോക്ക് ചെയ്യും", value: 3, gif: "https://media.giphy.com/media/3o85xGocUH8RYoDKKs/giphy.gif", comment: "Scorched earth policy. Noted." },
+          { label: "Crying behind the screen", labelMl: "ഫോണിന്റെ പിന്നിലിരുന്ന് കരച്ചിൽ", value: 5, gif: "https://media.giphy.com/media/7T33BLlBtfKPBXMz3K/giphy.gif", comment: "Valid. The machine sends a virtual tissue." }
         ]
       },
       {
-        id: "aliens",
-        q: "Aliens വന്ന് ഭൂമിയുടെ നേതാവിനോട് സംസാരിക്കണം എന്ന് പറഞ്ഞു. നിങ്ങൾ ആരെ കൊണ്ടുപോകും?",
+        key: "birthday",
+        title: "It’s their birthday and you just remembered at 11:58 PM. What’s the move?",
+        titleMl: "അവരുടെ ജന്മദിനം 11:58 PM-ന് മാത്രം ഓർമ്മ വന്നാൽ എന്താണ് പ്ലാൻ?",
         options: [
-          "🐱 എന്റെ പൂച്ച (വീട് ഭരിക്കുന്നത് അതാണ്)",
-          "☕ അവർക്കൊരു cold coffee കൊടുത്ത് മനുഷ്യരെ കുറിച്ച് കുറ്റം പറയും",
-          "🏎️ ഭൂമിക്ക് വേണ്ടി Mario Kart ചലഞ്ച് ചെയ്യും",
-          "👽 വഴിതെറ്റി വന്ന വേറൊരു alien ആണെന്ന് ഞാൻ അഭിനയിക്കും"
+          { label: "Panic-order a cake emoji bouquet and swear that was the plan all along", labelMl: "Cake emoji അയച്ച് ഇതാണ് പ്ലാൻ എന്ന് സ്ഥാപിക്കും", value: 12, gif: "https://media.giphy.com/media/1FMaabePDEfgk/giphy.gif", comment: "Improvisation at its finest." },
+          { label: "Call immediately, blame the time zone, hang up before they can respond", labelMl: "ഉടൻ വിളിച്ച് ടൈം സോണിനെ കുറ്റം പറഞ്ഞ് കോൾ കട്ട് ചെയ്യും", value: 6, gif: "https://media.giphy.com/media/3o7ZetIsjxiql9RNAs/giphy.gif", comment: "Bold strategy. Untraceable, allegedly." },
+          { label: "Show up empty-handed but with full chaotic energy and jazz hands", labelMl: "കൈയിൽ ഒന്നുമില്ലെങ്കിലും ഫുൾ എനർജിയോടെ മുന്നിൽ ചെല്ലും", value: 16, gif: "https://media.giphy.com/media/l0IxYD16t9Syvf89W/giphy.gif", comment: "Confidence over preparation. Somehow this might actually work." },
+          { label: "Smoothly pretend you didn’t forget: ‘so... how’s birthday week going?’", labelMl: "മറന്നില്ലെന്ന് അഭിനയിച്ച് ചോദിക്കും: ‘birthday week എങ്ങനെ പോകുന്നു?’", value: 18, gif: "https://media.giphy.com/media/6rFJNqv3wDRgxWpGHw/giphy.gif", comment: "Elite-level deflection. Salutes the audacity." }
         ]
       },
       {
-        id: "pizza",
-        q: "Pizza-യിൽ പൈനാപ്പിൾ ഇടുന്നതിനെ കുറിച്ച് നിങ്ങളുടെ അഭിപ്രായം എന്താണ്?",
+        key: "appliance",
+        title: "Quick, no thinking: if your relationship were a kitchen appliance having an existential crisis, which one?",
+        titleMl: "ഒരു നിമിഷം ചിന്തിക്കാതെ പറയൂ: നിങ്ങളുടെ ബന്ധം ഒരു അടുക്കള ഉപകരണമായിരുന്നെങ്കിൽ ഏതായിരിക്കും?",
         options: [
-          "👑 പാചകകലയിലെ ഏറ്റവും മികച്ച masterpiece",
-          "🚨 നേരെ romance ജയിലിലേക്ക് വിടേണ്ട കുറ്റം",
-          "📦 അതിന് പകരം ഞാൻ ഡെലിവറി കാർഡ്ബോർഡ് ബോക്സ് തിന്നോളാം",
-          "🌪️ Unfiltered chaos ആണ് എന്റെ യഥാർത്ഥ love language"
-        ]
-      },
-      {
-        id: "forest_door",
-        q: "കാട്ടിൽ തിളങ്ങുന്ന ഒരു പ്രത്യേക വാതിൽ കണ്ടു. നിങ്ങൾ എന്ത് ചെയ്യും?",
-        options: [
-          "🚪 ഒരു പേടിയും കൂടാതെ ചവിട്ടിത്തുറക്കും (side quest unlocked!)",
-          "🍪 മര്യാദയ്ക്ക് മുട്ടി ഒരു പ്ലേറ്റ് കുക്കീസ് നീട്ടും",
-          "📸 അതിന്റെ മുന്നിൽ നിന്ന് ഒരു aesthetic സെൽഫി എടുക്കും",
-          "🏃 എന്തിനാ വെറുതെ പ്രശ്നം എന്ന് കരുതി തിരിച്ച് ഓടും"
-        ]
-      },
-      {
-        id: "desktop",
-        q: "ഇപ്പോൾ നിങ്ങളുടെ കമ്പ്യൂട്ടർ ഡെസ്ക്ടോപ്പ് എങ്ങനെയാണ് ഇരിക്കുന്നത്?",
-        options: [
-          "✨ സീറോ ഐക്കണുകൾ, നല്ല neat & clean zen minimalism",
-          "🌪️ സ്ക്രീൻ മുഴുവൻ downloads & screenshots",
-          "📁 'stuff_2026_final_v2' എന്ന വലിയൊരു ഫോൾഡർ മാത്രം",
-          "🤷 വാൾപേപ്പർ കണ്ടിട്ട് ഇപ്പോൾ 4 വർഷമായി"
-        ]
-      },
-      {
-        id: "ghost",
-        q: "നിങ്ങൾ ഒരു പ്രേതമായാൽ (ghost), എങ്ങനെയായിരിക്കും പേടിപ്പിക്കുക?",
-        options: [
-          "🧦 കഴുകിയ തുണിയിൽ നിന്ന് ഓരോ കാൽസഞ്ചി (sock) മാത്രം മോഷ്ടിക്കും",
-          "📺 Netflix സബ്‌ടൈറ്റിൽ മാറ്റി ഗ്രീക്ക് ആക്കും",
-          "☕ ചൂടില്ലാത്ത ചായ/കോഫി തട്ടിയിടും",
-          "🔑 താക്കോൽ തപ്പുന്ന ആളുകളെ സഹായിക്കുന്ന നല്ല പ്രേതമാകും"
-        ]
-      },
-      {
-        id: "zombie",
-        q: "Zombie apocalypse വരുമ്പോൾ നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന ആയുധം ഏത്?",
-        options: [
-          "🍳 നല്ല കട്ടിയുള്ള cast-iron പാൻ (അടിച്ച് തല പൊട്ടിക്കാൻ)",
-          "🧀 Zombies-നെ കൂട്ടുകാരാക്കാൻ snacks നീട്ടും",
-          "🗡️ തൊട്ടാൽ പൊട്ടുന്ന ഒരു fancy ഷോ വാൾ (katana)",
-          "🛋️ പ്രശ്നം തീരുന്നത് വരെ blanket-ന്റെ ഉള്ളിൽ ഒളിച്ചിരിക്കും"
-        ]
-      },
-      {
-        id: "alarm",
-        q: "രാവിലെ അലാറം ക്ലോക്കുമായി നിങ്ങളുടെ ബന്ധം എങ്ങനെയാണ്?",
-        options: [
-          "⏰ ബെല്ലടിക്കുന്നതിന് 2 മിനിറ്റ് മുൻപ് സ്വാഭാവികമായി ഉണരും",
-          "😴 3 മിനിറ്റ് ഇടവേളയിൽ വെച്ച 14 അലാറങ്ങൾ",
-          "🎶 കേൾക്കുകയേ ചെയ്യാത്ത soft പക്ഷി ശബ്ദങ്ങൾ",
-          "💥 നെഞ്ചിടിച്ചുകൊണ്ടുള്ള ഞെട്ടിത്തെറിച്ച ചാട്ടം"
-        ]
-      },
-      {
-        id: "raccoon",
-        q: "രാത്രി 3 മണിക്ക് ഒരു കുറുക്കൻ നിങ്ങൾക്ക് ഒരു ബ്രീഫ്കേസ് തന്നാൽ:",
-        options: [
-          "💼 ചോദ്യമൊന്നും ചോദിക്കാതെ സൈലന്റായി വാങ്ങും",
-          "🥪 അർദ്ധരാത്രി സാൻഡ്‌വിച്ചിന്റെ പകുതി അതിന് കൊടുക്കും",
-          "🏃 തിരിഞ്ഞു നോക്കാതെ ജീവനും കൊണ്ട് ഓടും",
-          "🤝 ഗ്യാങ്ങിൽ ഒഴിവുണ്ടോ എന്ന് റെസ്യൂമെ കൊടുത്ത് ചോദിക്കും"
+          { label: "The toaster that only browns one side, out of spite", labelMl: "ഒരു വശം മാത്രം കരിയിക്കുന്ന ടോസ്റ്റർ", value: 14, gif: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif", comment: "Deeply relatable. The machine has been there." },
+          { label: "The blender that randomly turns on at 3 AM", labelMl: "രാത്രി 3 മണിക്ക് തനിയെ കറങ്ങുന്ന മിക്സി", value: 9, gif: "https://media.giphy.com/media/4pMX5rJ4PYA5a/giphy.gif", comment: "Ominous. Recommends therapy for the blender." },
+          { label: "The fridge that hums a different tune every day", labelMl: "ദിവസവും ഓരോ പാട്ട് മൂളുന്ന ഫ്രിഡ്ജ്", value: 16, gif: "https://media.giphy.com/media/l2JHRhYYnBo7B3BLG/giphy.gif", comment: "Chaotic, but the good kind of unpredictable." },
+          { label: "The microwave that beeps once and refuses to explain why", labelMl: "ഒരു തവണ ബീപ്പ് അടിച്ച് കാര്യം പറയാത്ത മൈക്രോവേവ്", value: 5, gif: "https://media.giphy.com/media/l0HlO4vdchLBZnxYc/giphy.gif", comment: "Mysterious and slightly threatening. Iconic." }
         ]
       }
     ];
 
-    let currentQuizQuestions = [];
-    let quizSelectedAnswers = {};
+    // Preload all unique GIFs in advance
+    QUESTIONS.forEach(q => {
+      q.options.forEach(opt => {
+        const img = new Image();
+        img.src = opt.gif;
+      });
+    });
 
-    function renderRandomQuiz() {
-      const container = document.getElementById('quiz-container');
-      if (!container) return;
+    const answers = {};
+    const photos = { p1: null, p2: null };
 
-      quizSelectedAnswers = {};
+    const mount = document.getElementById("questionMount");
+    const name1Input = document.getElementById("comp-name1");
+    const name2Input = document.getElementById("comp-name2");
+    const startBtn = document.getElementById("startBtn");
 
-      // Pick 3 random distinct questions
-      const shuffled = [...RANDOM_QUESTIONS].sort(() => 0.5 - Math.random());
-      currentQuizQuestions = shuffled.slice(0, 3);
+    const overlay = document.getElementById("popupOverlay");
+    const popupGif = document.getElementById("popupGif");
+    const popupComment = document.getElementById("popupComment");
 
-      container.innerHTML = '';
-      currentQuizQuestions.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = 'quiz-card';
+    function triggerPopup(gifUrl, text, callback) {
+      if (popupGif) popupGif.src = gifUrl;
+      if (popupComment) popupComment.textContent = text;
+      if (overlay) overlay.classList.add("active");
 
-        const qLabel = document.createElement('div');
-        qLabel.className = 'quiz-q-label';
-        qLabel.innerHTML = `<span>ചോദ്യം 0${idx + 1} // RANDOM VIBE CHECK</span><span id="quiz-badge-${q.id}" style="color: var(--label-3); font-size: 10px; font-weight: 600;">ഉത്തരം നൽകിയില്ല</span>`;
-        card.appendChild(qLabel);
+      setTimeout(() => {
+        if (overlay) overlay.classList.remove("active");
+        if (callback) callback();
+      }, 2000);
+    }
 
-        const qText = document.createElement('div');
-        qText.className = 'quiz-q-text';
-        qText.innerText = q.q;
-        card.appendChild(qText);
+    function checkNames() {
+      if (startBtn && name1Input && name2Input) {
+        startBtn.disabled = !(name1Input.value.trim() && name2Input.value.trim());
+      }
+    }
+    if (name1Input) name1Input.addEventListener("input", checkNames);
+    if (name2Input) name2Input.addEventListener("input", checkNames);
 
-        const optionsGrid = document.createElement('div');
-        optionsGrid.className = 'quiz-options-grid';
+    function setupPhotoSlot(circleId, inputId, key) {
+      const circle = document.getElementById(circleId);
+      const input = document.getElementById(inputId);
+      if (!circle || !input) return;
+      circle.addEventListener("click", () => input.click());
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          photos[key] = e.target.result;
+          circle.innerHTML = `<img src="${e.target.result}" alt="photo" />`;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    setupPhotoSlot("photo1Circle", "photo1Input", "p1");
+    setupPhotoSlot("photo2Circle", "photo2Input", "p2");
 
-        q.options.forEach(opt => {
-          const optBtn = document.createElement('button');
-          optBtn.type = 'button';
-          optBtn.className = 'quiz-opt-btn';
-          optBtn.innerText = opt;
-          optBtn.onclick = () => selectQuizOption(q.id, opt, optBtn, optionsGrid);
-          optionsGrid.appendChild(optBtn);
+    function showScreen(n) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      const target = document.querySelector(`.screen[data-screen="${n}"]`);
+      if (target) target.classList.add("active");
+    }
+
+    function renderQuestion(index) {
+      if (!mount) return;
+      mount.innerHTML = "";
+      const q = QUESTIONS[index];
+
+      const wrap = document.createElement("div");
+      wrap.className = "screen active";
+      wrap.dataset.screen = "q";
+
+      const progressRow = document.createElement("div");
+      progressRow.className = "progress-row";
+      QUESTIONS.forEach((_, i) => {
+        const t = document.createElement("div");
+        t.className = "tick" + (i < index ? " done" : i === index ? " now" : "");
+        progressRow.appendChild(t);
+      });
+
+      const title = document.createElement("div");
+      title.className = "q-title";
+      title.innerHTML = `<div>${q.title}</div><div style="font-size: 14.5px; font-weight: 500; color: var(--meter-burgundy); margin-top: 4px;">${q.titleMl}</div>`;
+
+      const opts = document.createElement("div");
+      opts.className = "options";
+
+      q.options.forEach(opt => {
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.type = "button";
+        b.innerHTML = `<div style="font-weight: 600;">${opt.label}</div><div style="font-size: 12.5px; opacity: 0.82; margin-top: 2px;">${opt.labelMl || ''}</div>`;
+        b.addEventListener("click", () => {
+          opts.querySelectorAll(".opt").forEach(el => { el.classList.remove("picked"); el.disabled = true; });
+          b.classList.add("picked");
+          answers[q.key] = opt.value;
+
+          // Show pop-up GIF modal
+          triggerPopup(opt.gif, opt.comment, () => {
+            if (index < QUESTIONS.length - 1) {
+              renderQuestion(index + 1);
+            } else {
+              computeResult();
+            }
+          });
         });
+        opts.appendChild(b);
+      });
 
-        card.appendChild(optionsGrid);
-        container.appendChild(card);
+      const backBtn = document.createElement("button");
+      backBtn.className = "back-link";
+      backBtn.type = "button";
+      backBtn.textContent = index === 0 ? "← change names & photos // പേരുകൾ മാറ്റുക" : "← back // തിരികെ";
+      backBtn.addEventListener("click", () => {
+        if (index === 0) {
+          document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+          const s0 = document.querySelector('.screen[data-screen="0"]');
+          if (s0) s0.classList.add("active");
+          mount.innerHTML = "";
+        } else {
+          renderQuestion(index - 1);
+        }
+      });
+
+      wrap.appendChild(progressRow);
+      wrap.appendChild(title);
+      wrap.appendChild(opts);
+      wrap.appendChild(backBtn);
+
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      mount.appendChild(wrap);
+    }
+
+    if (startBtn) {
+      startBtn.addEventListener("click", () => {
+        renderQuestion(0);
       });
     }
 
-    function selectQuizOption(qId, text, clickedBtn, parentGrid) {
-      const isAlreadySelected = clickedBtn.classList.contains('selected');
+    function nameScore(n1, n2) {
+      const combined = (n1 + n2).toLowerCase();
+      let hash = 0;
+      for (const c of combined) hash += c.charCodeAt(0);
+      return hash % 101;
+    }
 
-      // Clear selection in this question
-      parentGrid.querySelectorAll('.quiz-opt-btn').forEach(b => b.classList.remove('selected'));
-      const badge = document.getElementById(`quiz-badge-${qId}`);
+    function verdictFor(score) {
+      if (score >= 90) return { text: "Certified Soulmates // വിശ്വസനീയമായ പൊരുത്തം! 💕", sub: "The machine doesn’t say this often. Frame this ticket." };
+      if (score >= 70) return { text: "Strong Match // ശക്തമായ കണക്ഷൻ! ✨", sub: "Whatever you’re doing, keep doing it." };
+      if (score >= 50) return { text: "Worth a Shot // ഒരു ശ്രമം നടത്താം! 🌟", sub: "Promising numbers. The rest is up to you two." };
+      if (score >= 30) return { text: "Could Go Either Way // എങ്ങോട്ടും തിരിയാം! 💫", sub: "The machine is shrugging, but not walking away." };
+      return { text: "Read the Room // പതുക്കെ ശ്രദ്ധിക്കുക! ⚡", sub: "Maybe stay friends. Or recalibrate and try again." };
+    }
 
-      if (isAlreadySelected) {
-        delete quizSelectedAnswers[qId];
-        if (badge) {
-          badge.innerText = 'ഉത്തരം നൽകിയില്ല';
-          badge.style.color = 'var(--label-3)';
-        }
-      } else {
-        clickedBtn.classList.add('selected');
-        quizSelectedAnswers[qId] = text;
-        if (badge) {
-          badge.innerText = '✓ ഉത്തരം നൽകി';
-          badge.style.color = 'var(--accent-pink)';
-        }
+    function computeResult() {
+      const n1 = (name1Input ? name1Input.value : "").trim();
+      const n2 = (name2Input ? name2Input.value : "").trim();
+
+      const base = nameScore(n1, n2);
+      const qTotal = Object.values(answers).reduce((a,b) => a+b, 0);
+      const qMax = QUESTIONS.reduce((sum,q) => sum + Math.max(...q.options.map(o=>o.value)), 0);
+      const qPct = Math.round((qTotal / qMax) * 100);
+
+      const score = Math.max(0, Math.min(100, Math.round(base * 0.4 + qPct * 0.6)));
+
+      const resNames = document.getElementById("resultNames");
+      if (resNames) resNames.textContent = `${n1} × ${n2}`;
+
+      const scoreNum = document.getElementById("scoreNum");
+      if (scoreNum) scoreNum.innerHTML = `${score}<span>%</span>`;
+
+      const v = verdictFor(score);
+      const verdictText = document.getElementById("verdictText");
+      if (verdictText) verdictText.textContent = v.text;
+
+      const verdictSub = document.getElementById("verdictSub");
+      if (verdictSub) verdictSub.textContent = v.sub;
+
+      showScreen(6);
+      drawCertificate(n1, n2, score, v.text);
+
+      const angle = -85 + (score / 100) * 170;
+      const needle = document.getElementById("needle");
+      if (needle) {
+        needle.style.transform = "rotate(0deg)";
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            needle.style.transform = `rotate(${angle}deg)`;
+          });
+        });
+      }
+
+      // Background sync with LoveAI SQLite backend
+      try {
+        fetch('/api/compatibility', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name1: n1, name2: n2, interests: Object.keys(answers) })
+        }).then(() => loadStats()).catch(e => console.warn('API sync error', e));
+      } catch (e) {
+        console.warn('API fetch error', e);
       }
     }
 
-    async function runCompatibility() {
-      const name1 = document.getElementById('comp-name1').value.trim();
-      const name2 = document.getElementById('comp-name2').value.trim();
-      const tags = Object.values(quizSelectedAnswers);
+    function drawInitialCircle(ctx, cx, cy, r, label) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.fillStyle = "#F0C875";
+      ctx.fill();
+      ctx.strokeStyle = "#7A1330";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      ctx.fillStyle = "#7A1330";
+      ctx.font = "700 40px Fraunces, serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText((label || "?").charAt(0).toUpperCase(), cx, cy + 4);
+      ctx.restore();
+    }
 
-      if (!name1 || !name2) {
-        alert('ദയവായി രണ്ട് പേരുകളും നൽകുക.');
-        return;
-      }
+    function drawPhotoCircle(ctx, img, cx, cy, r) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.closePath();
+      ctx.clip();
+      const size = Math.min(img.width, img.height);
+      const sx = (img.width - size)/2;
+      const sy = (img.height - size)/2;
+      ctx.drawImage(img, sx, sy, size, size, cx-r, cy-r, r*2, r*2);
+      ctx.restore();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.strokeStyle = "#7A1330";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+    }
 
-      if (tags.length === 0) {
-        alert('താഴെയുള്ള Random Quiz-ൽ നിന്ന് കുറഞ്ഞത് ഒരു ഉത്തരമെങ്കിലും തിരഞ്ഞെടുക്കുക! 🎲');
-        return;
-      }
+    function drawCertificate(n1, n2, score, verdictText) {
+      const canvas = document.getElementById("certCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const W = canvas.width, H = canvas.height;
 
-      const btn = document.getElementById('btn-comp-run');
-      if (btn) {
-        btn.innerText = 'പൊരുത്തം കണക്കാക്കുകയാണ് 💕...';
-        btn.disabled = true;
-      }
+      ctx.fillStyle = "#F6E4CE";
+      ctx.fillRect(0, 0, W, H);
 
-      try {
-        const res = await fetch('/api/compatibility', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name1, name2, interests: tags })
-        });
-        const json = await res.json();
-        if (json.success) {
-          const r = json.result;
-          document.getElementById('comp-score-combined').innerText = r.combined_score + '%';
-          document.getElementById('comp-score-name').innerText = r.name_score + '%';
-          document.getElementById('comp-score-interest').innerText = r.interest_score + '%';
-          document.getElementById('comp-verdict-title').innerText = r.verdict_title || 'നിങ്ങളുടെ Score';
-          document.getElementById('comp-verdict-desc').innerText = r.verdict_description;
-          const resBox = document.getElementById('comp-result-box');
-          if (resBox) {
-            resBox.style.display = 'block';
-            resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
+      ctx.setLineDash([6,6]);
+      ctx.strokeStyle = "rgba(122,19,48,0.35)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(14, 14, W-28, H-28);
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "#7A1330";
+      ctx.font = "700 13px 'Work Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("LOVE-O-METER — OFFICIAL ROMANTIC CERTIFICATE", W/2, 46);
+
+      const r = 68;
+      const leftX = W/2 - 100, rightX = W/2 + 100, cy = 130;
+
+      function renderSlot(dataUrl, x, name, done) {
+        if (dataUrl) {
+          const img = new Image();
+          img.onload = () => { drawPhotoCircle(ctx, img, x, cy, r); done(); };
+          img.onerror = () => { drawInitialCircle(ctx, x, cy, r, name || "?"); done(); };
+          img.src = dataUrl;
         } else {
-          alert('പ്രശ്നം: ' + (json.error || 'പൊരുത്തം കണക്കാക്കാൻ കഴിഞ്ഞില്ല.'));
-        }
-      } catch (e) {
-        alert('പൊരുത്തം കണക്കാക്കുന്നതിൽ പ്രശ്നം: ' + e);
-      } finally {
-        if (btn) {
-          btn.innerText = 'പൊരുത്തം കണക്കാക്കുക 💕';
-          btn.disabled = false;
+          drawInitialCircle(ctx, x, cy, r, name || "?");
+          done();
         }
       }
+
+      let remaining = 2;
+      function afterBoth() {
+        remaining--;
+        if (remaining > 0) return;
+
+        ctx.fillStyle = "#D9A441";
+        ctx.font = "italic 600 40px Fraunces, serif";
+        ctx.textAlign = "center";
+        ctx.fillText("&", W/2, cy + 14);
+
+        ctx.fillStyle = "#2B1B14";
+        ctx.font = "700 20px 'Work Sans', sans-serif";
+        ctx.fillText(`${n1}  &  ${n2}`, W/2, 235);
+
+        ctx.fillStyle = "#7A1330";
+        ctx.font = "700 46px Fraunces, serif";
+        ctx.fillText(`${score}%`, W/2, 295);
+
+        ctx.fillStyle = "#2B1B14";
+        ctx.font = "600 15px 'Work Sans', sans-serif";
+        ctx.fillText(verdictText, W/2, 328);
+
+        ctx.fillStyle = "rgba(43,27,20,0.55)";
+        ctx.font = "12px 'Work Sans', sans-serif";
+        ctx.fillText("not peer reviewed · for romantic entertainment only", W/2, 358);
+      }
+
+      renderSlot(photos.p1, leftX, n1, afterBoth);
+      renderSlot(photos.p2, rightX, n2, afterBoth);
+    }
+
+    const downloadBtn = document.getElementById("downloadBtn");
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", () => {
+        const canvas = document.getElementById("certCanvas");
+        if (!canvas) return;
+        const link = document.createElement("a");
+        link.download = "love-o-meter-certificate.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+
+    const restartBtn = document.getElementById("restartBtn");
+    if (restartBtn) {
+      restartBtn.addEventListener("click", () => {
+        for (const k in answers) delete answers[k];
+        photos.p1 = null;
+        photos.p2 = null;
+        const c1 = document.getElementById("photo1Circle");
+        if (c1) c1.innerHTML = "<span>+ Photo ചേർക്കുക<br>(You)</span>";
+        const c2 = document.getElementById("photo2Circle");
+        if (c2) c2.innerHTML = "<span>+ Photo ചേർക്കുക<br>(Them)</span>";
+        if (name1Input) name1Input.value = "";
+        if (name2Input) name2Input.value = "";
+        checkNames();
+        if (mount) mount.innerHTML = "";
+        showScreen(0);
+      });
     }
 
     function previewImg(input, imgId) {
